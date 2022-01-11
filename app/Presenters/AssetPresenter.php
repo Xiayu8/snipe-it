@@ -49,7 +49,7 @@ class AssetPresenter extends Presenter
                 "sortable" => true,
                 "switchable" => true,
                 "title" => trans('admin/hardware/table.image'),
-                "visible" => true,
+                "visible" => false,
                 "formatter" => "imageFormatter"
             ], [
                 "field" => "asset_tag",
@@ -63,7 +63,7 @@ class AssetPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('admin/hardware/form.serial'),
-                "visible" => true,
+                "visible" => false,
                 "formatter" => "hardwareLinkFormatter"
             ],  [
                 "field" => "model",
@@ -83,7 +83,7 @@ class AssetPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('general.category'),
-                "visible" => true,
+                "visible" => false,
                 "formatter" => "categoriesLinkObjFormatter"
             ], [
                 "field" => "status_label",
@@ -97,7 +97,7 @@ class AssetPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('admin/hardware/form.checkedout_to'),
-                "visible" => true,
+                "visible" => false,
                 "formatter" => "polymorphicItemFormatter"
             ], [
                 "field" => "employee_number",
@@ -132,7 +132,7 @@ class AssetPresenter extends Presenter
                 "searchable" => true,
                 "sortable" => true,
                 "title" => trans('general.supplier'),
-                "visible" => false,
+                "visible" => true,
                 "formatter" => "suppliersLinkObjFormatter"
             ], [
                 "field" => "purchase_date",
@@ -147,6 +147,7 @@ class AssetPresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('general.purchase_cost'),
                 "footerFormatter" => 'sumFormatter',
+                "visible" => false,
             ], [
                 "field" => "order_number",
                 "searchable" => true,
@@ -283,7 +284,7 @@ class AssetPresenter extends Presenter
             "sortable" => false,
             "switchable" => true,
             "title" => trans('general.checkin').'/'.trans('general.checkout'),
-            "visible" => true,
+            "visible" => false,
             "formatter" => "hardwareInOutFormatter",
         ];
 

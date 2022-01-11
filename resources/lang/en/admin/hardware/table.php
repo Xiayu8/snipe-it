@@ -2,7 +2,7 @@
 
 return array(
 
-    'asset_tag'   	=> 'Asset Tag',
+    'asset_tag'   	=> 'KC Nr.',
     'asset_model'       => 'Model',
     'book_value'  	=> 'Value',
     'change' 		=> 'In/Out',

@@ -13,8 +13,8 @@
 
 @section('inputFields')
 
-    @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
-
+    <!-- include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id']) -->
+    @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
 
   <!-- Asset Tag -->
   <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
@@ -41,7 +41,7 @@
           </div>
       @endif
   </div>
-    @include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]', 'translated_serial' => trans('admin/hardware/form.serial')])
+    <!-- include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]', 'translated_serial' => trans('admin/hardware/form.serial')])-->
 
     <div class="input_fields_wrap">
     </div>
@@ -52,6 +52,7 @@
 
   <div id='custom_fields_content'>
       <!-- Custom Fields -->
+      
       @if ($item->model && $item->model->fieldset)
       <?php $model=$item->model; ?>
       @endif
@@ -76,7 +77,7 @@
       @include ('partials.forms.edit.datepicker', ['translated_name' => trans('admin/hardware/form.expected_checkin'),'fieldname' => 'expected_checkin'])
   @endif
 
-  @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
+  
   @include ('partials.forms.edit.purchase_date')
   @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
   @include ('partials.forms.edit.order_number')
@@ -252,9 +253,9 @@
                 box_html += '</div>';
                 box_html += '</div>';
                 box_html += '</div>';
-                box_html += '<div class="form-group"><label for="serial" class="col-md-3 control-label">{{ trans('admin/hardware/form.serial') }} ' + x + '</label>';
-                box_html += '<div class="col-md-7 col-sm-12">';
-                box_html += '<input type="text"  class="form-control" name="serials[' + x + ']">';
+                //box_html += '<div class="form-group"><label for="serial" class="col-md-3 control-label">{{ trans('admin/hardware/form.serial') }} ' + x + '</label>';
+                //box_html += '<div class="col-md-7 col-sm-12">';
+                //box_html += '<input type="text"  class="form-control" name="serials[' + x + ']">';
                 box_html += '</div>';
                 box_html += '</div>';
                 box_html += '</span>';
