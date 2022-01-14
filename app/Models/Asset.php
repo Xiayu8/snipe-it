@@ -88,7 +88,7 @@ class Asset extends Depreciable
     ];
 
     protected $rules = [
-        'name'            => 'max:255|nullable',
+        'name'            => 'required|min:2|max:255|nullable',
         'model_id'        => 'required|integer|exists:models,id',
         'status_id'       => 'required|integer|exists:status_labels,id',
         'company_id'      => 'integer|nullable',
@@ -96,16 +96,24 @@ class Asset extends Depreciable
         'physical'        => 'numeric|max:1|nullable',
         'checkout_date'   => 'date|max:10|min:10|nullable',
         'checkin_date'    => 'date|max:10|min:10|nullable',
-        'supplier_id'     => 'exists:suppliers,id|numeric|nullable',
+        'supplier_id'     => 'exists:suppliers,id|numeric|nullable|min:2',
         'location_id'     => 'exists:locations,id|nullable',
-        'rtd_location_id' => 'exists:locations,id|nullable',
+        'rtd_location_id' => 'required|exists:locations,id|nullable',
         'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
         'status'          => 'integer',
         'serial'          => 'unique_serial|nullable',
         'purchase_cost'   => 'numeric|nullable',
         'next_audit_date' => 'date|nullable',
         'last_audit_date' => 'date|nullable',
-        '_snipeit_shelf_nr_6' => 'required',
+        '_snipeit_shelf_nr_6' => 'required|min:2',
+        '_snipeit_description_3' => 'required|min:2',
+        '_snipeit_state_of_aggregation_4' => 'required|min:2',
+        '_snipeit_quantity_5' => 'required|min:2',
+        '_snipeit_haz_subst_7' => 'required|min:2',
+        '_snipeit_rh_8' => 'required|min:2',
+        '_snipeit_sp_9' => 'required|min:2',
+        '_snipeit_cas_nr_10' => 'required|min:2',
+
     ];
 
   /**

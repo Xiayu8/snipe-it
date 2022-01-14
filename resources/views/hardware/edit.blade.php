@@ -65,8 +65,9 @@
       @include("models/custom_fields_form",["model" => $model])
       @endif
   </div>
-
-    
+  @include ('partials.forms.edit.status', [ 'required' => 'true'])
+  
+  
   @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
   @include ('partials.forms.edit.order_number')
     <?php
@@ -97,6 +98,8 @@
       </div>
   </div>
   @endif
+  @include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]', 'translated_serial' => trans('admin/hardware/form.serial')])
+    
 
 @include ('partials.forms.edit.image-upload')
 
@@ -168,7 +171,7 @@
                         $("#selected_status_status").removeClass('text-danger');
                         $("#selected_status_status").removeClass('text-warning');
                         $("#selected_status_status").addClass('text-success');
-                        $("#selected_status_status").html('<i class="fa fa-check"></i> That status is deployable. This asset can be checked out.');
+                        //$("#selected_status_status").html('<i class="fa fa-check"></i> That status is deployable. This asset can be checked out.');
 
 
                     } else {
@@ -176,7 +179,7 @@
                         $("#selected_status_status").removeClass('text-danger');
                         $("#selected_status_status").removeClass('text-success');
                         $("#selected_status_status").addClass('text-warning');
-                        $("#selected_status_status").html('<i class="fa fa-warning"></i> That asset status is not deployable. This asset cannot be checked out. ');
+                        //$("#selected_status_status").html('<i class="fa fa-warning"></i> That asset status is not deployable. This asset cannot be checked out. ');
                     }
                 }
             });
