@@ -90,6 +90,14 @@ class BulkAssetsController extends Controller
             || ($request->filled('company_id'))
             || ($request->filled('status_id'))
             || ($request->filled('model_id'))
+            || ($request->filled('_snipeit_description_3'))
+            || ($request->filled('_snipeit_state_of_aggregation_4'))
+            || ($request->filled('_snipeit_quantity_5'))
+            || ($request->filled('_snipeit_shelf_nr_6'))
+            || ($request->filled('_snipeit_haz_subst_7'))
+            || ($request->filled('_snipeit_rh_8'))
+            || ($request->filled('_snipeit_sp_9'))
+            || ($request->filled('_snipeit_cas_nr_10'))
         ) {
             foreach ($assets as $assetId) {
 
@@ -102,7 +110,15 @@ class BulkAssetsController extends Controller
                     ->conditionallyAddItem('requestable')
                     ->conditionallyAddItem('status_id')
                     ->conditionallyAddItem('supplier_id')
-                    ->conditionallyAddItem('warranty_months');
+                    ->conditionallyAddItem('warranty_months')
+                    ->conditionallyAddItem('_snipeit_description_3')
+                    ->conditionallyAddItem('_snipeit_state_of_aggregation_4')
+                    ->conditionallyAddItem('_snipeit_quantity_5')
+                    ->conditionallyAddItem('_snipeit_shelf_nr_6')
+                    ->conditionallyAddItem('_snipeit_haz_subst_7')
+                    ->conditionallyAddItem('_snipeit_rh_8')
+                    ->conditionallyAddItem('_snipeit_sp_9')
+                    ->conditionallyAddItem('_snipeit_cas_nr_10');
 
                 if ($request->filled('purchase_cost')) {
                     $this->update_array['purchase_cost'] =  Helper::ParseCurrency($request->input('purchase_cost'));

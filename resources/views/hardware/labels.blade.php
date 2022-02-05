@@ -61,7 +61,7 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
         display: inline-block;
     }
     img.label-logo {
-        height: 0.5in;
+        height: 0.28in;
     }
     .qr_text {
         width: {{ $settings->labels_width }}in;
@@ -141,12 +141,12 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
             @endif
             @if (($settings->labels_display_tag=='1') && ($asset->asset_tag!=''))
                 <div class="pull-left">
-                    T: {{ $asset->asset_tag }}
+                    KC {{ $asset->asset_tag }}
                 </div>
             @endif
-            @if (($settings->labels_display_serial=='1') && ($asset->serial!=''))
+            @if (($settings->labels_display_serial=='1') && ($asset->_snipeit_shelf_nr_6!=''))
                 <div class="pull-left">
-                    S: {{ $asset->serial }}
+                     {{ $asset->_snipeit_shelf_nr_6 }}
                 </div>
             @endif
             @if (($settings->labels_display_model=='1') && ($asset->model->name!=''))

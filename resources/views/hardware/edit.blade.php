@@ -13,8 +13,8 @@
 
 @section('inputFields')
 
-    @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
-
+    <!-- include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id']) -->
+    @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
 
   <!-- Asset Tag -->
   <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
@@ -41,7 +41,7 @@
           </div>
       @endif
   </div>
-    @include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]', 'translated_serial' => trans('admin/hardware/form.serial')])
+    <!-- include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]', 'translated_serial' => trans('admin/hardware/form.serial')])-->
 
     <div class="input_fields_wrap">
     </div>
@@ -52,6 +52,7 @@
 
   <div id='custom_fields_content'>
       <!-- Custom Fields -->
+      
       @if ($item->model && $item->model->fieldset)
       <?php $model=$item->model; ?>
       @endif
@@ -64,20 +65,9 @@
       @include("models/custom_fields_form",["model" => $model])
       @endif
   </div>
-
   @include ('partials.forms.edit.status', [ 'required' => 'true'])
-  @if (!$item->id)
-      @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true', 'style' => 'display:none;'])
-      @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_user', 'style' => 'display:none;', 'required' => 'false'])
-      @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_asset', 'style' => 'display:none;', 'required' => 'false'])
-      @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required' => 'false'])
-  @elseif (($item->assignedTo) && ($item->deleted_at==''))
-      <!-- This is an asset and it's currently deployed, so let them edit the expected checkin date -->
-      @include ('partials.forms.edit.datepicker', ['translated_name' => trans('admin/hardware/form.expected_checkin'),'fieldname' => 'expected_checkin'])
-  @endif
-
-  @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
-  @include ('partials.forms.edit.purchase_date')
+  
+  
   @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
   @include ('partials.forms.edit.order_number')
     <?php
@@ -86,15 +76,13 @@
         $currency_type = $item->location->currency;
     }
     ?>
-  @include ('partials.forms.edit.purchase_cost', ['currency_type' => $currency_type])
-  @include ('partials.forms.edit.warranty')
+  
   @include ('partials.forms.edit.notes')
 
   @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.default_location'), 'fieldname' => 'rtd_location_id'])
 
 
-  @include ('partials.forms.edit.requestable', ['requestable_text' => trans('admin/hardware/general.requestable')])
-
+  
   <!-- Image -->
   @if ($item->image)
   <div class="form-group {{ $errors->has('image_delete') ? 'has-error' : '' }}">
@@ -110,6 +98,8 @@
       </div>
   </div>
   @endif
+  @include ('partials.forms.edit.serial', ['fieldname'=> 'serials[1]', 'translated_serial' => trans('admin/hardware/form.serial')])
+    
 
 @include ('partials.forms.edit.image-upload')
 
@@ -181,7 +171,7 @@
                         $("#selected_status_status").removeClass('text-danger');
                         $("#selected_status_status").removeClass('text-warning');
                         $("#selected_status_status").addClass('text-success');
-                        $("#selected_status_status").html('<i class="fa fa-check"></i> That status is deployable. This asset can be checked out.');
+                        //$("#selected_status_status").html('<i class="fa fa-check"></i> That status is deployable. This asset can be checked out.');
 
 
                     } else {
@@ -189,7 +179,7 @@
                         $("#selected_status_status").removeClass('text-danger');
                         $("#selected_status_status").removeClass('text-success');
                         $("#selected_status_status").addClass('text-warning');
-                        $("#selected_status_status").html('<i class="fa fa-warning"></i> That asset status is not deployable. This asset cannot be checked out. ');
+                        //$("#selected_status_status").html('<i class="fa fa-warning"></i> That asset status is not deployable. This asset cannot be checked out. ');
                     }
                 }
             });
@@ -252,9 +242,9 @@
                 box_html += '</div>';
                 box_html += '</div>';
                 box_html += '</div>';
-                box_html += '<div class="form-group"><label for="serial" class="col-md-3 control-label">{{ trans('admin/hardware/form.serial') }} ' + x + '</label>';
-                box_html += '<div class="col-md-7 col-sm-12">';
-                box_html += '<input type="text"  class="form-control" name="serials[' + x + ']">';
+                //box_html += '<div class="form-group"><label for="serial" class="col-md-3 control-label">{{ trans('admin/hardware/form.serial') }} ' + x + '</label>';
+                //box_html += '<div class="col-md-7 col-sm-12">';
+                //box_html += '<input type="text"  class="form-control" name="serials[' + x + ']">';
                 box_html += '</div>';
                 box_html += '</div>';
                 box_html += '</span>';

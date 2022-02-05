@@ -35,7 +35,7 @@ return [
     'select_statustype'	=> 'Select Status Type',
     'serial'			=> 'Serial',
     'status'			=> 'Status',
-    'tag'				=> 'Asset Tag',
+    'tag'				=> 'KC Number',
     'update'			=> 'Asset Update',
     'warranty'			=> 'Warranty',
         'warranty_expires'		=> 'Warranty Expires',
