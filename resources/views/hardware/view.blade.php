@@ -826,35 +826,6 @@
                                                     "M011" => "ISO_7010_M011.svg", "M013" => "ISO_7010_M013.svg", "M014" => "ISO_7010_M014.svg",
                                                     "M016" => "ISO_7010_M016.svg", "M017" => "ISO_7010_M017.svg", "M018" => "ISO_7010_M018.svg", "M019" => "ISO_7010_M019.svg");
                                                 foreach ($ghs as $key => $val){
-                                                    if (strpos($asset->_snipeit_psa_14, $key) !== false){
-                                                        echo '<img style="height: 100px; width: 100px; margin right: 10px;" src="https://Chemikalienliste/uploads/'.$val.'" alt="'.$key.'">';
-                                                    }
-                                                }
-                                            ?>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <?php
-                                                $ghs = array ("GHS01" => "GHS01-pictogram-explos.svg", "GHS02" => "GHS02-pictogram-flamme.svg", "GHS03" => "GHS03-pictogram-rondflam.svg", "GHS04" => "GHS04-pictogram-bottle.svg",
-                                                    "GHS05" => "GHS05-pictogram-acid.svg", "GHS06" => "GHS06-pictogram-skull.svg", "GHS07" => "GHS07-pictogram-exclam.svg",
-                                                    "GHS08" => "GHS08-pictogram-silhouette.svg", "GHS09" => "GHS09-pictogram-pollu.svg");
-                                                foreach ($ghs as $key => $val){
-                                                    if (strpos($asset->_snipeit_haz_subst_7, $key) !== false){
-                                                        echo '<img style="height: 100px; width: 100px; margin right: 10px;" src="https://Chemikalienliste/uploads/'.$val.'" alt="'.$key.'">';
-                                                    }
-                                                }
-                                            ?>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <?php
-                                                $ghs = array ("M003" => "ISO_7010_M003.svg", "M004" => "ISO_7010_M004.svg", "M009" => "ISO_7010_M009.svg", "M010" => "ISO_7010_M010.svg",
-                                                    "M011" => "ISO_7010_M011.svg", "M013" => "ISO_7010_M013.svg", "M014" => "ISO_7010_M014.svg",
-                                                    "M016" => "ISO_7010_M016.svg", "M017" => "ISO_7010_M017.svg", "M018" => "ISO_7010_M018.svg", "M019" => "ISO_7010_M019.svg");
-                                                foreach ($ghs as $key => $val){
                                                     if (strpos($asset->_snipeit_ppe_12, $key) !== false){
                                                         echo '<img style="height: 100px; width: 100px; margin right: 10px;" src="https://Chemikalienliste/uploads/'.$val.'" alt="'.$key.'">';
                                                     }
