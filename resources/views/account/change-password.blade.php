@@ -54,6 +54,42 @@
         </div>
     </div>
 
+    <div class="form-group">
+        <label class="col-md-3 control-label">Requirements</label>
+        <div class="col-md-5">
+            <ul class="list-group">
+                <li class="list-group-item">
+                    Require at least {{ $snipeSettings->pwd_secure_min }} characters
+                </li>
+                @if (strpos($snipeSettings->pwd_secure_complexity, 'fields') !== FALSE)
+                    <li class="list-group-item">
+                        Password cannot be the same as first name, last name, email, or username
+                    </li>
+                @endif
+                @if (strpos($snipeSettings->pwd_secure_complexity, 'letters') !== FALSE)
+                    <li class="list-group-item">
+                        Require at least one letter
+                    </li>
+                @endif
+                @if (strpos($snipeSettings->pwd_secure_complexity, 'numbers') !== FALSE)
+                    <li class="list-group-item">
+                        Require at least one number
+                    </li>
+                @endif
+                @if (strpos($snipeSettings->pwd_secure_complexity, 'symbols') !== FALSE)
+                    <li class="list-group-item">
+                        Require at least one symbol
+                    </li>
+                @endif
+                @if (strpos($snipeSettings->pwd_secure_complexity, 'case_diff') !== FALSE)
+                    <li class="list-group-item">
+                        Require at least one uppercase and one lowercase
+                    </li>
+                @endif
+            </ul>
+        </div>
+    </div>
+
 
 
             </div> <!-- .box-body -->
