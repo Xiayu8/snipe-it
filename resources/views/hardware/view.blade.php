@@ -815,7 +815,7 @@
                                                     "GHS08" => "GHS08-pictogram-silhouette.svg", "GHS09" => "GHS09-pictogram-pollu.svg");
                                                 foreach ($ghs as $key => $val){
                                                     if (strpos($asset->_snipeit_haz_subst_7, $key) !== false){
-                                                        echo '<img style="height: 100px; width: 100px; margin right: 10px;" src="https://Chemikalienliste/uploads/'.$val.'" alt="'.$key.'">';
+                                                        echo '<img style="height: 100px; width: 100px; margin right: 10px;" src="https://Chemikalienliste/uploads/'.$val.'" class="pull-left" alt="'.$key.'">';
                                                     }
                                                 }
                                             ?>
@@ -827,7 +827,7 @@
                                                     "M016" => "ISO_7010_M016.svg", "M017" => "ISO_7010_M017.svg", "M018" => "ISO_7010_M018.svg", "M019" => "ISO_7010_M019.svg");
                                                 foreach ($ghs as $key => $val){
                                                     if (strpos($asset->_snipeit_ppe_12, $key) !== false){
-                                                        echo '<img style="height: 100px; width: 100px; margin right: 10px;" src="https://Chemikalienliste/uploads/'.$val.'" alt="'.$key.'">';
+                                                        echo '<img style="height: 100px; width: 100px; margin right: 10px;" src="https://Chemikalienliste/uploads/'.$val.'" class="pull-right" alt="'.$key.'">';
                                                     }
                                                 }
                                             ?>
