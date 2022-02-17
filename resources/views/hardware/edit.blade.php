@@ -49,6 +49,7 @@
 
     @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id', 'field_req' => true])
 
+    @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.default_location'), 'fieldname' => 'rtd_location_id'])
 
   <div id='custom_fields_content'>
       <!-- Custom Fields -->
@@ -79,7 +80,6 @@
   
   @include ('partials.forms.edit.notes')
 
-  @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.default_location'), 'fieldname' => 'rtd_location_id'])
 
 
   

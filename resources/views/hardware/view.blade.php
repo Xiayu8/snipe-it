@@ -301,7 +301,7 @@
                                             </div>
                                         </div>
                                     @endif
-
+                                    <!--
                                     @if (($asset->model) && ($asset->model->manufacturer))
                                         <div class="row">
                                             <div class="col-md-2">
@@ -385,6 +385,7 @@
                                             @endif
                                         </div>
                                     </div>
+                                    -->
 
                                     @if ($asset->model)
                                         <div class="row">
@@ -408,7 +409,7 @@
                                             </div>
                                         </div>
                                     @endif
-
+                                    <!--
                                     <div class="row">
                                         <div class="col-md-2">
                                             <strong>
@@ -419,7 +420,7 @@
                                             {{ ($asset->model) ? $asset->model->model_number : ''}}
                                         </div>
                                     </div>
-
+                                    -->
                                     @if (($asset->model) && ($asset->model->fieldset))
                                         @foreach($asset->model->fieldset->fields as $field)
                                             <div class="row">
@@ -721,6 +722,7 @@
                                             </div>
                                         </div>
                                     @endif
+                                    <!--
                                      @if ($asset->last_checkout!='')
                                         <div class="row">
                                             <div class="col-md-2">
@@ -770,6 +772,7 @@
                                             {{ ($asset->userRequests) ? (int) $asset->userRequests->count() : '0' }}
                                         </div>
                                     </div>
+                                    -->
                                     <div class="row">
                                         <div class="col-md-2">
                                             <strong>
