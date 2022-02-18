@@ -34,7 +34,7 @@
     <div class="form-group {{ $errors->has('password') ? ' has-error' : '' }}">
         <label for="password" class="col-md-3 control-label">New Password</label>
         <div class="col-md-5 required">
-            <input class="form-control" type="password" name="password" id="password" {{ (config('app.lock_passwords') ? ' disabled' : '') }}>
+            <input class="form-control" type="password" name="password" id="password" {{ (config('app.lock_passwords') ? ' disabled' : '') }} onKeyUp="checkPasswordMatch();">
             {!! $errors->first('password', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             @if (config('app.lock_passwords')===true)
                 <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
@@ -46,11 +46,18 @@
     <div class="form-group {{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
         <label for="password_confirmation" class="col-md-3 control-label">New Password</label>
         <div class="col-md-5 required">
-            <input class="form-control" type="password" name="password_confirmation" id="password_confirmation"  {{ (config('app.lock_passwords') ? ' disabled' : '') }} aria-label="password_confirmation">
+            <input class="form-control" type="password" name="password_confirmation" id="password_confirmation"  {{ (config('app.lock_passwords') ? ' disabled' : '') }} aria-label="password_confirmation" onKeyUp="checkPasswordMatch();">
             {!! $errors->first('password_confirmation', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             @if (config('app.lock_passwords')===true)
                 <p class="text-warning"><i class="fa fa-lock"></i> {{ trans('general.feature_disabled') }}</p>
             @endif
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-3 control-label"></label>
+        <div class="col-md-5 registrationFormAlert" >
+            <p style="color:darkgreen;" id="divCheckPasswordMatch";></p>
         </div>
     </div>
 
@@ -90,6 +97,26 @@
         </div>
     </div>
 
+    <script type="text/javascript" >
+    function checkPasswordMatch() {
+        var password = $("#password").val();
+        var confirmPassword = $("#password_confirmation").val();
+        var regex;
+        if (password == confirmPassword){
+            document.getElementById("divCheckPasswordMatch").hidden = false;
+            document.getElementById("divCheckPasswordMatch").style.color = "darkgreen";
+            $("#divCheckPasswordMatch").html("&#9745; Passwords match");
+        }
+        if (password != confirmPassword){
+            document.getElementById("divCheckPasswordMatch").hidden = false;
+            document.getElementById("divCheckPasswordMatch").style.color = "darkred";
+            $("#divCheckPasswordMatch").html("&#9746; Passwords dont match");
+        }
+        if(password == "" || confirmPassword == ""){
+            document.getElementById("divCheckPasswordMatch").hidden = true;
+        }
+    }
+    </script>
 
 
             </div> <!-- .box-body -->
