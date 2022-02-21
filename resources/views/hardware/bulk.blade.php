@@ -86,93 +86,95 @@
             </div>
           </div> <!--/form-group-->
 
-           <!-- Description 
-         <div class="form-group {{ $errors->has('_snipeit_description_3') ? ' has-error' : '' }}">
-            <label for="_snipeit_description_3" class="col-md-3 control-label">
-              Description
-            </label>
-            <div class="col-md-7">
-              <input class="form-control" type="text" maxlength="200" name="_snipeit_description_3" id="_snipeit_description_3" value="{{ old('_snipeit_description_3') }}" />
-              {!! $errors->first('order_number', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+          @can('superuser')
+            <!-- Description -->
+          <div class="form-group {{ $errors->has('_snipeit_description_3') ? ' has-error' : '' }}">
+              <label for="_snipeit_description_3" class="col-md-3 control-label">
+                Description
+              </label>
+              <div class="col-md-7">
+                <input class="form-control" type="text" maxlength="200" name="_snipeit_description_3" id="_snipeit_description_3" value="{{ old('_snipeit_description_3') }}" />
+                {!! $errors->first('order_number', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              </div>
             </div>
-          </div> -->
 
-         <!-- State of Aggregation 
-         <div class="form-group {{ $errors->has('_snipeit_state_of_aggregation_4') ? ' has-error' : '' }}">
-            <label for="_snipeit_state_of_aggregation_4" class="col-md-3 control-label">
-              State of Aggregation
-            </label>
-            <div class="col-md-7">
-              <input class="form-control" type="text" maxlength="200" name="_snipeit_state_of_aggregation_4" id="_snipeit_state_of_aggregation_4" value="{{ old('_snipeit_state_of_aggregation_4') }}" />
-              {!! $errors->first('_snipeit_state_of_aggregation_4', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+          <!-- State of Aggregation -->
+          <div class="form-group {{ $errors->has('_snipeit_state_of_aggregation_4') ? ' has-error' : '' }}">
+              <label for="_snipeit_state_of_aggregation_4" class="col-md-3 control-label">
+                State of Aggregation
+              </label>
+              <div class="col-md-7">
+                <input class="form-control" type="text" maxlength="200" name="_snipeit_state_of_aggregation_4" id="_snipeit_state_of_aggregation_4" value="{{ old('_snipeit_state_of_aggregation_4') }}" />
+                {!! $errors->first('_snipeit_state_of_aggregation_4', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              </div>
             </div>
-          </div> -->
 
-            <!-- Quantity 
-         <div class="form-group {{ $errors->has('_snipeit_quantity_5') ? ' has-error' : '' }}">
-            <label for="_snipeit_quantity_5" class="col-md-3 control-label">
-              Quantity
-            </label>
-            <div class="col-md-7">
-              <input class="form-control" type="text" maxlength="200" name="_snipeit_quantity_5" id="_snipeit_quantity_5" value="{{ old('_snipeit_quantity_5') }}" />
-              {!! $errors->first('_snipeit_quantity_5', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              <!-- Quantity -->
+          <div class="form-group {{ $errors->has('_snipeit_quantity_5') ? ' has-error' : '' }}">
+              <label for="_snipeit_quantity_5" class="col-md-3 control-label">
+                Quantity
+              </label>
+              <div class="col-md-7">
+                <input class="form-control" type="text" maxlength="200" name="_snipeit_quantity_5" id="_snipeit_quantity_5" value="{{ old('_snipeit_quantity_5') }}" />
+                {!! $errors->first('_snipeit_quantity_5', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              </div>
             </div>
-          </div> -->
 
-         <!-- Shelf-Nr 
-         <div class="form-group {{ $errors->has('_snipeit_shelf_nr_6') ? ' has-error' : '' }}">
-            <label for="_snipeit_shelf_nr_6" class="col-md-3 control-label">
-              Shelf-Nr
-            </label>
-            <div class="col-md-7">
-              <input class="form-control" type="text" maxlength="200" name="_snipeit_shelf_nr_6" id="_snipeit_shelf_nr_6" value="{{ old('_snipeit_shelf_nr_6') }}" />
-              {!! $errors->first('_snipeit_shelf_nr_6', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+          <!-- Shelf-Nr -->
+          <div class="form-group {{ $errors->has('_snipeit_shelf_nr_6') ? ' has-error' : '' }}">
+              <label for="_snipeit_shelf_nr_6" class="col-md-3 control-label">
+                Shelf-Nr
+              </label>
+              <div class="col-md-7">
+                <input class="form-control" type="text" maxlength="200" name="_snipeit_shelf_nr_6" id="_snipeit_shelf_nr_6" value="{{ old('_snipeit_shelf_nr_6') }}" />
+                {!! $errors->first('_snipeit_shelf_nr_6', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              </div>
             </div>
-          </div> -->
 
-         <!-- haz subst 
-         <div class="form-group {{ $errors->has('_snipeit_haz_subst_7') ? ' has-error' : '' }}">
-            <label for="_snipeit_haz_subst_7" class="col-md-3 control-label">
-              haz subst
-            </label>
-            <div class="col-md-7">
-              <input class="form-control" type="text" maxlength="200" name="_snipeit_haz_subst_7" id="_snipeit_haz_subst_7" value="{{ old('_snipeit_haz_subst_7') }}" />
-              {!! $errors->first('_snipeit_haz_subst_7', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+          <!-- haz subst -->
+          <div class="form-group {{ $errors->has('_snipeit_haz_subst_7') ? ' has-error' : '' }}">
+              <label for="_snipeit_haz_subst_7" class="col-md-3 control-label">
+                haz subst
+              </label>
+              <div class="col-md-7">
+                <input class="form-control" type="text" maxlength="200" name="_snipeit_haz_subst_7" id="_snipeit_haz_subst_7" value="{{ old('_snipeit_haz_subst_7') }}" />
+                {!! $errors->first('_snipeit_haz_subst_7', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              </div>
             </div>
-          </div> -->
 
-         <!-- RH 
-         <div class="form-group {{ $errors->has('_snipeit_rh_8') ? ' has-error' : '' }}">
-            <label for="_snipeit_rh_8" class="col-md-3 control-label">
-              RH
-            </label>
-            <div class="col-md-7">
-              <input class="form-control" type="text" maxlength="200" name="_snipeit_rh_8" id="_snipeit_rh_8" value="{{ old('_snipeit_rh_8') }}" />
-              {!! $errors->first('_snipeit_rh_8', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+          <!-- RH -->
+          <div class="form-group {{ $errors->has('_snipeit_rh_8') ? ' has-error' : '' }}">
+              <label for="_snipeit_rh_8" class="col-md-3 control-label">
+                RH
+              </label>
+              <div class="col-md-7">
+                <input class="form-control" type="text" maxlength="200" name="_snipeit_rh_8" id="_snipeit_rh_8" value="{{ old('_snipeit_rh_8') }}" />
+                {!! $errors->first('_snipeit_rh_8', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              </div>
             </div>
-          </div> -->
 
-         <!-- SP 
-         <div class="form-group {{ $errors->has('_snipeit_sp_9') ? ' has-error' : '' }}">
-            <label for="_snipeit_sp_9" class="col-md-3 control-label">
-              SP
-            </label>
-            <div class="col-md-7">
-              <input class="form-control" type="text" maxlength="200" name="_snipeit_sp_9" id="_snipeit_sp_9" value="{{ old('_snipeit_sp_9') }}" />
-              {!! $errors->first('_snipeit_sp_9', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+          <!-- SP -->
+          <div class="form-group {{ $errors->has('_snipeit_sp_9') ? ' has-error' : '' }}">
+              <label for="_snipeit_sp_9" class="col-md-3 control-label">
+                SP
+              </label>
+              <div class="col-md-7">
+                <input class="form-control" type="text" maxlength="200" name="_snipeit_sp_9" id="_snipeit_sp_9" value="{{ old('_snipeit_sp_9') }}" />
+                {!! $errors->first('_snipeit_sp_9', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              </div>
             </div>
-          </div> -->
 
-          <!-- CAS Nr 
-         <div class="form-group {{ $errors->has('_snipeit_cas_nr_10') ? ' has-error' : '' }}">
-            <label for="_snipeit_cas_nr_10" class="col-md-3 control-label">
-              CAS-Nr
-            </label>
-            <div class="col-md-7">
-              <input class="form-control" type="text" maxlength="200" name="_snipeit_cas_nr_10" id="_snipeit_cas_nr_10" value="{{ old('_snipeit_cas_nr_10') }}" />
-              {!! $errors->first('_snipeit_cas_nr_10', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
-            </div>
-          </div> -->
+            <!-- CAS Nr -->
+          <div class="form-group {{ $errors->has('_snipeit_cas_nr_10') ? ' has-error' : '' }}">
+              <label for="_snipeit_cas_nr_10" class="col-md-3 control-label">
+                CAS-Nr
+              </label>
+              <div class="col-md-7">
+                <input class="form-control" type="text" maxlength="200" name="_snipeit_cas_nr_10" id="_snipeit_cas_nr_10" value="{{ old('_snipeit_cas_nr_10') }}" />
+                {!! $errors->first('_snipeit_cas_nr_10', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              </div>
+            </div> 
+          @endcan
 
           <!-- Purchase Cost 
           <div class="form-group {{ $errors->has('purchase_cost') ? ' has-error' : '' }}">
@@ -185,6 +187,7 @@
                 {!! $errors->first('purchase_cost', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div> -->
+          
 
           <!-- Supplier -->
            @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
