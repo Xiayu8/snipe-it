@@ -98,6 +98,7 @@ class BulkAssetsController extends Controller
             || ($request->filled('_snipeit_rh_8'))
             || ($request->filled('_snipeit_sp_9'))
             || ($request->filled('_snipeit_cas_nr_10'))
+            || ($request->filled('_snipeit_ppe_12'))
         ) {
             foreach ($assets as $assetId) {
 
@@ -118,7 +119,8 @@ class BulkAssetsController extends Controller
                     ->conditionallyAddItem('_snipeit_haz_subst_7')
                     ->conditionallyAddItem('_snipeit_rh_8')
                     ->conditionallyAddItem('_snipeit_sp_9')
-                    ->conditionallyAddItem('_snipeit_cas_nr_10');
+                    ->conditionallyAddItem('_snipeit_cas_nr_10')
+                    ->conditionallyAddItem('_snipeit_ppe_12');
 
                 if ($request->filled('purchase_cost')) {
                     $this->update_array['purchase_cost'] =  Helper::ParseCurrency($request->input('purchase_cost'));
