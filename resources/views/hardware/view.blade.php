@@ -165,7 +165,7 @@
                     <li>
                         <a href="#files" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                            <i class="fa fa-file fa-2x" aria-hidden="true"></i>
+                            <i class="fa fa-file-o fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.files') }}
                           </span>
