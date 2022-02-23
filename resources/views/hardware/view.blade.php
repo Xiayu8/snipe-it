@@ -123,7 +123,7 @@
                     <li>
                         <a href="#components" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                            <i class="fa fa-hdd" aria-hidden="true"></i>
+                            <i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.components') }}
                           </span>
@@ -194,10 +194,10 @@
 
                                     @if ($asset->deleted_at!='')
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <span class="text-danger"><strong>{{ trans('general.deleted') }}</strong></span>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 {{ \App\Helpers\Helper::getFormattedDateObject($asset->deleted_at, 'date', false) }}
 
                                             </div>
@@ -209,10 +209,10 @@
                                     @if ($asset->assetstatus)
 
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>{{ trans('general.status') }}</strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 @if (($asset->assignedTo) && ($asset->deleted_at==''))
                                                     <i class="fa fa-circle text-blue"></i>
                                                     {{ $asset->assetstatus->name }}
@@ -240,10 +240,10 @@
 
                                     @if ($asset->company)
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>{{ trans('general.company') }}</strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 <a href="{{ url('/companies/' . $asset->company->id) }}">{{ $asset->company->name }}</a>
                                             </div>
                                         </div>
@@ -251,10 +251,10 @@
 
                                     @if ($asset->name)
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>{{ trans('admin/hardware/form.name') }}</strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 {{ $asset->name }}
                                             </div>
                                         </div>
@@ -262,10 +262,10 @@
 
                                     @if ($asset->serial)
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>{{ trans('admin/hardware/form.serial') }}</strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 {{ $asset->serial  }}
                                             </div>
                                         </div>
@@ -274,12 +274,12 @@
 
                                     @if ((isset($audit_log)) && ($audit_log->created_at))
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>
                                                     {{ trans('general.last_audit') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 {{ \App\Helpers\Helper::getFormattedDateObject($audit_log->created_at, 'date', false) }} 
                                                 @if ($audit_log->user) 
                                                     (by {{ link_to_route('users.show', $audit_log->user->present()->fullname(), [$audit_log->user->id]) }})
@@ -291,12 +291,12 @@
 
                                     @if ($asset->next_audit_date)
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>
                                                     {{ trans('general.next_audit_date') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 {{ \App\Helpers\Helper::getFormattedDateObject($asset->next_audit_date, 'date', false) }}
                                             </div>
                                         </div>
@@ -389,12 +389,12 @@
 
                                     @if ($asset->model)
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.model') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 @if ($asset->model)
 
                                                     @can('view', \App\Models\AssetModel::class)
@@ -424,12 +424,12 @@
                                     @if (($asset->model) && ($asset->model->fieldset))
                                         @foreach($asset->model->fieldset->fields as $field)
                                             <div class="row">
-                                                <div class="col-md-2">
+                                                <div class="col-xs-3 col-md-2">
                                                     <strong>
                                                         {{ $field->name }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-xs-7 col-md-6">
                                                     @if ($field->field_encrypted=='1')
                                                         <i class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
                                                     @endif
@@ -460,12 +460,12 @@
 
                                     @if ($asset->purchase_date)
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.date') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 {{ \App\Helpers\Helper::getFormattedDateObject($asset->purchase_date, 'date', false) }}
                                             </div>
                                         </div>
@@ -473,12 +473,12 @@
 
                                     @if ($asset->purchase_cost)
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.cost') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 @if (($asset->id) && ($asset->location))
                                                     {{ $asset->location->currency }}
                                                 @elseif (($asset->id) && ($asset->location))
@@ -493,13 +493,13 @@
                                     @endif
                                     @if (($asset->model) && ($asset->depreciation))
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/table.current_value') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-6">
-                                                <div class="col-md-6" style="margin-left:-15px;">
+                                            <div class="col-xs-7 col-md-6">
+                                                <div class="col-xs-7 col-md-6" style="margin-left:-15px;">
                                                     @if (($asset->id) && ($asset->location))
                                                         {{ $asset->location->currency }}
                                                     @elseif (($asset->id) && ($asset->location))
@@ -515,12 +515,12 @@
                                     @endif
                                     @if ($asset->order_number)
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>
                                                     {{ trans('general.order_number') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 #{{ $asset->order_number }}
                                             </div>
                                         </div>
@@ -528,12 +528,12 @@
 
                                     @if ($asset->supplier)
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>
                                                     {{ trans('general.supplier') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 @can ('superuser')
                                                     <a href="{{ route('suppliers.show', $asset->supplier_id) }}">
                                                         {{ $asset->supplier->name }}
@@ -548,12 +548,12 @@
 
                                     @if ($asset->warranty_months)
                                         <div class="row{!! $asset->present()->warrantee_expires() < date("Y-m-d") ? ' warning' : '' !!}">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.warranty') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 {{ $asset->warranty_months }}
                                                 {{ trans('admin/hardware/form.months') }}
 
@@ -565,12 +565,12 @@
 
                                     @if (($asset->model) && ($asset->depreciation))
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>
                                                     {{ trans('general.depreciation') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 {{ $asset->depreciation->name }}
                                                 ({{ $asset->depreciation->months }}
                                                 {{ trans('admin/hardware/form.months') }}
@@ -578,12 +578,12 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.fully_depreciated') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 @if ($asset->time_until_depreciated()->y > 0)
                                                     {{ $asset->time_until_depreciated()->y }}
                                                     {{ trans('admin/hardware/form.years') }},
@@ -597,12 +597,12 @@
 
                                     @if (($asset->model) && ($asset->model->eol))
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.eol_rate') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 {{ $asset->model->eol }}
                                                 {{ trans('admin/hardware/form.months') }}
 
@@ -610,12 +610,12 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.eol_date') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 {{ $asset->present()->eol_date() }}
 
 
@@ -637,36 +637,36 @@
 
                                     @if ($asset->expected_checkin!='')
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.expected_checkin') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 {{ \App\Helpers\Helper::getFormattedDateObject($asset->expected_checkin, 'date', false) }}
                                             </div>
                                         </div>
                                     @endif
 
                                     <div class="row">
-                                        <div class="col-md-2">
+                                        <div class="col-xs-3 col-md-2">
                                             <strong>
                                                 {{ trans('admin/hardware/form.notes') }}
                                             </strong>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-xs-7 col-md-6">
                                             {!! nl2br(e($asset->notes)) !!}
                                         </div>
                                     </div>
 
                                     @if ($asset->location)
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>
                                                     {{ trans('general.location') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 @can('superuser')
                                                     <a href="{{ route('locations.show', ['location' => $asset->location->id]) }}">
                                                         {{ $asset->location->name }}
@@ -680,12 +680,12 @@
 
                                     @if ($asset->defaultLoc)
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.default_location') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 @can('superuser')
                                                     <a href="{{ route('locations.show', ['location' => $asset->defaultLoc->id]) }}">
                                                         {{ $asset->defaultLoc->name }}
@@ -699,12 +699,12 @@
 
                                     @if ($asset->created_at!='')
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>
                                                     {{ trans('general.created_at') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 {{ \App\Helpers\Helper::getFormattedDateObject($asset->created_at, 'datetime', false) }}
                                             </div>
                                         </div>
@@ -712,12 +712,12 @@
 
                                     @if ($asset->updated_at!='')
                                         <div class="row">
-                                            <div class="col-md-2">
+                                            <div class="col-xs-3 col-md-2">
                                                 <strong>
                                                     {{ trans('general.updated_at') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-md-6">
+                                            <div class="col-xs-7 col-md-6">
                                                 {{ \App\Helpers\Helper::getFormattedDateObject($asset->updated_at, 'datetime', false) }}
                                             </div>
                                         </div>
@@ -774,12 +774,12 @@
                                     </div>
                                     -->
                                     <div class="row">
-                                        <div class="col-md-2">
+                                        <div class="col-xs-3 col-md-2">
                                             <strong>
                                                Labels
                                             </strong>
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-xs-7 col-md-6">
                                             {{ Form::open([
                                                       'method' => 'POST',
                                                       'route' => ['hardware/bulkedit'],
