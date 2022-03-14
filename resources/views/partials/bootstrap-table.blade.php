@@ -31,7 +31,7 @@
         }
 
         $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
-            classes: 'table table-responsive table-no-bordered',
+            classes: 'table table-responsive table-bordered table-condensed table-hover',
             ajaxOptions: {
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -440,6 +440,49 @@
                         return '<a href="' + row.custom_fields[field_column_plain].value + '" target="_blank" rel="noopener">' + row.custom_fields[field_column_plain].value + '</a>';
                     } else if (row.custom_fields[field_column_plain].field_format=='EMAIL') {
                         return '<a href="mailto:' + row.custom_fields[field_column_plain].value + '">' + row.custom_fields[field_column_plain].value + '</a>';
+                    } else if ((this.title=='SDS')&&(row.custom_fields[field_column_plain].value!='')) {
+                        return '<a href="/SDS/sdb_' + row.asset_tag + '.pdf" class="btn btn-default btn-sm" role="button" target="_blank" rel="noopener">SDS</a>';
+                    } else if ((this.title=='TDS')&&(row.custom_fields[field_column_plain].value!='')) {
+                        return '<a href="/TDS/tdb_' + row.asset_tag + '.pdf" class="btn btn-default btn-sm" role="button" target="_blank" rel="noopener">TDS</a>';
+                    } else if (this.title=='haz. subst.'&&(row.custom_fields[field_column_plain].value.indexOf("GHS")>=0)) {
+                        var ghsArray = {"GHS01":"GHS01-pictogram-explos.svg", "GHS02":"GHS02-pictogram-flamme.svg","GHS03":"GHS03-pictogram-rondflam.svg", "GHS04" : "GHS04-pictogram-bottle.svg",
+                                                    "GHS05" : "GHS05-pictogram-acid.svg", "GHS06" : "GHS06-pictogram-skull.svg", "GHS07" : "GHS07-pictogram-exclam.svg",
+                                                    "GHS08" : "GHS08-pictogram-silhouette.svg", "GHS09" : "GHS09-pictogram-pollu.svg"};
+                        var x = 0;
+                        var pictureString='';
+                        for (let key of Object.keys(ghsArray)) {
+                            var y = 0;
+                            for(let value of Object.values(ghsArray)){
+                                if(y == x){
+                                    if(row.custom_fields[field_column_plain].value.indexOf(key)>=0){
+                                        pictureString = pictureString + '<img style="height: 35px; width: 35px;" src="https://Chemikalienliste/uploads/'+value+'" class="pull-left" alt="'+value+'">'
+                                    }
+                                }
+                                y += 1;
+                            }
+                        x += 1;
+                        }
+                        return pictureString;
+
+                    } else if (this.title=='PPE'&&(row.custom_fields[field_column_plain].value!='')) {
+                        var ppeArray = {"M003" : "ISO_7010_M003.svg", "M004" : "ISO_7010_M004.svg", "M009" : "ISO_7010_M009.svg", "M010" : "ISO_7010_M010.svg",
+                                        "M011" : "ISO_7010_M011.svg", "M013" : "ISO_7010_M013.svg", "M014" : "ISO_7010_M014.svg",
+                                        "M016" : "ISO_7010_M016.svg", "M017" : "ISO_7010_M017.svg", "M018" : "ISO_7010_M018.svg", "M019" : "ISO_7010_M019.svg"};
+                        var x = 0;
+                        var pictureString='';
+                        for (let key of Object.keys(ppeArray)) {
+                            var y = 0;
+                            for(let value of Object.values(ppeArray)){
+                                if(y == x){
+                                    if(row.custom_fields[field_column_plain].value.indexOf(key)>=0){
+                                        pictureString = pictureString + '<img style="height: 35px; width: 35px;" src="https://Chemikalienliste/uploads/'+value+'" class="pull-left" alt="'+value+'">'
+                                    }
+                                }
+                                y += 1;
+                            }
+                        x += 1;
+                        }
+                        return pictureString;
                     }
                 }
                 return row.custom_fields[field_column_plain].value;

@@ -185,6 +185,17 @@
                 {!! $errors->first('_snipeit_ppe_12', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
               </div>
             </div> 
+
+                <!-- SDS -->
+          <div class="form-group {{ $errors->has('_snipeit_sds_13') ? ' has-error' : '' }}">
+              <label for="_snipeit_sds_13" class="col-md-3 control-label">
+                SDS
+              </label>
+              <div class="col-md-7">
+                <input class="form-control" type="text" maxlength="200" name="_snipeit_sds_13" id="_snipeit_sds_13" value="{{ old('_snipeit_sds_13') }}" />
+                {!! $errors->first('_snipeit_sds_13', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+              </div>
+            </div> 
           @endcan
 
           <!-- Purchase Cost 

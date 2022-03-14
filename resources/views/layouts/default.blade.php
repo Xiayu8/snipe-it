@@ -829,7 +829,7 @@
           @endif
           
 
-          Die Chemikalienliste ist bis Ende Februar in der Betaphase. <i class="fa fa-heart" style="color: #a94442; font-size: 10px" aria-hidden="true"></i>
+          <!-- Betaphase. <i class="fa fa-heart" style="color: #a94442; font-size: 10px" aria-hidden="true"></i> -->
       </footer>
 
 

@@ -105,15 +105,6 @@ class Asset extends Depreciable
         'purchase_cost'   => 'numeric|nullable',
         'next_audit_date' => 'date|nullable',
         'last_audit_date' => 'date|nullable',
-        '_snipeit_shelf_nr_6' => 'required|min:2',
-        '_snipeit_description_3' => 'required|min:2',
-        '_snipeit_state_of_aggregation_4' => 'required|min:2',
-        '_snipeit_quantity_5' => 'required|min:2',
-        '_snipeit_haz_subst_7' => 'required|min:2',
-        '_snipeit_rh_8' => 'required|min:2',
-        '_snipeit_sp_9' => 'required|min:2',
-        '_snipeit_cas_nr_10' => 'required|min:2',
-
     ];
 
   /**

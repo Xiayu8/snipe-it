@@ -448,6 +448,10 @@
                                                     @else
                                                         @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
                                                             <a href="{{ $asset->{$field->db_column_name()} }}" target="_new">{{ $asset->{$field->db_column_name()} }}</a>
+                                                        @elseif(($field->name=='SDS')&&($asset->{$field->db_column_name()}!=''))
+                                                            <a href="/SDS/sdb_{{$asset->asset_tag}}.pdf" class="btn btn-default btn-sm" role="button" target="_new">Safety Data Sheet KC{{$asset->asset_tag}}</a>
+                                                        @elseif(($field->name=='TDS')&&($asset->{$field->db_column_name()}!=''))
+                                                            <a href="/TDS/tdb_{{$asset->asset_tag}}.pdf" class="btn btn-default btn-sm" role="button" target="_new">Technical Data Sheet KC{{$asset->asset_tag}}</a>
                                                         @else
                                                             {!! nl2br(e($asset->{$field->db_column_name()})) !!}
                                                         @endif
