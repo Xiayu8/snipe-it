@@ -452,6 +452,244 @@
                                                             <a href="/SDS/sdb_{{$asset->asset_tag}}.pdf" class="btn btn-default btn-sm" role="button" target="_new">Safety Data Sheet KC{{$asset->asset_tag}}</a>
                                                         @elseif(($field->name=='TDS')&&($asset->{$field->db_column_name()}!=''))
                                                             <a href="/TDS/tdb_{{$asset->asset_tag}}.pdf" class="btn btn-default btn-sm" role="button" target="_new">Technical Data Sheet KC{{$asset->asset_tag}}</a>
+                                                        @elseif(($field->name=='S/P')&&($asset->{$field->db_column_name()}!=''))
+                                                            {!! nl2br(e($asset->{$field->db_column_name()})) !!} <?php
+                                                            $ghs = array ("P101"=>'If medical advice is needed,have product container or label at hand.',
+                                                            "P102"=>'Keep out of reach of children.',
+                                                            "P103"=>'Read label before use.',
+                                                            "P201"=>'Obtain special instructions before use.',
+                                                            "P202"=>'Do not handle until all safety precautions have been read and understood.',
+                                                            "P210"=>'Keep away from heat/sparks/open flames/hot surfaces. No smoking.',
+                                                            "P211"=>'Do not spray on an open flame or other ignition source.',
+                                                            "P220"=>'Keep/Store away from clothing/.../combustible materials.',
+                                                            "P221"=>'Take any precaution to avoid mixing with combustibles/...',
+                                                            "P222"=>'Do not allow contact with air.',
+                                                            "P223"=>'Keep away from any possible contact with water, because of violent reaction and possible flash fire.',
+                                                            "P230"=>'Keep wetted with ...',
+                                                            "P231"=>'Handle under inert gas.',
+                                                            "P232"=>'Protect from moisture.',
+                                                            "P233"=>'Keep container tightly closed.',
+                                                            "P234"=>'Keep only in original container.',
+                                                            "P235"=>'Keep cool.',
+                                                            "P240"=>'Ground/bond container and receiving equipment.',
+                                                            "P241"=>'Use explosion-prrof electrical/ventilating/lighting/.../equipment.',
+                                                            "P242"=>'Use only non-sparking tools.',
+                                                            "P243"=>'Take precautionary measures against static discharge.',
+                                                            "P244"=>'Keep reduction valves free from grease and oil.',
+                                                            "P250"=>'Do not subject to grinding/shock/.../friction.',
+                                                            "P251"=>'Pressurized container: Do not pierce or burn, even after use.',
+                                                            "P260"=>'Do not breathe dust/fume/gas/mist/vapours/spray.',
+                                                            "P261"=>'Avoid breathing dust/fume/gas/mist/vapours/spray.',
+                                                            "P262"=>'Do not get in eyes, on skin, or on clothing.',
+                                                            "P263"=>'Avoid contact during pregnancy/while nursing.',
+                                                            "P264"=>'Wash hands thoroughly after handling.',
+                                                            "P264"=>'Wash skin thouroughly after handling.',
+                                                            "P270"=>'Do not eat, drink or smoke when using this product.',
+                                                            "P271"=>'Use only outdoors or in a well-ventilated area.',
+                                                            "P272"=>'Contaminated work clothing should not be allowed out of the workplace.',
+                                                            "P273"=>'Avoid release to the environment.',
+                                                            "P280"=>'Wear protective gloves/protective clothing/eye protection/face protection.',
+                                                            "P281"=>'Use personal protective equipment as required.',
+                                                            "P282"=>'Wear cold insulating gloves/face shield/eye protection.',
+                                                            "P283"=>'Wear fire/flame resistant/retardant clothing.',
+                                                            "P284"=>'Wear respiratory protection.',
+                                                            "P285"=>'In case of inadequate ventilation wear respiratory protection.',
+                                                            "P301"=>'IF SWALLOWED:',
+                                                            "P302"=>'IF ON SKIN:',
+                                                            "P303"=>'IF ON SKIN (or hair):',
+                                                            "P304"=>'IF INHALED:',
+                                                            "P305"=>'IF IN EYES:',
+                                                            "P306"=>'IF ON CLOTHING:',
+                                                            "P307"=>'IF exposed:',
+                                                            "P308"=>'IF exposed or concerned:',
+                                                            "P309"=>'IF exposed or if you feel unwell:',
+                                                            "P310"=>'Immediately call a POISON CENTER or doctor/physician.',
+                                                            "P311"=>'Call a POISON CENTER or doctor/physician.',
+                                                            "P312"=>'Call a POISON CENTER or doctor/physician if you feel unwell.',
+                                                            "P313"=>'Get medical advice/attention.',
+                                                            "P314"=>'Get medical advice/attention if you feel unwell.',
+                                                            "P315"=>'Get immediate medical advice/attention.',
+                                                            "P320"=>'Specific treatment is urgent (see ... on this label).',
+                                                            "P321"=>'Specific treatment (see ... on this label).',
+                                                            "P322"=>'Specific measures (see ...on this label).',
+                                                            "P330"=>'Rinse mouth.',
+                                                            "P331"=>'Do NOT induce vomiting.',
+                                                            "P332"=>'IF SKIN irritation occurs:',
+                                                            "P333"=>'If skin irritation or rash occurs:',
+                                                            "P334"=>'Immerse in cool water/wrap n wet bandages.',
+                                                            "P335"=>'Brush off loose particles from skin.',
+                                                            "P336"=>'Thaw frosted parts with lukewarm water. Do not rub affected area.',
+                                                            "P337"=>'If eye irritation persists:',
+                                                            "P338"=>'Remove contact lenses, if present and easy to do. Continue rinsing.',
+                                                            "P340"=>'Remove victim to fresh air and keep at rest in a position comfortable for breathing.',
+                                                            "P341"=>'If breathing is difficult, remove victim to fresh air and keep at rest in a position comfortable for breathing.',
+                                                            "P342"=>'If experiencing respiratory symptoms:',
+                                                            "P350"=>'Gently wash with plenty of soap and water.',
+                                                            "P351"=>'Rinse cautiously with water for several minutes.',
+                                                            "P352"=>'Wash with plenty of soap and water.',
+                                                            "P353"=>'Rinse skin with water/shower.',
+                                                            "P360"=>'Rinse immediately contaminated clothing and skin with plenty of water before removing clothes.',
+                                                            "P361"=>'Remove/Take off immediately all contaminated clothing.',
+                                                            "P362"=>'Take off contaminated clothing and wash before reuse.',
+                                                            "P363"=>'Wash contaminated clothing before reuse.',
+                                                            "P370"=>'In case of fire:',
+                                                            "P371"=>'In case of major fire and large quantities:',
+                                                            "P372"=>'Explosion risk in case of fire.',
+                                                            "P373"=>'DO NOT fight fire when fire reaches explosives.',
+                                                            "P374"=>'Fight fire with normal precautions from a reasonable distance.',
+                                                            "P376"=>'Stop leak if safe to do so. Oxidising gases (section 2.4) 1',
+                                                            "P377"=>'Leaking gas fire: Do not extinguish, unless leak can be stopped safely.',
+                                                            "P378"=>'Use ... for extinction.',
+                                                            "P380"=>'Evacuate area.',
+                                                            "P381"=>'Eliminate all ignition sources if safe to do so.',
+                                                            "P390"=>'Absorb spillage to prevent material damage.',
+                                                            "P391"=>'Collect spillage. Hazardous to the aquatic environment.',
+                                                            "P401"=>'Store ...',
+                                                            "P402"=>'Store in a dry place.',
+                                                            "P403"=>'Store in a well-ventilated place.',
+                                                            "P404"=>'Store in a closed container.',
+                                                            "P405"=>'Store l°Cked up.',
+                                                            "P406"=>'Store in corrosive resistant/... container with a resistant inner liner.',
+                                                            "P407"=>'Maintain air gap between stacks/pallets.',
+                                                            "P410"=>'Protect from sunlight.',
+                                                            "P411"=>'Store at temperatures not exceeding ... °C/...F.',
+                                                            "P412"=>'Do not expose to temperatures exceeding 50 °C/ 122 F.',
+                                                            "P413"=>'Store bulk masses greater than ... kg/...lbs at temperatures not exceeding ... °C/...F.',
+                                                            "P420"=>'Store away from other materials.',
+                                                            "P422"=>'Store contents under ...',
+                                                            "P501"=>'Dispose of contents/container to.....',
+                                                            "P502"=>'Refer to manufacturer/supplier for information on recovery/recycling.',
+                                                            );
+                                                            $infoText = '';
+                                                            $infoTest = '&#10071;';
+                                                            $infoTemp = '';
+                                                            $stringLength = strlen($asset->_snipeit_sp_9);
+                                                            $string = $asset->_snipeit_sp_9;
+                                                            for ($x = 0; $x <= $stringLength; $x++) {
+                                                                $temp = substr($string,$x,1);
+                                                                $infoTemp .= substr($string,$x,1);
+                                                                if($temp=='-'||$temp=='+'||$x==$stringLength){
+                                                                    foreach ($ghs as $key => $val){
+                                                                        if (strpos($infoTemp, $key) !== false){
+                                                                            $infoTest .= $val;
+                                                                        }
+                                                                        //echo strpos($infoTemp, $key);
+                                                                    }
+                                                                    //echo $infoTemp;
+                                                                    //echo $infoTest;
+                                                                    if($temp=='-'){
+                                                                        $infoTest .= '&#10071;';
+                                                                        $infoTemp = '';
+                                                                    }else{
+                                                                        $infoTemp = '';
+                                                                    }
+                                                                }
+                                                            } 
+                                                            //echo $infoTest;
+                                                            echo '<i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-html="true" data-placement="right" title="'.$infoTest.'"></i>';
+                                                        ?>
+                                                        @elseif(($field->name=='R/H')&&($asset->{$field->db_column_name()}!=''))
+                                                            {!! nl2br(e($asset->{$field->db_column_name()})) !!} <?php
+                                                            $ghs = array ("H200"=>'Unstable explosive.',
+                                                            "H201"=>'Explosive; mass explosion hazard.',
+                                                            "H202"=>'Explosive; severe projection hazard.',
+                                                            "H203"=>'Explosive; fire, blast or projection hazard.',
+                                                            "H204"=>'Fire or projection hazard.',
+                                                            "H205"=>'May mass explode in fire.',
+                                                            "H206"=>'Fire, blast or projection hazard; increased risk of explosion if desensitising agent is reduced.',
+                                                            "H207"=>'Fire or projection hazard; increased risk of explosion if desensitising agent is reduced.',
+                                                            "H208"=>'Fire hazard; increased risk of explosion if desensitising agent is reduced.',
+                                                            "H220"=>'Extremely flammable gas.',
+                                                            "H221"=>'Flammable gas.',
+                                                            "H222"=>'Extremely flammable aerosol.',
+                                                            "H223"=>'Flammable aerosol.',
+                                                            "H224"=>'Extremely flammable liquid and vapor.',
+                                                            "H225"=>'Highly flammable liquid and vapor.',
+                                                            "H226"=>'Flammable liquid and vapor.',
+                                                            "H228"=>'Flammable solid.',
+                                                            "H229"=>'Pressurized container: may burst if heated.',
+                                                            "H230"=>'May react explosively even in the absence of air.',
+                                                            "H231"=>'May react explosively even in the absence of air at elevated pressure and/or temperature.',
+                                                            "H232"=>'May ignite spontaneously if exposed to air.',
+                                                            "H240"=>'Heating may cause an explosion.',
+                                                            "H241"=>'Heating may cause a fire or explosion.',
+                                                            "H242"=>'Heating may cause a fire.',
+                                                            "H250"=>'Catches fire spontaneously if exposed to air.',
+                                                            "H251"=>'Self-heating; may catch fire.',
+                                                            "H252"=>'Self-heating in large quantities; may catch fire.',
+                                                            "H260"=>'In contact with water releases flammable gases which may ignite spontaneously.',
+                                                            "H261"=>'In contact with water releases flammable gas.',
+                                                            "H270"=>'May cause or intensify fire; oxidizer.',
+                                                            "H271"=>'May cause fire or explosion; strong oxidizer.',
+                                                            "H272"=>'May intensify fire; oxidizer.',
+                                                            "H280"=>'Contains gas under pressure; may explode if heated.',
+                                                            "H281"=>'Contains refrigerated gas; may cause cryogenic burns or injury.',
+                                                            "H290"=>'May be corrosive to metals.',
+                                                            "H300"=>'Fatal if swallowed.',
+                                                            "H301"=>'Toxic if swallowed.',
+                                                            "H302"=>'Harmful if swallowed.',
+                                                            "H304"=>'May be fatal if swallowed and enters airways.',
+                                                            "H310"=>'Fatal in contact with skin.',
+                                                            "H311"=>'Toxic in contact with skin.',
+                                                            "H312"=>'Harmful in contact with skin.',
+                                                            "H314"=>'Causes severe skin burns and eye damage.',
+                                                            "H315"=>'Causes skin irritation.',
+                                                            "H317"=>'May cause an allergic skin reaction.',
+                                                            "H318"=>'Causes serious eye damage.',
+                                                            "H319"=>'Causes serious eye irritation.',
+                                                            "H330"=>'Fatal if inhaled.',
+                                                            "H331"=>'Toxic if inhaled.',
+                                                            "H332"=>'Harmful if inhaled.',
+                                                            "H334"=>'May cause allergy or asthma symptoms or breathing difficulties if inhaled.',
+                                                            "H335"=>'May cause respiratory irritation.',
+                                                            "H336"=>'May cause drowsiness or dizziness.',
+                                                            "H340"=>'May cause genetic defects.',
+                                                            "H341"=>'Suspected of causing genetic defects.',
+                                                            "H350"=>'May cause cancer.',
+                                                            "H351"=>'Suspected of causing cancer.',
+                                                            "H360"=>'May damage fertility or the unborn child.',
+                                                            "H361"=>'Suspected of damaging fertility or the unborn child.',
+                                                            "H362"=>'May cause harm to breast-fed children.',
+                                                            "H370"=>'Causes damage to organs.',
+                                                            "H371"=>'May cause damage to organs.',
+                                                            "H372"=>'Causes damage to organs through prolonged or repeated exposure.',
+                                                            "H373"=>'May cause damage to organs through prolonged or repeated exposure.',
+                                                            "H400"=>'Very toxic to aquatic life.',
+                                                            "H410"=>'Very toxic to aquatic life with long lasting effects.',
+                                                            "H411"=>'Toxic to aquatic life with long lasting effects.',
+                                                            "H412"=>'Harmful to aquatic life with long lasting effects.',
+                                                            "H413"=>'May cause long lasting harmful effects to aquatic life.',
+                                                            "H420"=>'Harms public health and the environment by destroying ozone in the upper atmosphere.',
+                                                            
+                                                            );
+                                                            $infoText = '';
+                                                            $infoTest = '&#10071;';
+                                                            $infoTemp = '';
+                                                            $stringLength = strlen($asset->_snipeit_rh_8);
+                                                            $string = $asset->_snipeit_rh_8;
+                                                            for ($x = 0; $x <= $stringLength; $x++) {
+                                                                $temp = substr($string,$x,1);
+                                                                $infoTemp .= substr($string,$x,1);
+                                                                if($temp=='-'||$temp=='+'||$x==$stringLength){
+                                                                    foreach ($ghs as $key => $val){
+                                                                        if (strpos($infoTemp, $key) !== false){
+                                                                            $infoTest .= $val;
+                                                                        }
+                                                                        //echo strpos($infoTemp, $key);
+                                                                    }
+                                                                    //echo $infoTemp;
+                                                                    //echo $infoTest;
+                                                                    if($temp=='-'){
+                                                                        $infoTest .= '&#10071;';
+                                                                        $infoTemp = '';
+                                                                    }else{
+                                                                        $infoTemp = '';
+                                                                    }
+                                                                }
+                                                            } 
+                                                            //echo $infoTest;
+                                                            echo '<i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-html="true" data-placement="right" title="'.$infoTest.'"></i>';
+                                                        ?>
                                                         @else
                                                             {!! nl2br(e($asset->{$field->db_column_name()})) !!}
                                                         @endif
