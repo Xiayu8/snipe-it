@@ -329,19 +329,21 @@
                          </a></li>
 
 
-
+                    @can('edit', \App\Models\Asset::class)
                      <li>
                           <a href="{{ route('profile') }}">
                              <i class="fa fa-user fa-fw" aria-hidden="true"></i>
                               {{ trans('general.editprofile') }}
                          </a>
                      </li>
+                     
                      <li>
                          <a href="{{ route('account.password.index') }}">
                              <i class="fa fa-asterisk fa-fw" aria-hidden="true"></i>
                              {{ trans('general.changepassword') }}
                          </a>
                      </li>
+                     @endcan
 
 
 
