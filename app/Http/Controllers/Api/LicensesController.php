@@ -26,7 +26,7 @@ class LicensesController extends Controller
     public function index(Request $request)
     {
         $this->authorize('view', License::class);
-        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'freeSeats', 'supplier','category')->withCount('freeSeats as free_seats_count'));
+        $licenses = Company::scopeCompanyables(License::with('company', 'manufacturer', 'supplier','category')->withCount('freeSeats as free_seats_count'));
 
 
         if ($request->filled('company_id')) {
@@ -80,6 +80,10 @@ class LicensesController extends Controller
 
         if ($request->filled('search')) {
             $licenses = $licenses->TextSearch($request->input('search'));
+        }
+
+        if ($request->input('deleted')=='true') {
+            $licenses->onlyTrashed();
         }
 
 
