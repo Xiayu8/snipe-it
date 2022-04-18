@@ -123,7 +123,7 @@
                     <li>
                         <a href="#components" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                            <i class="fa fa-hdd-o fa-2x" aria-hidden="true"></i>
+                            <i class="fa fa-hdd" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.components') }}
                           </span>
@@ -165,7 +165,7 @@
                     <li>
                         <a href="#files" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                            <i class="fa fa-file-o fa-2x" aria-hidden="true"></i>
+                            <i class="fa fa-file fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.files') }}
                           </span>
@@ -194,10 +194,10 @@
 
                                     @if ($asset->deleted_at!='')
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <span class="text-danger"><strong>{{ trans('general.deleted') }}</strong></span>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 {{ \App\Helpers\Helper::getFormattedDateObject($asset->deleted_at, 'date', false) }}
 
                                             </div>
@@ -209,10 +209,10 @@
                                     @if ($asset->assetstatus)
 
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>{{ trans('general.status') }}</strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 @if (($asset->assignedTo) && ($asset->deleted_at==''))
                                                     <i class="fa fa-circle text-blue"></i>
                                                     {{ $asset->assetstatus->name }}
@@ -240,10 +240,10 @@
 
                                     @if ($asset->company)
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>{{ trans('general.company') }}</strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 <a href="{{ url('/companies/' . $asset->company->id) }}">{{ $asset->company->name }}</a>
                                             </div>
                                         </div>
@@ -251,10 +251,10 @@
 
                                     @if ($asset->name)
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>{{ trans('admin/hardware/form.name') }}</strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 {{ $asset->name }}
                                             </div>
                                         </div>
@@ -262,10 +262,10 @@
 
                                     @if ($asset->serial)
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>{{ trans('admin/hardware/form.serial') }}</strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 {{ $asset->serial  }}
                                             </div>
                                         </div>
@@ -274,12 +274,12 @@
 
                                     @if ((isset($audit_log)) && ($audit_log->created_at))
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('general.last_audit') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 {{ \App\Helpers\Helper::getFormattedDateObject($audit_log->created_at, 'date', false) }} 
                                                 @if ($audit_log->user) 
                                                     (by {{ link_to_route('users.show', $audit_log->user->present()->fullname(), [$audit_log->user->id]) }})
@@ -291,17 +291,17 @@
 
                                     @if ($asset->next_audit_date)
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('general.next_audit_date') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 {{ \App\Helpers\Helper::getFormattedDateObject($asset->next_audit_date, 'date', false) }}
                                             </div>
                                         </div>
                                     @endif
-                                    <!--
+
                                     @if (($asset->model) && ($asset->model->manufacturer))
                                         <div class="row">
                                             <div class="col-md-2">
@@ -310,7 +310,7 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                <ul class="list-unstyled">
+                                                <ul class="list-unstyled" style="line-height: 25px;">
                                                     @can('view', \App\Models\Manufacturer::class)
 
                                                         <li>
@@ -385,16 +385,15 @@
                                             @endif
                                         </div>
                                     </div>
-                                    -->
 
                                     @if ($asset->model)
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.model') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 @if ($asset->model)
 
                                                     @can('view', \App\Models\AssetModel::class)
@@ -409,7 +408,7 @@
                                             </div>
                                         </div>
                                     @endif
-                                    <!--
+
                                     <div class="row">
                                         <div class="col-md-2">
                                             <strong>
@@ -420,16 +419,16 @@
                                             {{ ($asset->model) ? $asset->model->model_number : ''}}
                                         </div>
                                     </div>
-                                    -->
+
                                     @if (($asset->model) && ($asset->model->fieldset))
                                         @foreach($asset->model->fieldset->fields as $field)
                                             <div class="row">
-                                                <div class="col-xs-3 col-md-2">
+                                                <div class="col-md-2">
                                                     <strong>
                                                         {{ $field->name }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-xs-7 col-md-6">
+                                                <div class="col-md-6">
                                                     @if ($field->field_encrypted=='1')
                                                         <i class="fa fa-lock" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
                                                     @endif
@@ -438,6 +437,8 @@
                                                         @can('superuser')
                                                             @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
                                                                 <a href="{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
+                                                            @elseif (($field->format=='DATE') && ($asset->{$field->db_column_name()}!=''))
+                                                                {{ \App\Helpers\Helper::gracefulDecrypt($field, \App\Helpers\Helper::getFormattedDateObject($asset->{$field->db_column_name()}, 'date', false)) }}
                                                             @else
                                                                 {{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}
                                                             @endif
@@ -446,253 +447,16 @@
                                                         @endcan
 
                                                     @else
-                                                        @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
+                                                        @if (($field->format=='BOOLEAN') && ($asset->{$field->db_column_name()}!=''))
+                                                            {!! ($asset->{$field->db_column_name()} == 1) ? "<span class='fas fa-check-circle' style='color:green' />" : "<span class='fas fa-times-circle' style='color:red' />" !!}
+                                                        @elseif (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
                                                             <a href="{{ $asset->{$field->db_column_name()} }}" target="_new">{{ $asset->{$field->db_column_name()} }}</a>
-                                                        @elseif(($field->name=='SDS')&&($asset->{$field->db_column_name()}!=''))
-                                                            <a href="/SDS/sdb_{{$asset->asset_tag}}.pdf" class="btn btn-default btn-sm" role="button" target="_new">Safety Data Sheet KC{{$asset->asset_tag}}</a>
-                                                        @elseif(($field->name=='TDS')&&($asset->{$field->db_column_name()}!=''))
-                                                            <a href="/TDS/tdb_{{$asset->asset_tag}}.pdf" class="btn btn-default btn-sm" role="button" target="_new">Technical Data Sheet KC{{$asset->asset_tag}}</a>
-                                                        @elseif(($field->name=='S/P')&&($asset->{$field->db_column_name()}!=''))
-                                                            {!! nl2br(e($asset->{$field->db_column_name()})) !!} <?php
-                                                            $ghs = array ("P101"=>'If medical advice is needed,have product container or label at hand.',
-                                                            "P102"=>'Keep out of reach of children.',
-                                                            "P103"=>'Read label before use.',
-                                                            "P201"=>'Obtain special instructions before use.',
-                                                            "P202"=>'Do not handle until all safety precautions have been read and understood.',
-                                                            "P210"=>'Keep away from heat/sparks/open flames/hot surfaces. No smoking.',
-                                                            "P211"=>'Do not spray on an open flame or other ignition source.',
-                                                            "P220"=>'Keep/Store away from clothing/.../combustible materials.',
-                                                            "P221"=>'Take any precaution to avoid mixing with combustibles/...',
-                                                            "P222"=>'Do not allow contact with air.',
-                                                            "P223"=>'Keep away from any possible contact with water, because of violent reaction and possible flash fire.',
-                                                            "P230"=>'Keep wetted with ...',
-                                                            "P231"=>'Handle under inert gas.',
-                                                            "P232"=>'Protect from moisture.',
-                                                            "P233"=>'Keep container tightly closed.',
-                                                            "P234"=>'Keep only in original container.',
-                                                            "P235"=>'Keep cool.',
-                                                            "P240"=>'Ground/bond container and receiving equipment.',
-                                                            "P241"=>'Use explosion-prrof electrical/ventilating/lighting/.../equipment.',
-                                                            "P242"=>'Use only non-sparking tools.',
-                                                            "P243"=>'Take precautionary measures against static discharge.',
-                                                            "P244"=>'Keep reduction valves free from grease and oil.',
-                                                            "P250"=>'Do not subject to grinding/shock/.../friction.',
-                                                            "P251"=>'Pressurized container: Do not pierce or burn, even after use.',
-                                                            "P260"=>'Do not breathe dust/fume/gas/mist/vapours/spray.',
-                                                            "P261"=>'Avoid breathing dust/fume/gas/mist/vapours/spray.',
-                                                            "P262"=>'Do not get in eyes, on skin, or on clothing.',
-                                                            "P263"=>'Avoid contact during pregnancy/while nursing.',
-                                                            "P264"=>'Wash hands thoroughly after handling.',
-                                                            "P264"=>'Wash skin thouroughly after handling.',
-                                                            "P270"=>'Do not eat, drink or smoke when using this product.',
-                                                            "P271"=>'Use only outdoors or in a well-ventilated area.',
-                                                            "P272"=>'Contaminated work clothing should not be allowed out of the workplace.',
-                                                            "P273"=>'Avoid release to the environment.',
-                                                            "P280"=>'Wear protective gloves/protective clothing/eye protection/face protection.',
-                                                            "P281"=>'Use personal protective equipment as required.',
-                                                            "P282"=>'Wear cold insulating gloves/face shield/eye protection.',
-                                                            "P283"=>'Wear fire/flame resistant/retardant clothing.',
-                                                            "P284"=>'Wear respiratory protection.',
-                                                            "P285"=>'In case of inadequate ventilation wear respiratory protection.',
-                                                            "P301"=>'IF SWALLOWED:',
-                                                            "P302"=>'IF ON SKIN:',
-                                                            "P303"=>'IF ON SKIN (or hair):',
-                                                            "P304"=>'IF INHALED:',
-                                                            "P305"=>'IF IN EYES:',
-                                                            "P306"=>'IF ON CLOTHING:',
-                                                            "P307"=>'IF exposed:',
-                                                            "P308"=>'IF exposed or concerned:',
-                                                            "P309"=>'IF exposed or if you feel unwell:',
-                                                            "P310"=>'Immediately call a POISON CENTER or doctor/physician.',
-                                                            "P311"=>'Call a POISON CENTER or doctor/physician.',
-                                                            "P312"=>'Call a POISON CENTER or doctor/physician if you feel unwell.',
-                                                            "P313"=>'Get medical advice/attention.',
-                                                            "P314"=>'Get medical advice/attention if you feel unwell.',
-                                                            "P315"=>'Get immediate medical advice/attention.',
-                                                            "P320"=>'Specific treatment is urgent (see ... on this label).',
-                                                            "P321"=>'Specific treatment (see ... on this label).',
-                                                            "P322"=>'Specific measures (see ...on this label).',
-                                                            "P330"=>'Rinse mouth.',
-                                                            "P331"=>'Do NOT induce vomiting.',
-                                                            "P332"=>'IF SKIN irritation occurs:',
-                                                            "P333"=>'If skin irritation or rash occurs:',
-                                                            "P334"=>'Immerse in cool water/wrap n wet bandages.',
-                                                            "P335"=>'Brush off loose particles from skin.',
-                                                            "P336"=>'Thaw frosted parts with lukewarm water. Do not rub affected area.',
-                                                            "P337"=>'If eye irritation persists:',
-                                                            "P338"=>'Remove contact lenses, if present and easy to do. Continue rinsing.',
-                                                            "P340"=>'Remove victim to fresh air and keep at rest in a position comfortable for breathing.',
-                                                            "P341"=>'If breathing is difficult, remove victim to fresh air and keep at rest in a position comfortable for breathing.',
-                                                            "P342"=>'If experiencing respiratory symptoms:',
-                                                            "P350"=>'Gently wash with plenty of soap and water.',
-                                                            "P351"=>'Rinse cautiously with water for several minutes.',
-                                                            "P352"=>'Wash with plenty of soap and water.',
-                                                            "P353"=>'Rinse skin with water/shower.',
-                                                            "P360"=>'Rinse immediately contaminated clothing and skin with plenty of water before removing clothes.',
-                                                            "P361"=>'Remove/Take off immediately all contaminated clothing.',
-                                                            "P362"=>'Take off contaminated clothing and wash before reuse.',
-                                                            "P363"=>'Wash contaminated clothing before reuse.',
-                                                            "P370"=>'In case of fire:',
-                                                            "P371"=>'In case of major fire and large quantities:',
-                                                            "P372"=>'Explosion risk in case of fire.',
-                                                            "P373"=>'DO NOT fight fire when fire reaches explosives.',
-                                                            "P374"=>'Fight fire with normal precautions from a reasonable distance.',
-                                                            "P376"=>'Stop leak if safe to do so. Oxidising gases (section 2.4) 1',
-                                                            "P377"=>'Leaking gas fire: Do not extinguish, unless leak can be stopped safely.',
-                                                            "P378"=>'Use ... for extinction.',
-                                                            "P380"=>'Evacuate area.',
-                                                            "P381"=>'Eliminate all ignition sources if safe to do so.',
-                                                            "P390"=>'Absorb spillage to prevent material damage.',
-                                                            "P391"=>'Collect spillage. Hazardous to the aquatic environment.',
-                                                            "P401"=>'Store ...',
-                                                            "P402"=>'Store in a dry place.',
-                                                            "P403"=>'Store in a well-ventilated place.',
-                                                            "P404"=>'Store in a closed container.',
-                                                            "P405"=>'Store l°Cked up.',
-                                                            "P406"=>'Store in corrosive resistant/... container with a resistant inner liner.',
-                                                            "P407"=>'Maintain air gap between stacks/pallets.',
-                                                            "P410"=>'Protect from sunlight.',
-                                                            "P411"=>'Store at temperatures not exceeding ... °C/...F.',
-                                                            "P412"=>'Do not expose to temperatures exceeding 50 °C/ 122 F.',
-                                                            "P413"=>'Store bulk masses greater than ... kg/...lbs at temperatures not exceeding ... °C/...F.',
-                                                            "P420"=>'Store away from other materials.',
-                                                            "P422"=>'Store contents under ...',
-                                                            "P501"=>'Dispose of contents/container to.....',
-                                                            "P502"=>'Refer to manufacturer/supplier for information on recovery/recycling.',
-                                                            );
-                                                            $infoText = '';
-                                                            $infoTest = '&#10071;';
-                                                            $infoTemp = '';
-                                                            $stringLength = strlen($asset->_snipeit_sp_9);
-                                                            $string = $asset->_snipeit_sp_9;
-                                                            for ($x = 0; $x <= $stringLength; $x++) {
-                                                                $temp = substr($string,$x,1);
-                                                                $infoTemp .= substr($string,$x,1);
-                                                                if($temp=='-'||$temp=='+'||$x==$stringLength){
-                                                                    foreach ($ghs as $key => $val){
-                                                                        if (strpos($infoTemp, $key) !== false){
-                                                                            $infoTest .= $val;
-                                                                        }
-                                                                        //echo strpos($infoTemp, $key);
-                                                                    }
-                                                                    //echo $infoTemp;
-                                                                    //echo $infoTest;
-                                                                    if($temp=='-'){
-                                                                        $infoTest .= '&#10071;';
-                                                                        $infoTemp = '';
-                                                                    }else{
-                                                                        $infoTemp = '';
-                                                                    }
-                                                                }
-                                                            } 
-                                                            //echo $infoTest;
-                                                            echo '<i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-html="true" data-placement="right" title="'.$infoTest.'"></i>';
-                                                        ?>
-                                                        @elseif(($field->name=='R/H')&&($asset->{$field->db_column_name()}!=''))
-                                                            {!! nl2br(e($asset->{$field->db_column_name()})) !!} <?php
-                                                            $ghs = array ("H200"=>'Unstable explosive.',
-                                                            "H201"=>'Explosive; mass explosion hazard.',
-                                                            "H202"=>'Explosive; severe projection hazard.',
-                                                            "H203"=>'Explosive; fire, blast or projection hazard.',
-                                                            "H204"=>'Fire or projection hazard.',
-                                                            "H205"=>'May mass explode in fire.',
-                                                            "H206"=>'Fire, blast or projection hazard; increased risk of explosion if desensitising agent is reduced.',
-                                                            "H207"=>'Fire or projection hazard; increased risk of explosion if desensitising agent is reduced.',
-                                                            "H208"=>'Fire hazard; increased risk of explosion if desensitising agent is reduced.',
-                                                            "H220"=>'Extremely flammable gas.',
-                                                            "H221"=>'Flammable gas.',
-                                                            "H222"=>'Extremely flammable aerosol.',
-                                                            "H223"=>'Flammable aerosol.',
-                                                            "H224"=>'Extremely flammable liquid and vapor.',
-                                                            "H225"=>'Highly flammable liquid and vapor.',
-                                                            "H226"=>'Flammable liquid and vapor.',
-                                                            "H228"=>'Flammable solid.',
-                                                            "H229"=>'Pressurized container: may burst if heated.',
-                                                            "H230"=>'May react explosively even in the absence of air.',
-                                                            "H231"=>'May react explosively even in the absence of air at elevated pressure and/or temperature.',
-                                                            "H232"=>'May ignite spontaneously if exposed to air.',
-                                                            "H240"=>'Heating may cause an explosion.',
-                                                            "H241"=>'Heating may cause a fire or explosion.',
-                                                            "H242"=>'Heating may cause a fire.',
-                                                            "H250"=>'Catches fire spontaneously if exposed to air.',
-                                                            "H251"=>'Self-heating; may catch fire.',
-                                                            "H252"=>'Self-heating in large quantities; may catch fire.',
-                                                            "H260"=>'In contact with water releases flammable gases which may ignite spontaneously.',
-                                                            "H261"=>'In contact with water releases flammable gas.',
-                                                            "H270"=>'May cause or intensify fire; oxidizer.',
-                                                            "H271"=>'May cause fire or explosion; strong oxidizer.',
-                                                            "H272"=>'May intensify fire; oxidizer.',
-                                                            "H280"=>'Contains gas under pressure; may explode if heated.',
-                                                            "H281"=>'Contains refrigerated gas; may cause cryogenic burns or injury.',
-                                                            "H290"=>'May be corrosive to metals.',
-                                                            "H300"=>'Fatal if swallowed.',
-                                                            "H301"=>'Toxic if swallowed.',
-                                                            "H302"=>'Harmful if swallowed.',
-                                                            "H304"=>'May be fatal if swallowed and enters airways.',
-                                                            "H310"=>'Fatal in contact with skin.',
-                                                            "H311"=>'Toxic in contact with skin.',
-                                                            "H312"=>'Harmful in contact with skin.',
-                                                            "H314"=>'Causes severe skin burns and eye damage.',
-                                                            "H315"=>'Causes skin irritation.',
-                                                            "H317"=>'May cause an allergic skin reaction.',
-                                                            "H318"=>'Causes serious eye damage.',
-                                                            "H319"=>'Causes serious eye irritation.',
-                                                            "H330"=>'Fatal if inhaled.',
-                                                            "H331"=>'Toxic if inhaled.',
-                                                            "H332"=>'Harmful if inhaled.',
-                                                            "H334"=>'May cause allergy or asthma symptoms or breathing difficulties if inhaled.',
-                                                            "H335"=>'May cause respiratory irritation.',
-                                                            "H336"=>'May cause drowsiness or dizziness.',
-                                                            "H340"=>'May cause genetic defects.',
-                                                            "H341"=>'Suspected of causing genetic defects.',
-                                                            "H350"=>'May cause cancer.',
-                                                            "H351"=>'Suspected of causing cancer.',
-                                                            "H360"=>'May damage fertility or the unborn child.',
-                                                            "H361"=>'Suspected of damaging fertility or the unborn child.',
-                                                            "H362"=>'May cause harm to breast-fed children.',
-                                                            "H370"=>'Causes damage to organs.',
-                                                            "H371"=>'May cause damage to organs.',
-                                                            "H372"=>'Causes damage to organs through prolonged or repeated exposure.',
-                                                            "H373"=>'May cause damage to organs through prolonged or repeated exposure.',
-                                                            "H400"=>'Very toxic to aquatic life.',
-                                                            "H410"=>'Very toxic to aquatic life with long lasting effects.',
-                                                            "H411"=>'Toxic to aquatic life with long lasting effects.',
-                                                            "H412"=>'Harmful to aquatic life with long lasting effects.',
-                                                            "H413"=>'May cause long lasting harmful effects to aquatic life.',
-                                                            "H420"=>'Harms public health and the environment by destroying ozone in the upper atmosphere.',
-                                                            
-                                                            );
-                                                            $infoText = '';
-                                                            $infoTest = '&#10071;';
-                                                            $infoTemp = '';
-                                                            $stringLength = strlen($asset->_snipeit_rh_8);
-                                                            $string = $asset->_snipeit_rh_8;
-                                                            for ($x = 0; $x <= $stringLength; $x++) {
-                                                                $temp = substr($string,$x,1);
-                                                                $infoTemp .= substr($string,$x,1);
-                                                                if($temp=='-'||$temp=='+'||$x==$stringLength){
-                                                                    foreach ($ghs as $key => $val){
-                                                                        if (strpos($infoTemp, $key) !== false){
-                                                                            $infoTest .= $val;
-                                                                        }
-                                                                        //echo strpos($infoTemp, $key);
-                                                                    }
-                                                                    //echo $infoTemp;
-                                                                    //echo $infoTest;
-                                                                    if($temp=='-'){
-                                                                        $infoTest .= '&#10071;';
-                                                                        $infoTemp = '';
-                                                                    }else{
-                                                                        $infoTemp = '';
-                                                                    }
-                                                                }
-                                                            } 
-                                                            //echo $infoTest;
-                                                            echo '<i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-html="true" data-placement="right" title="'.$infoTest.'"></i>';
-                                                        ?>
+                                                        @elseif (($field->format=='DATE') && ($asset->{$field->db_column_name()}!=''))
+                                                            {{ \App\Helpers\Helper::getFormattedDateObject($asset->{$field->db_column_name()}, 'date', false) }}
                                                         @else
                                                             {!! nl2br(e($asset->{$field->db_column_name()})) !!}
                                                         @endif
+
                                                     @endif
                                                 </div>
                                             </div>
@@ -702,12 +466,12 @@
 
                                     @if ($asset->purchase_date)
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.date') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 {{ \App\Helpers\Helper::getFormattedDateObject($asset->purchase_date, 'date', false) }}
                                             </div>
                                         </div>
@@ -715,12 +479,12 @@
 
                                     @if ($asset->purchase_cost)
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.cost') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 @if (($asset->id) && ($asset->location))
                                                     {{ $asset->location->currency }}
                                                 @elseif (($asset->id) && ($asset->location))
@@ -735,13 +499,13 @@
                                     @endif
                                     @if (($asset->model) && ($asset->depreciation))
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/table.current_value') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
-                                                <div class="col-xs-7 col-md-6" style="margin-left:-15px;">
+                                            <div class="col-md-6">
+                                                <div class="col-md-6" style="margin-left:-15px;">
                                                     @if (($asset->id) && ($asset->location))
                                                         {{ $asset->location->currency }}
                                                     @elseif (($asset->id) && ($asset->location))
@@ -757,12 +521,12 @@
                                     @endif
                                     @if ($asset->order_number)
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('general.order_number') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 #{{ $asset->order_number }}
                                             </div>
                                         </div>
@@ -770,12 +534,12 @@
 
                                     @if ($asset->supplier)
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('general.supplier') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 @can ('superuser')
                                                     <a href="{{ route('suppliers.show', $asset->supplier_id) }}">
                                                         {{ $asset->supplier->name }}
@@ -790,12 +554,12 @@
 
                                     @if ($asset->warranty_months)
                                         <div class="row{!! $asset->present()->warrantee_expires() < date("Y-m-d") ? ' warning' : '' !!}">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.warranty') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 {{ $asset->warranty_months }}
                                                 {{ trans('admin/hardware/form.months') }}
 
@@ -807,12 +571,12 @@
 
                                     @if (($asset->model) && ($asset->depreciation))
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('general.depreciation') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 {{ $asset->depreciation->name }}
                                                 ({{ $asset->depreciation->months }}
                                                 {{ trans('admin/hardware/form.months') }}
@@ -820,12 +584,12 @@
                                             </div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.fully_depreciated') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 @if ($asset->time_until_depreciated()->y > 0)
                                                     {{ $asset->time_until_depreciated()->y }}
                                                     {{ trans('admin/hardware/form.years') }},
@@ -839,12 +603,12 @@
 
                                     @if (($asset->model) && ($asset->model->eol))
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.eol_rate') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 {{ $asset->model->eol }}
                                                 {{ trans('admin/hardware/form.months') }}
 
@@ -852,12 +616,12 @@
                                         </div>
 
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.eol_date') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 {{ $asset->present()->eol_date() }}
 
 
@@ -879,36 +643,36 @@
 
                                     @if ($asset->expected_checkin!='')
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.expected_checkin') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 {{ \App\Helpers\Helper::getFormattedDateObject($asset->expected_checkin, 'date', false) }}
                                             </div>
                                         </div>
                                     @endif
 
                                     <div class="row">
-                                        <div class="col-xs-3 col-md-2">
+                                        <div class="col-md-2">
                                             <strong>
                                                 {{ trans('admin/hardware/form.notes') }}
                                             </strong>
                                         </div>
-                                        <div class="col-xs-7 col-md-6">
+                                        <div class="col-md-6">
                                             {!! nl2br(e($asset->notes)) !!}
                                         </div>
                                     </div>
 
                                     @if ($asset->location)
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('general.location') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 @can('superuser')
                                                     <a href="{{ route('locations.show', ['location' => $asset->location->id]) }}">
                                                         {{ $asset->location->name }}
@@ -922,12 +686,12 @@
 
                                     @if ($asset->defaultLoc)
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('admin/hardware/form.default_location') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 @can('superuser')
                                                     <a href="{{ route('locations.show', ['location' => $asset->defaultLoc->id]) }}">
                                                         {{ $asset->defaultLoc->name }}
@@ -941,12 +705,12 @@
 
                                     @if ($asset->created_at!='')
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('general.created_at') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 {{ \App\Helpers\Helper::getFormattedDateObject($asset->created_at, 'datetime', false) }}
                                             </div>
                                         </div>
@@ -954,17 +718,16 @@
 
                                     @if ($asset->updated_at!='')
                                         <div class="row">
-                                            <div class="col-xs-3 col-md-2">
+                                            <div class="col-md-2">
                                                 <strong>
                                                     {{ trans('general.updated_at') }}
                                                 </strong>
                                             </div>
-                                            <div class="col-xs-7 col-md-6">
+                                            <div class="col-md-6">
                                                 {{ \App\Helpers\Helper::getFormattedDateObject($asset->updated_at, 'datetime', false) }}
                                             </div>
                                         </div>
                                     @endif
-                                    <!--
                                      @if ($asset->last_checkout!='')
                                         <div class="row">
                                             <div class="col-md-2">
@@ -1014,14 +777,13 @@
                                             {{ ($asset->userRequests) ? (int) $asset->userRequests->count() : '0' }}
                                         </div>
                                     </div>
-                                    -->
                                     <div class="row">
-                                        <div class="col-xs-3 col-md-2">
+                                        <div class="col-md-2">
                                             <strong>
                                                Labels
                                             </strong>
                                         </div>
-                                        <div class="col-xs-7 col-md-6">
+                                        <div class="col-md-6">
                                             {{ Form::open([
                                                       'method' => 'POST',
                                                       'route' => ['hardware/bulkedit'],
@@ -1050,35 +812,6 @@
                                         </a>
                                     </div>
                                 @endif
-                                
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <?php
-                                                $ghs = array ("GHS01" => "GHS01-pictogram-explos.svg", "GHS02" => "GHS02-pictogram-flamme.svg", "GHS03" => "GHS03-pictogram-rondflam.svg", "GHS04" => "GHS04-pictogram-bottle.svg",
-                                                    "GHS05" => "GHS05-pictogram-acid.svg", "GHS06" => "GHS06-pictogram-skull.svg", "GHS07" => "GHS07-pictogram-exclam.svg",
-                                                    "GHS08" => "GHS08-pictogram-silhouette.svg", "GHS09" => "GHS09-pictogram-pollu.svg");
-                                                foreach ($ghs as $key => $val){
-                                                    if (strpos($asset->_snipeit_haz_subst_7, $key) !== false){
-                                                        echo '<img style="height: 100px; width: 100px; margin right: 10px;" src="https://Chemikalienliste/uploads/'.$val.'" class="pull-left" alt="'.$key.'">';
-                                                    }
-                                                }
-                                            ?>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <?php
-                                                $ghs = array ("M003" => "ISO_7010_M003.svg", "M004" => "ISO_7010_M004.svg", "M009" => "ISO_7010_M009.svg", "M010" => "ISO_7010_M010.svg",
-                                                    "M011" => "ISO_7010_M011.svg", "M013" => "ISO_7010_M013.svg", "M014" => "ISO_7010_M014.svg",
-                                                    "M016" => "ISO_7010_M016.svg", "M017" => "ISO_7010_M017.svg", "M018" => "ISO_7010_M018.svg", "M019" => "ISO_7010_M019.svg");
-                                                foreach ($ghs as $key => $val){
-                                                    if (strpos($asset->_snipeit_ppe_12, $key) !== false){
-                                                        echo '<img style="height: 100px; width: 100px; margin right: 10px;" src="https://Chemikalienliste/uploads/'.$val.'" class="pull-right" alt="'.$key.'">';
-                                                    }
-                                                }
-                                            ?>
-                                        </div>
-                                    </div>
-                                </div>
 
                                 @if ($asset->deleted_at!='')
                                     <div class="text-center col-md-12" style="padding-bottom: 15px;">

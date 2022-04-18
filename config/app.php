@@ -255,7 +255,20 @@ return [
     'enable_csp' => env('ENABLE_CSP', false),
 
 
+    /*
+     |--------------------------------------------------------------------------
+     | Require SAML Login
+     |--------------------------------------------------------------------------
+     |
+     | Disable the ability to login via form login, and disables the 'nosaml'
+     | workaround. It requires all logins to process via SAML login.
+     | (This is for high security setups. If your SAML configuration is not
+     | working, this option should be set to false. This option is not needed
+     | to successfully configure SAML authentication.)
+     |
+     */
 
+    'require_saml' => env('REQUIRE_SAML', false),
 
     /*
     |--------------------------------------------------------------------------
@@ -411,5 +424,16 @@ return [
 
 
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | API Throttling
+    |--------------------------------------------------------------------------
+    |
+    | This value determines the number of API requests permitted per minute
+    |
+    */
+
+    'api_throttle_per_minute' => env('API_THROTTLE_PER_MINUTE', 120),
 
 ];
