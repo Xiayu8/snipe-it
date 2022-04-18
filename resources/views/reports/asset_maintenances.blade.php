@@ -25,8 +25,9 @@
                     data-show-columns="true"
                     data-show-export="true"
                     data-show-refresh="true"
-                    data-sort-order="asc"
+                    data-sort-order="desc"
                     id="maintenancesReport"
+                    data-mobile-responsive="true"
                     data-url="{{route('api.maintenances.index') }}"
                     class="table table-striped snipe-table"
                     data-export-options='{
@@ -48,6 +49,9 @@
                     <th data-searchable="true" data-sortable="true" data-field="cost" class="text-right" data-footer-formatter="sumFormatter">{{ trans('admin/asset_maintenances/form.cost') }}</th>
                     <th data-searchable="true" data-sortable="true" data-field="user_id" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                     <th data-searchable="true" data-sortable="true" data-field="notes" data-visible="false">{{ trans('admin/asset_maintenances/form.notes') }}</th>
+                    <th data-searchable="true" data-sortable="true" data-field="old_weight">old_weight</th>
+                    <th data-searchable="true" data-sortable="true" data-field="new_weight">new_weight</th>
+                    <th data-searchable="true" data-sortable="true" data-field="diff_weight" data-footer-formatter="sumFormatter">diff_weight</th>
                 </tr>
                 </thead>
             </table>

@@ -38,6 +38,12 @@
                 "fileName": "export-maintenances-{{ date('Y-m-d') }}",
                     "ignoreColumn": ["actions","image","change","checkbox","checkincheckout","icon"]
               }'>
+              <thead>
+                <tr>
+              
+              <th data-searchable="true" data-sortable="true" data-field="diff_weight" data-footer-formatter="sumFormatter">diff_weight</th>
+            </tr>
+            </thead>
 
         </table>
 

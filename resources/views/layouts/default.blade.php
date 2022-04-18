@@ -311,12 +311,14 @@
                  </a>
                  <ul class="dropdown-menu">
                    <!-- User image -->
+                   @can('admin')
+
                      <li {!! (Request::is('account/profile') ? ' class="active"' : '') !!}>
                        <a href="{{ route('view-assets') }}">
                              <i class="fa fa-check fa-fw" aria-hidden="true"></i>
                              {{ trans('general.viewassets') }}
                        </a></li>
-
+                       
                      <li {!! (Request::is('account/requested') ? ' class="active"' : '') !!}>
                          <a href="{{ route('account.requested') }}">
                              <i class="fa fa-check fa-disk fa-fw" aria-hidden="true"></i>
@@ -329,13 +331,15 @@
                          </a></li>
 
 
-                    @can('edit', \App\Models\Asset::class)
+                    
                      <li>
                           <a href="{{ route('profile') }}">
                              <i class="fa fa-user fa-fw" aria-hidden="true"></i>
                               {{ trans('general.editprofile') }}
                          </a>
                      </li>
+                     @endcan
+                     @can('edit', \App\Models\Asset::class)
                      
                      <li>
                          <a href="{{ route('account.password.index') }}">
@@ -425,7 +429,7 @@
                         @endforeach
                     @endif
 
-
+                    @can('superuser')
                   <li{!! (Request::query('status') == 'Deployed' ? ' class="active"' : '') !!}>
                     <a href="{{ url('hardware?status=Deployed') }}">
                         <i class="fa fa-circle-o text-blue"></i>
@@ -434,23 +438,26 @@
                         ({{ (isset($total_deployed_sidebar)) ? $total_deployed_sidebar : '' }})
                     </a>
                   </li>
+                  @endcan
                   <li{!! (Request::query('status') == 'RTD' ? ' class="active"' : '') !!}>
                     <a href="{{ url('hardware?status=RTD') }}">
                         <i class="fa fa-circle-o text-green"></i>
                         {{ trans('general.all') }}
-                        {{ trans('general.ready_to_deploy') }}
+                        Available
                         ({{ (isset($total_rtd_sidebar)) ? $total_rtd_sidebar : '' }})
                     </a>
                   </li>
+                  @can('superuser')
                   <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Pending') }}"><i class="fa fa-circle-o text-orange"></i>
                           {{ trans('general.all') }}
                           {{ trans('general.pending') }}
                           ({{ (isset($total_pending_sidebar)) ? $total_pending_sidebar : '' }})
                       </a>
                   </li>
+                  @endcan
                   <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a href="{{ url('hardware?status=Undeployable') }}"><i class="fa fa-times text-red"></i>
                           {{ trans('general.all') }}
-                          {{ trans('general.undeployable') }}
+                          Depleted
                           ({{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }})
                       </a>
                   </li>
@@ -460,11 +467,12 @@
                           ({{ (isset($total_archived_sidebar)) ? $total_archived_sidebar : '' }})
                           </a>
                   </li>
+                  @can('superuser')
                     <li{!! (Request::query('status') == 'Requestable' ? ' class="active"' : '') !!}><a href="{{ url('hardware?status=Requestable') }}"><i class="fa fa-check text-blue"></i>
                         {{ trans('admin/hardware/general.requestable') }}
                         </a>
                     </li>
-
+                    @endcan
                     @can('audit', \App\Models\Asset::class)
                         <li{!! (Request::is('hardware/audit/due') ? ' class="active"' : '') !!}>
                             <a href="{{ route('assets.audit.due') }}">
@@ -491,7 +499,7 @@
                     </li>
                     @endcan
 
-                    @can('create', \App\Models\Asset::class)
+                    @can('admin')
                       <li{!! (Request::query('Deleted') ? ' class="active"' : '') !!}>
                           <a href="{{ url('hardware?status=Deleted') }}">
                               {{ trans('general.deleted') }}
@@ -578,7 +586,7 @@
                 </li>
             @endcan
 
-            @can('backend.interact')
+            @can('admin')
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-gear" aria-hidden="true"></i>

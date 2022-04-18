@@ -106,6 +106,8 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->cost = Helper::ParseCurrency($request->input('cost'));
         $assetMaintenance->notes = $request->input('notes');
         $asset = Asset::find($request->input('asset_id'));
+        $assetMaintenance->old_weight = Helper::ParseWeight($request->input('old_weight'));
+        $assetMaintenance->new_weight = Helper::ParseWeight($request->input('new_weight'));
 
         if ((!Company::isCurrentUserHasAccess($asset)) && ($asset!=null)) {
             return static::getInsufficientPermissionsRedirect();
@@ -118,6 +120,11 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->start_date             = $request->input('start_date');
         $assetMaintenance->completion_date        = $request->input('completion_date');
         $assetMaintenance->user_id                = Auth::id();
+        $assetMaintenance->old_weight             = Helper::ParseWeight($request->input('old_weight'));
+        $assetMaintenance->new_weight             = Helper::ParseWeight($request->input('new_weight'));
+        $oldWeight                                = Helper::ParseWeight($request->input('old_weight'));
+        $newWeight                                = Helper::ParseWeight($request->input('new_weight'));
+        $assetMaintenance->diff_weight            = $oldWeight-$newWeight;
 
         if (( $assetMaintenance->completion_date !== null )
             && ( $assetMaintenance->start_date !== "" )
@@ -218,6 +225,8 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->is_warranty = $request->input('is_warranty');
         $assetMaintenance->cost =  Helper::ParseCurrency($request->input('cost'));
         $assetMaintenance->notes = $request->input('notes');
+        $assetMaintenance->old_weight = Helper::ParseWeight($request->input('old_weight'));
+        $assetMaintenance->new_weight = Helper::ParseWeight($request->input('new_weight'));
 
         $asset = Asset::find(request('asset_id'));
 
@@ -231,6 +240,11 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->title                  = $request->input('title');
         $assetMaintenance->start_date             = $request->input('start_date');
         $assetMaintenance->completion_date        = $request->input('completion_date');
+        $assetMaintenance->old_weight             = Helper::ParseWeight($request->input('old_weight'));
+        $assetMaintenance->new_weight             = Helper::ParseWeight($request->input('new_weight'));
+        $oldWeight                                = Helper::ParseWeight($request->input('old_weight'));
+        $newWeight                                = Helper::ParseWeight($request->input('new_weight'));
+        $assetMaintenance->diff_weight            = $oldWeight-$newWeight;
 
         if (( $assetMaintenance->completion_date == null )
         ) {

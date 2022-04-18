@@ -42,11 +42,31 @@
 
       <div class="box-body">
         @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/hardware/table.asset_tag'), 'fieldname' => 'asset_id', 'required' => 'true'])
-        @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id', 'required' => 'true'])
-        @include ('partials.forms.edit.maintenance_type')
+
+        <!-- Maintenace Type (hidden, fixed Maintenance)-->
+        <div class="form-group {{ $errors->has('title') ? ' has-error' : '' }}" hidden>
+          <label for="asset_maintenance_type" class="col-md-3 control-label">
+            {{ trans('admin/asset_maintenances/form.asset_maintenance_type') }}
+          </label>
+          <div class="col-md-7">
+            <input class="form-control" type="text" name="asset_maintenance_type" id="asset_maintenance_type" aria-label="asset_maintenance_type" value="Maintenance" />
+            {!! $errors->first('asset_maintenance_type', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+          </div>
+        </div>
+
+        <!-- Supplier (hidden, fixed n.a.)-->
+        <div class="form-group {{ $errors->has('title') ? ' has-error' : '' }}" hidden>
+          <label for="supplier_id" class="col-md-3 control-label">
+            {{ trans('general.supplier') }}
+          </label>
+          <div class="col-md-7">
+            <input class="form-control" type="text" name="supplier_id" id="supplier_select" aria-label="supplier_id" value=2 />
+            {!! $errors->first('supplier_id', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+          </div>
+        </div>
 
         <!-- Title -->
-        <div class="form-group {{ $errors->has('title') ? ' has-error' : '' }}">
+        <div class="form-group {{ $errors->has('supplier_id') ? ' has-error' : '' }}">
           <label for="title" class="col-md-3 control-label">
             {{ trans('admin/asset_maintenances/form.title') }}
           </label>
@@ -71,7 +91,7 @@
 
 
 
-        <!-- Completion Date -->
+        <!-- Completion Date 
         <div class="form-group {{ $errors->has('completion_date') ? ' has-error' : '' }}">
           <label for="start_date" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/form.completion_date') }}</label>
 
@@ -82,9 +102,9 @@
             </div>
             {!! $errors->first('completion_date', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
-        </div>
+        </div>-->
 
-        <!-- Warranty -->
+        <!-- Warranty 
         <div class="form-group">
           <div class="col-sm-offset-3 col-sm-9">
             <div class="checkbox">
@@ -93,9 +113,9 @@
               </label>
             </div>
           </div>
-        </div>
+        </div>-->
 
-        <!-- Asset Maintenance Cost -->
+        <!-- Asset Maintenance Cost 
         <div class="form-group {{ $errors->has('cost') ? ' has-error' : '' }}">
           <label for="cost" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/form.cost') }}</label>
           <div class="col-md-2">
@@ -111,7 +131,7 @@
               {!! $errors->first('cost', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
             </div>
           </div>
-        </div>
+        </div>-->
 
         <!-- Notes -->
         <div class="form-group {{ $errors->has('notes') ? ' has-error' : '' }}">
@@ -119,6 +139,33 @@
           <div class="col-md-7">
             <textarea class="col-md-6 form-control" id="notes" name="notes">{{ old('notes', $item->notes) }}</textarea>
             {!! $errors->first('notes', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+          </div>
+        </div>
+
+        <!-- old weight -->
+      <div class="form-group {{ $errors->has('old_weight') ? ' has-error' : '' }}">
+          <label for="old_weight" class="col-md-3 control-label">old weight</label>
+          <div class="col-md-2">
+          <div class="input-group">
+              <span class="input-group-addon">
+                Gramm
+              </span>
+            <input class="col-md-6 form-control" id="old_weight" name="old_weight"value="{{ old('old_weight', \App\Helpers\Helper::formatCurrencyOutput($item->old_weight)) }}"</input>
+            {!! $errors->first('old_weight', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+          </div>
+        </div>
+      </div> <!-- .box-body -->
+
+      <!-- new weight -->
+      <div class="form-group {{ $errors->has('new_weight') ? ' has-error' : '' }}">
+          <label for="new_weight" class="col-md-3 control-label">new weight</label>
+          <div class="col-md-2">
+          <div class="input-group">
+              <span class="input-group-addon">
+                Gramm
+              </span>
+            <input class="col-md-6 form-control" id="new_weight" name="new_weight" value="{{ old('new_weight', \App\Helpers\Helper::formatCurrencyOutput($item->new_weight)) }}"></input>
+            {!! $errors->first('new_weight', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
       </div> <!-- .box-body -->

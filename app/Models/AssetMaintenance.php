@@ -30,7 +30,9 @@ class AssetMaintenance extends Model implements ICompanyableChild
         'start_date'             => 'required|date',
         'completion_date'        => 'nullable|date',
         'notes'                  => 'string|nullable',
-        'cost'                   => 'numeric|nullable'
+        'cost'                   => 'numeric|nullable',
+        'old_weight'             => 'numeric|required',
+        'new_weight'             => 'numeric|required'
     ];
 
     use Searchable;

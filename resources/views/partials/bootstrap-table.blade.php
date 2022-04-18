@@ -30,62 +30,70 @@
             return false;
         }
 
-        $('.snipe-table').bootstrapTable('destroy').bootstrapTable({
-            classes: 'table table-responsive table-bordered table-condensed table-hover',
-            ajaxOptions: {
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        $('.snipe-table').bootstrapTable('destroy').each(function () {
+            data_export_options = $(this).attr('data-export-options');
+            export_options = data_export_options ? JSON.parse(data_export_options) : {};
+            export_options['htmlContent'] = false; // this is already the default; but let's be explicit about it
+            // the following callback method is necessary to prevent XSS vulnerabilities
+            // (this is taken from Bootstrap Tables's default wrapper around jQuery Table Export)
+            export_options['onCellHtmlData'] = function (cell, rowIndex, colIndex, htmlData) {
+                if (cell.is('th')) {
+                    return cell.find('.th-inner').text()
                 }
-            },
-            stickyHeader: true,
-            stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
-            undefinedText: '',
-            iconsPrefix: 'fa',
-            cookie: true,
-            cookieExpire: '2y',
-            mobileResponsive: true,
-            maintainSelected: true,
-            trimOnSearch: false,
-            showSearchClearButton: true,
-            paginationFirstText: "{{ trans('general.first') }}",
-            paginationLastText: "{{ trans('general.last') }}",
-            paginationPreText: "{{ trans('general.previous') }}",
-            paginationNextText: "{{ trans('general.next') }}",
-            pageList: ['10','20', '30','50','100','150','200', '500', '1000'],
-            pageSize: {{  (($snipeSettings->per_page!='') && ($snipeSettings->per_page > 0)) ? $snipeSettings->per_page : 20 }},
-            paginationVAlign: 'both',
-            queryParams: function (params) {
-                var newParams = {};
-                for(var i in params) {
-                    if(!keyBlocked(i)) { // only send the field if it's not in blockedFields
-                        newParams[i] = params[i];
-                    }
-                }
-                return newParams;
-            },
-            formatLoadingMessage: function () {
-                return '<h2><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
-            },
-            icons: {
-                advancedSearchIcon: 'fa fa-search-plus',
-                paginationSwitchDown: 'fa-caret-square-o-down',
-                paginationSwitchUp: 'fa-caret-square-o-up',
-                columns: 'fa-columns',
-                refresh: 'fa-refresh',
-                export: 'fa-download',
-                clearSearch: 'fa-times'
-            },
-            exportOptions: {
-                htmlContent: true,
-            },
-
-            exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
-            onLoadSuccess: function () {
-                $('[data-toggle="tooltip"]').tooltip(); // Needed to attach tooltips after ajax call
+                return htmlData
             }
-
-        });   
-
+            $(this).bootstrapTable({
+                classes: 'table table-responsive table-bordered table-condensed table-hover',
+                ajaxOptions: {
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                },
+                stickyHeader: true,
+                stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
+                undefinedText: '',
+                iconsPrefix: 'fa',
+                cookie: true,
+                cookieExpire: '2y',
+                mobileResponsive: true,
+                maintainSelected: true,
+                trimOnSearch: false,
+                showSearchClearButton: true,
+                paginationFirstText: "{{ trans('general.first') }}",
+                paginationLastText: "{{ trans('general.last') }}",
+                paginationPreText: "{{ trans('general.previous') }}",
+                paginationNextText: "{{ trans('general.next') }}",
+                pageList: ['10','20', '30','50','100','150','200'{!! ((config('app.max_results') > 200) ? ",'500'" : '') !!}{!! ((config('app.max_results') > 500) ? ",'".config('app.max_results')."'" : '') !!}],
+                pageSize: {{  (($snipeSettings->per_page!='') && ($snipeSettings->per_page > 0)) ? $snipeSettings->per_page : 20 }},
+                paginationVAlign: 'both',
+                queryParams: function (params) {
+                    var newParams = {};
+                    for(var i in params) {
+                        if(!keyBlocked(i)) { // only send the field if it's not in blockedFields
+                            newParams[i] = params[i];
+                        }
+                    }
+                    return newParams;
+                },
+                formatLoadingMessage: function () {
+                    return '<h2><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
+                },
+                icons: {
+                    advancedSearchIcon: 'fa fa-search-plus',
+                    paginationSwitchDown: 'fa-caret-square-o-down',
+                    paginationSwitchUp: 'fa-caret-square-o-up',
+                    columns: 'fa-columns',
+                    refresh: 'fa-refresh',
+                    export: 'fa-download',
+                    clearSearch: 'fa-times'
+                },
+                exportOptions: export_options,
+                exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
+                onLoadSuccess: function () {
+                    $('[data-toggle="tooltip"]').tooltip(); // Needed to attach tooltips after ajax call
+                }
+            });
+        });
     });
 
 
@@ -438,7 +446,9 @@
                 if ((row.custom_fields[field_column_plain].field_format) && (row.custom_fields[field_column_plain].value)) {
                     if (row.custom_fields[field_column_plain].field_format=='URL') {
                         return '<a href="' + row.custom_fields[field_column_plain].value + '" target="_blank" rel="noopener">' + row.custom_fields[field_column_plain].value + '</a>';
-                    } else if (row.custom_fields[field_column_plain].field_format=='EMAIL') {
+                    }else if (row.custom_fields[field_column_plain].field_format=='BOOLEAN') {
+                        return (row.custom_fields[field_column_plain].value == 1) ? "<span class='fas fa-check-circle' style='color:green' />" : "<span class='fas fa-times-circle' style='color:red' />";
+                    }else if (row.custom_fields[field_column_plain].field_format=='EMAIL') {
                         return '<a href="mailto:' + row.custom_fields[field_column_plain].value + '">' + row.custom_fields[field_column_plain].value + '</a>';
                     } else if ((this.title=='SDS')&&(row.custom_fields[field_column_plain].value!='')) {
                         return '<a href="/SDS/sdb_' + row.asset_tag + '.pdf" class="btn btn-default btn-sm" role="button" target="_blank" rel="noopener">SDS</a>';

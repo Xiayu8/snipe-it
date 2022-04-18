@@ -109,7 +109,7 @@
                           <span class="hidden-xs hidden-sm">{{ trans('admin/users/general.info') }}</span>
                         </a>
                     </li>
-
+                    @can('superuser')
                     <li>
                         <a href="#software" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
@@ -151,6 +151,7 @@
                           </span>
                         </a>
                     </li>
+                    @endcan
 
                     <li>
                         <a href="#maintenances" data-toggle="tab">
@@ -161,6 +162,7 @@
                           </span>
                         </a>
                     </li>
+                    @can('superuser')
 
                     <li>
                         <a href="#files" data-toggle="tab">
@@ -171,6 +173,7 @@
                           </span>
                         </a>
                     </li>
+                    @endcan
 
                    
                     @can('update', \App\Models\Asset::class)
@@ -231,7 +234,7 @@
                                                     @endif
                                                     <a href="{{ route('statuslabels.show', $asset->assetstatus->id) }}">
                                                         {{ $asset->assetstatus->name }}</a>
-                                                    <label class="label label-default">{{ $asset->present()->statusMeta }}</label>
+                                                    <!--<label class="label label-default">{{ $asset->present()->statusMeta }}</label>-->
 
                                                 @endif
                                             </div>
@@ -438,6 +441,8 @@
                                                         @can('superuser')
                                                             @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
                                                                 <a href="{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}" target="_new">{{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}</a>
+                                                            @elseif (($field->format=='DATE') && ($asset->{$field->db_column_name()}!=''))
+                                                                {{ \App\Helpers\Helper::gracefulDecrypt($field, \App\Helpers\Helper::getFormattedDateObject($asset->{$field->db_column_name()}, 'date', false)) }}
                                                             @else
                                                                 {{ \App\Helpers\Helper::gracefulDecrypt($field, $asset->{$field->db_column_name()}) }}
                                                             @endif
@@ -446,8 +451,12 @@
                                                         @endcan
 
                                                     @else
-                                                        @if (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
+                                                        @if (($field->format=='BOOLEAN') && ($asset->{$field->db_column_name()}!=''))
+                                                            {!! ($asset->{$field->db_column_name()} == 1) ? "<span class='fas fa-check-circle' style='color:green' />" : "<span class='fas fa-times-circle' style='color:red' />" !!}
+                                                        @elseif (($field->format=='URL') && ($asset->{$field->db_column_name()}!=''))
                                                             <a href="{{ $asset->{$field->db_column_name()} }}" target="_new">{{ $asset->{$field->db_column_name()} }}</a>
+                                                        @elseif (($field->format=='DATE') && ($asset->{$field->db_column_name()}!=''))
+                                                            {{ \App\Helpers\Helper::getFormattedDateObject($asset->{$field->db_column_name()}, 'date', false) }}
                                                         @elseif(($field->name=='SDS')&&($asset->{$field->db_column_name()}!=''))
                                                             <a href="/SDS/sdb_{{$asset->asset_tag}}.pdf" class="btn btn-default btn-sm" role="button" target="_new">Safety Data Sheet KC{{$asset->asset_tag}}</a>
                                                         @elseif(($field->name=='TDS')&&($asset->{$field->db_column_name()}!=''))
@@ -1301,7 +1310,7 @@
                             <div class="col-md-12">
                                 @can('update', \App\Models\Asset::class)
                                     <div id="maintenance-toolbar">
-                                        <a href="{{ route('maintenances.create', ['asset_id' => $asset->id]) }}" class="btn btn-primary">Add Maintenance</a>
+                                        <a href="{{ route('maintenances.create', ['asset_id' => $asset->id]) }}" class="btn btn-primary">Add Logbook Entry</a>
                                     </div>
                             @endcan
 
@@ -1313,6 +1322,7 @@
                                         data-pagination="true"
                                         data-id-table="assetMaintenancesTable"
                                         data-search="true"
+                                        data-show-footer="true"
                                         data-side-pagination="server"
                                         data-toolbar="#maintenance-toolbar"
                                         data-show-columns="true"
@@ -1325,6 +1335,28 @@
                                         data-url="{{ route('api.maintenances.index', array('asset_id' => $asset->id)) }}"
                                         data-cookie-id-table="assetMaintenancesTable"
                                         data-cookie="true">
+                                        <thead>
+                <tr>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th ></th>
+                    <th data-searchable="true" data-sortable="true" data-field="diff_weight" data-footer-formatter="sumFormatter">diff_weight</th>
+                </tr>
+                </thead>
                                 </table>
                             </div> <!-- /.col-md-12 -->
                         </div> <!-- /.row -->

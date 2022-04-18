@@ -108,6 +108,21 @@ class AssetMaintenancesPresenter extends Presenter
                 "sortable" => true,
                 "title" => trans('general.admin'),
                 "formatter" => "usersLinkObjFormatter"
+            ],[
+                "field" => "old_weight",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => "old_weight",
+            ], [
+                "field" => "new_weight",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => "new_weight",
+            ], [
+                "field" => "diff_weight",
+                "searchable" => true,
+                "sortable" => true,
+                "title" => "diff_weight",
             ], [
                 "field" => "actions",
                 "searchable" => false,
