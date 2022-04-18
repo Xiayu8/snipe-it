@@ -25,7 +25,7 @@
                     data-show-columns="true"
                     data-show-export="true"
                     data-show-refresh="true"
-                    data-sort-order="desc"
+                    data-sort-order="asc"
                     id="maintenancesReport"
                     data-mobile-responsive="true"
                     data-url="{{route('api.maintenances.index') }}"

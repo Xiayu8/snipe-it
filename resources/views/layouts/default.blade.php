@@ -339,17 +339,15 @@
                          </a>
                      </li>
                      @endcan
-                     @can('edit', \App\Models\Asset::class)
                      
+                     @can('update', \App\Models\Asset::class)
                      <li>
                          <a href="{{ route('account.password.index') }}">
                              <i class="fa fa-asterisk fa-fw" aria-hidden="true"></i>
                              {{ trans('general.changepassword') }}
                          </a>
                      </li>
-                     @endcan
-
-
+                    @endcan
 
                      @can('self.api')
                      <li>
