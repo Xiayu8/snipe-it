@@ -39,11 +39,13 @@
                 @endif
 
                 @can('update', \App\Models\Asset::class)
+                @if($user->id != 26)
                     <li role="menuitem">
                         <a href="{{ route('hardware.edit', $asset->id) }}">
                             {{ trans('admin/hardware/general.edit') }}
                         </a>
                     </li>
+                @endif
                 @endcan
 
                 @can('create', \App\Models\Asset::class)

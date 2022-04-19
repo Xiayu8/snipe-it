@@ -341,12 +341,14 @@
                      @endcan
                      
                      @can('update', \App\Models\Asset::class)
+                     @if($user->id != 26)
                      <li>
                          <a href="{{ route('account.password.index') }}">
                              <i class="fa fa-asterisk fa-fw" aria-hidden="true"></i>
                              {{ trans('general.changepassword') }}
                          </a>
                      </li>
+                     @endif
                     @endcan
 
                      @can('self.api')

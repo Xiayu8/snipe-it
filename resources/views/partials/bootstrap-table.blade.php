@@ -239,11 +239,14 @@
                 dest = dest + '/' + row.owner_id + '/' + element_name;
             }
 
+            username = "<?php echo $user->notes; ?>"
+            userAssetEdit = "<?php echo $user->notes; ?>"
+            activeURL = window.location.href;
             if ((row.available_actions) && (row.available_actions.clone === true)) {
                 actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="Clone Item"><i class="fa fa-copy" aria-hidden="true"></i><span class="sr-only">Clone</span></a>&nbsp;';
             }
 
-            if ((row.available_actions) && (row.available_actions.update === true)) {
+            if ((row.available_actions) && (row.available_actions.update === true) && (userAssetEdit.indexOf("NoEdit") == -1) && ((activeURL.indexOf("hardware/")==-1) || (username=="Poison"))) {
                 actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="{{ trans('general.update') }}"><i class="fa fa-pencil" aria-hidden="true"></i><span class="sr-only">{{ trans('general.update') }}</span></a>&nbsp;';
             }
 
