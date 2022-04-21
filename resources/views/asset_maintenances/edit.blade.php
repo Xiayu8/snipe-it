@@ -150,7 +150,7 @@
               <span class="input-group-addon">
                 Gramm
               </span>
-            <input class="col-md-6 form-control" id="old_weight" name="old_weight"value="{{ old('old_weight', \App\Helpers\Helper::formatCurrencyOutput($item->old_weight)) }}"</input>
+            <input class="col-md-6 form-control" id="old_weight" name="old_weight"value="{{ old('old_weight', \App\Helpers\Helper::formatWeightOutput($item->old_weight)) }}"</input>
             {!! $errors->first('old_weight', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
@@ -164,7 +164,7 @@
               <span class="input-group-addon">
                 Gramm
               </span>
-            <input class="col-md-6 form-control" id="new_weight" name="new_weight" value="{{ old('new_weight', \App\Helpers\Helper::formatCurrencyOutput($item->new_weight)) }}"></input>
+            <input class="col-md-6 form-control" id="new_weight" name="new_weight" value="{{ old('new_weight', \App\Helpers\Helper::formatWeightOutput($item->new_weight)) }}"></input>
             {!! $errors->first('new_weight', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>

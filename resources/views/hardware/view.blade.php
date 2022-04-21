@@ -154,16 +154,17 @@
                         </a>
                     </li>
                     @endcan
-
+                    @if($asset->model->name == "Gift")
                     <li>
                         <a href="#maintenances" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                            <i class="fa fa-wrench fa-2x" aria-hidden="true"></i>
+                            <i class="fa fa-book fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.maintenances') }}
                           </span>
                         </a>
                     </li>
+                    @endif
                     @can('superuser')
 
                     <li>
