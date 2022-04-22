@@ -234,6 +234,8 @@
                                                         <i class="fa fa-circle text-orange"></i>
                                                     @elseif (($asset->assetstatus) && ($asset->assetstatus->archived=='1'))
                                                         <i class="fa fa-times text-red"></i>
+                                                    @elseif (($asset->assetstatus) && ($asset->assetstatus->undeployable!='1'))
+                                                        <i class="fa fa-times text-red"></i>
                                                     @endif
                                                     <a href="{{ route('statuslabels.show', $asset->assetstatus->id) }}">
                                                         {{ $asset->assetstatus->name }}</a>
