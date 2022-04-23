@@ -139,12 +139,6 @@ class AssetMaintenancesController extends Controller
         // Was the asset maintenance created?
         if ($assetMaintenance->save()) {
            
-            $logAction = new Actionlog();
-            $logAction->item_type = Asset::class;
-            $logAction->item_id = $asset->id;
-            $logAction->created_at =  date("Y-m-d H:i:s");
-            $logAction->user_id = Auth::id();
-            $logAction->logaction('Poison Entry created');
             // Redirect to the new asset maintenance page
             return redirect()->route("hardware.show", "$asset->id#maintenances")
                            ->with('success', trans('admin/asset_maintenances/message.create.success'));
@@ -274,21 +268,6 @@ class AssetMaintenancesController extends Controller
 
       // Was the asset maintenance created?
         if ($assetMaintenance->save()) {
-            $changed = [];
-
-            foreach ($assetMaintenance->getOriginal() as $key => $value) {
-                if ($assetMaintenance->getOriginal()[$key] != $assetMaintenance->getAttributes()[$key]) {
-                    $changed[$key]['old'] = $assetMaintenance->getOriginal()[$key];
-                    $changed[$key]['new'] = $assetMaintenance->getAttributes()[$key];
-                }
-            }
-            $logAction = new Actionlog();
-            $logAction->item_type = Asset::class;
-            $logAction->item_id = $asset->id;
-            $logAction->created_at =  date("Y-m-d H:i:s");
-            $logAction->user_id = Auth::id();
-            $logAction->log_meta = json_encode($changed);
-            $logAction->logaction('Poison Entry updated');
 
             // Redirect to the new asset maintenance page
             return redirect()->route("hardware.show", "$asset->id#maintenances")

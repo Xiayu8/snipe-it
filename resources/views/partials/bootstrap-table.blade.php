@@ -305,6 +305,10 @@
             } else if (value.type == 'location') {
                 item_destination = 'locations'
                 item_icon = 'fa-map-marker';
+            } else if (value.type == 'assetMaintenance') {
+                item_destination = 'hardware'
+                item_icon = 'fa-book';
+                return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.name + '#maintenances' + '" data-tooltip="true" title="' + value.type + '"><i class="fa ' + item_icon + ' text-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} "></i> ' + value.name + '[' + value.id + '] </a></nobr>';
             }
 
             return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="fa ' + item_icon + ' text-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} "></i> ' + value.name + '</a></nobr>';

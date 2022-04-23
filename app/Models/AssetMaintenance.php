@@ -89,6 +89,11 @@ class AssetMaintenance extends Model implements ICompanyableChild
         $this->attributes['is_warranty'] = $value;
     }
 
+    public function getDisplayNameAttribute()
+    {
+        return $this->asset_id;
+    }
+
     /**
      * @param $value
      */

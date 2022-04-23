@@ -4,12 +4,14 @@ namespace App\Providers;
 
 use App\Models\Accessory;
 use App\Models\Asset;
+use App\Models\AssetMaintenance;
 use App\Models\Component;
 use App\Models\Consumable;
 use App\Models\License;
 use App\Models\Setting;
 use App\Observers\AccessoryObserver;
 use App\Observers\AssetObserver;
+use App\Observers\AssetMaintenanceObserver;
 use App\Observers\ComponentObserver;
 use App\Observers\ConsumableObserver;
 use App\Observers\LicenseObserver;
@@ -56,6 +58,7 @@ class AppServiceProvider extends ServiceProvider
 
         Schema::defaultStringLength(191);
         Asset::observe(AssetObserver::class);
+        AssetMaintenance::observe(AssetMaintenanceObserver::class);
         Accessory::observe(AccessoryObserver::class);
         Component::observe(ComponentObserver::class);
         Consumable::observe(ConsumableObserver::class);
