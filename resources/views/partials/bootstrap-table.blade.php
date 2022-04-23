@@ -703,7 +703,7 @@
             var total_sum = data.reduce(function(sum, row) {
                 return (sum) + (cleanFloat(row[field]) || 0);
             }, 0);
-            return numberWithCommas(total_sum.toFixed(2));
+            return numberWithCommas(total_sum.toFixed(5));
         }
         return 'not an array';
     }
