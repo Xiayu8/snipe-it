@@ -108,6 +108,34 @@ return array(
 
     ),
 
+    'AssetMaintenances' => array(
+        array(
+            'permission' => 'assetMaintenaces.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'assetMaintenances.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'assetMaintenances.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ),
+        array(
+            'permission' => 'assetMaintenances.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ),
+
+    ),
+
     'Accessories' => array(
         array(
             'permission' => 'accessories.view',

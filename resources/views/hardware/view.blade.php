@@ -39,13 +39,11 @@
                 @endif
 
                 @can('update', \App\Models\Asset::class)
-                @if($user->id != 26)
                     <li role="menuitem">
                         <a href="{{ route('hardware.edit', $asset->id) }}">
                             {{ trans('admin/hardware/general.edit') }}
                         </a>
                     </li>
-                @endif
                 @endcan
 
                 @can('create', \App\Models\Asset::class)
@@ -1313,7 +1311,7 @@
                     <div class="tab-pane fade" id="maintenances">
                         <div class="row">
                             <div class="col-md-12">
-                                @can('update', \App\Models\Asset::class)
+                                @can('create', \App\Models\AssetMaintenance::class)
                                     <div id="maintenance-toolbar">
                                         <a href="{{ route('maintenances.create', ['asset_id' => $asset->id]) }}" class="btn btn-primary">Add Logbook Entry</a>
                                     </div>
