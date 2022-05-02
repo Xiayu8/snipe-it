@@ -76,18 +76,7 @@
           </div>
         </div>
 
-        <!-- Start Date -->
-        <div class="form-group {{ $errors->has('start_date') ? ' has-error' : '' }}">
-          <label for="start_date" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/form.start_date') }}</label>
-
-          <div class="input-group col-md-3{{  (\App\Helpers\Helper::checkIfRequired($item, 'start_date')) ? ' required' : '' }}">
-            <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
-              <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="start_date" id="start_date" value="{{ old('start_date', $item->start_date) }}">
-              <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
-            </div>
-            {!! $errors->first('start_date', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
-          </div>
-        </div>
+        
 
 
 
@@ -145,30 +134,46 @@
         <!-- old weight -->
       <div class="form-group {{ $errors->has('old_weight') ? ' has-error' : '' }}">
           <label for="old_weight" class="col-md-3 control-label">old weight</label>
-          <div class="col-md-2">
+          <div class="col-md-5">
           <div class="input-group">
               <span class="input-group-addon">
-                Gramm
+                [g]
               </span>
             <input class="col-md-6 form-control" id="old_weight" name="old_weight"value="{{ old('old_weight', \App\Helpers\Helper::formatWeightOutput($item->old_weight)) }}"</input>
             {!! $errors->first('old_weight', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
       </div> <!-- .box-body -->
-
+      
       <!-- new weight -->
       <div class="form-group {{ $errors->has('new_weight') ? ' has-error' : '' }}">
           <label for="new_weight" class="col-md-3 control-label">new weight</label>
-          <div class="col-md-2">
+          <div class="col-md-5">
           <div class="input-group">
               <span class="input-group-addon">
-                Gramm
+                [g]
               </span>
             <input class="col-md-6 form-control" id="new_weight" name="new_weight" value="{{ old('new_weight', \App\Helpers\Helper::formatWeightOutput($item->new_weight)) }}"></input>
             {!! $errors->first('new_weight', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
+          <p class="help-block">
+          Use suitable scale to measure the difference in weight!
+      </p>
         </div>
       </div> <!-- .box-body -->
+
+      <!-- Start Date -->
+      <div class="form-group {{ $errors->has('start_date') ? ' has-error' : '' }}">
+          <label for="start_date" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/form.start_date') }}</label>
+
+          <div class="input-group col-md-3{{  (\App\Helpers\Helper::checkIfRequired($item, 'start_date')) ? ' required' : '' }}">
+            <div class="input-group date" data-provide="datepicker" data-date-format="yyyy-mm-dd"  data-autoclose="true">
+              <input type="text" class="form-control" placeholder="{{ trans('general.select_date') }}" name="start_date" id="start_date" value="{{ old('start_date', $item->start_date) }}">
+              <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+            </div>
+            {!! $errors->first('start_date', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
+          </div>
+        </div>
 
       <div class="box-footer text-right">
         <button type="submit" class="btn btn-success"><i class="fa fa-check icon-white" aria-hidden="true"></i> {{ trans('general.save') }}</button>

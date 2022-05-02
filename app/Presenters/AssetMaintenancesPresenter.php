@@ -112,17 +112,17 @@ class AssetMaintenancesPresenter extends Presenter
                 "field" => "old_weight",
                 "searchable" => true,
                 "sortable" => true,
-                "title" => "old_weight",
+                "title" => "Old Weight [g]",
             ], [
                 "field" => "new_weight",
                 "searchable" => true,
                 "sortable" => true,
-                "title" => "new_weight",
+                "title" => "New Weight [g]",
             ], [
                 "field" => "diff_weight",
                 "searchable" => true,
                 "sortable" => true,
-                "title" => "diff_weight",
+                "title" => "&Delta;Weight [g]",
             ], [
                 "field" => "actions",
                 "searchable" => false,

@@ -49,9 +49,9 @@
                     <th data-searchable="true" data-sortable="true" data-field="cost" class="text-right" data-footer-formatter="sumFormatter">{{ trans('admin/asset_maintenances/form.cost') }}</th>
                     <th data-searchable="true" data-sortable="true" data-field="user_id" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                     <th data-searchable="true" data-sortable="true" data-field="notes" data-visible="false">{{ trans('admin/asset_maintenances/form.notes') }}</th>
-                    <th data-searchable="true" data-sortable="true" data-field="old_weight">old_weight</th>
-                    <th data-searchable="true" data-sortable="true" data-field="new_weight">new_weight</th>
-                    <th data-searchable="true" data-sortable="true" data-field="diff_weight" data-footer-formatter="sumFormatter">diff_weight</th>
+                    <th data-searchable="true" data-sortable="true" data-field="old_weight">Old Weight [g]</th>
+                    <th data-searchable="true" data-sortable="true" data-field="new_weight">New Weight [g]</th>
+                    <th data-searchable="true" data-sortable="true" data-field="diff_weight" data-footer-formatter="sumFormatter">&Delta;Weight [g]</th>
                 </tr>
                 </thead>
             </table>
