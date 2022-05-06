@@ -1,8 +1,8 @@
 <!doctype html>
-<html lang="en">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Assigned to {{ $show_user->present()->fullName() }}</title>
+    <title>{{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }}</title>
     <style>
         body {
             font-family: "Arial, Helvetica", sans-serif;
@@ -49,7 +49,7 @@
     @endif
 @endif
 
-<h2>Assigned to {{ $show_user->present()->fullName() }}</h4>
+<h2>{{ trans('general.assigned_to', ['name' => $show_user->present()->fullName()]) }}</h4>
 
 @if ($assets->count() > 0)
     @php
@@ -64,12 +64,12 @@
         <thead>
             <tr>
                 <th style="width: 20px;"></th>
-                <th style="width: 20%;">Asset Tag</th>
-                <th style="width: 20%;">Name</th>
-                <th style="width: 10%;">Category</th>
-                <th style="width: 20%;">Model</th>
-                <th style="width: 20%;">Serial</th>
-                <th style="width: 10%;">Checked Out</th>
+                <th style="width: 20%;">{{ trans('admin/hardware/table.asset_tag') }}</th>
+                <th style="width: 20%;">{{ trans('general.name') }}</th>
+                <th style="width: 10%;">{{ trans('general.category') }}</th>
+                <th style="width: 20%;">{{ trans('admin/hardware/form.model') }}</th>
+                <th style="width: 20%;">{{ trans('admin/hardware/form.serial') }}</th>
+                <th style="width: 10%;">{{ trans('admin/hardware/table.checkout_date') }}</th>
                 <th data-formatter="imageFormatter" style="width: 20%;">{{ trans('general.signature') }}</th>
             </tr>
         </thead>
@@ -104,8 +104,7 @@
                         <td>{{ $asset->model->category->name }}</td>
                         <td>{{ $asset->model->name }}</td>
                         <td>{{ $asset->serial }}</td>
-                        <td>
-                            {{ $asset->last_checkout }}</td>
+                        <td>{{ $asset->last_checkout }}</td>
                         <td><img style="width:auto;height:100px;" src="{{ asset('/') }}display-sig/{{ $asset->assetlog->first()->accept_signature }}"></td>
                     </tr>
                     @php
@@ -131,9 +130,9 @@
         <thead>
             <tr>
                 <th style="width: 20px;"></th>
-                <th style="width: 40%;">Name</th>
-                <th style="width: 50%;">Serial/Product Key</th>
-                <th style="width: 10%;">Checked Out</th>
+                <th style="width: 40%;">{{ trans('general.name') }}</th>
+                <th style="width: 50%;">{{ trans('admin/licenses/form.license_key') }}</th>
+                <th style="width: 10%;">{{ trans('admin/hardware/table.checkout_date') }}</th>
             </tr>
         </thead>
         @php
@@ -173,9 +172,9 @@
         <thead>
             <tr>
                 <th style="width: 20px;"></th>
-                <th style="width: 40%;">Name</th>
-                <th style="width: 50%;">Category</th>
-                <th style="width: 10%;">Checked Out</th>
+                <th style="width: 40%;">{{ trans('general.name') }}</th>
+                <th style="width: 50%;">{{ trans('general.category') }}</th>
+                <th style="width: 10%;">{{ trans('admin/hardware/table.checkout_date') }}</th>
             </tr>
         </thead>
         @php
@@ -209,9 +208,9 @@
         <thead>
         <tr>
             <th style="width: 20px;"></th>
-            <th style="width: 40%;">Name</th>
-            <th style="width: 50%;">Category</th>
-            <th style="width: 10%;">Checked Out</th>
+            <th style="width: 40%;">{{ trans('general.name') }}</th>
+            <th style="width: 50%;">{{ trans('general.category') }}</th>
+            <th style="width: 10%;">{{ trans('admin/hardware/table.checkout_date') }}</th>
         </tr>
         </thead>
         @php
@@ -247,10 +246,10 @@
 <br>
 <table>
     <tr>
-        <td>Signed Off By:</td>
+        <td>{{ trans('general.signed_off_by') }}:</td>
         <td>________________________________________________________</td>
         <td></td>
-        <td>Date:</td>
+        <td>{{ trans('general.date') }}:</td>
         <td>________________________________________________________</td>
     </tr>
 </table>
