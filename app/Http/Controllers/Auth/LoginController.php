@@ -86,7 +86,9 @@ class LoginController extends Controller
             return redirect()->route('saml.login');
         }
 
+
         if (Setting::getSettings()->login_common_disabled == "1") {
+            \Log::debug('login_common_disabled is set to 1 - return a 403');
             return view('errors.403');
         }
 
@@ -108,13 +110,18 @@ class LoginController extends Controller
      */
     private function loginViaSaml(Request $request)
     {
+        \Log::debug('Attempting to login via SAML');
         $saml = $this->saml;
         $samlData = $request->session()->get('saml_login');
+
         if ($saml->isEnabled() && !empty($samlData)) {
+            \Log::debug('SAML is enabled, and the samleData is not empty');
+
             try {
                 Log::debug("Attempting to log user in by SAML authentication.");
                 $user = $saml->samlLogin($samlData);
-                if(!is_null($user)) {
+
+                if (!is_null($user)) {
                     Auth::login($user);
                 } else {
                     $username = $saml->getUsername();
@@ -127,11 +134,26 @@ class LoginController extends Controller
                     $user->last_login = \Carbon::now();
                     $user->save();
                 }
+                
             } catch (\Exception $e) {
                 \Log::warning("There was an error authenticating the SAML user: " . $e->getMessage());
                 throw new \Exception($e->getMessage());
             }
+
+        // Fallthrough with better logging
+        } else {
+
+            // Better logging
+            if (!$saml->isEnabled()) {
+                \Log::warning("SAML page requested, but SAML does not seem to enabled.");
+            } else {
+                \Log::warning("SAML page requested, but samlData seems empty.");
+            }
         }
+
+        \Log::warning("Something else went wrong while trying to login as SAML user");
+
+
     }
 
     /**
@@ -207,10 +229,12 @@ class LoginController extends Controller
 
         //If the environment is set to ALWAYS require SAML, return access denied
         if (config('app.require_saml')) {
+            \Log::debug('require SAML is enabled in the .env - return a 403');
             return view('errors.403');
         }
 
         if (Setting::getSettings()->login_common_disabled == "1") {
+            \Log::debug('login_common_disabled is set to 1 - return a 403');
             return view('errors.403');
         }
 
