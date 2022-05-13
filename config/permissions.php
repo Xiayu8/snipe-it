@@ -320,13 +320,6 @@ return array(
             'note'       => '',
             'display'    => true,
         ),
-
-        array(
-            'permission' => 'kits.checkout',
-            'label'      => 'Checkout ',
-            'note'       => '',
-            'display'    => true,
-        ),
     ),
 
 
