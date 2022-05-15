@@ -11,4 +11,4 @@
         'notes'                  => 'Notes',
         'update'                 => 'Update Logbook Entry',
         'create'                 => 'Create Logbook Entry'
-    ];
+    );
