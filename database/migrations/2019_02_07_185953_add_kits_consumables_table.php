@@ -32,7 +32,7 @@ class AddKitsConsumablesTable extends Migration
     public function down()
     {
         if (Schema::hasTable('kits_consumables')) {
-		    Schema::drop('kits_consumables');
+            Schema::drop('kits_consumables');
         }
     }
 }

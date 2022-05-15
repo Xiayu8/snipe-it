@@ -41,7 +41,5 @@ return [
     'make_required' => 'Választható - kattintással kötelezővé tehető',
     'reorder' => 'Újrarendezés',
     'db_field' => 'Adatbázis mező',
-    'db_convert_warning' => 'FIGYELMEZTETÉS. Ez a mező az egyéni mezők táblában <code> :db_column </code> néven szerepel, de :expected </code>-nek kellene lennie.',
-    'is_unique' => 'Ennek az értéknek minden eszköz esetében egyedinek kell lennie',
-    'unique' => 'Egyedi',
+    'db_convert_warning' => 'FIGYELMEZTETÉS. Ez a mező az egyéni mezők táblában <code> :db_column </code> néven szerepel, de :expected </code>-nek kellene lennie.'
 ];

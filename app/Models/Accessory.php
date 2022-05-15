@@ -1,9 +1,11 @@
 <?php
+
 namespace App\Models;
 
 use App\Models\Traits\Acceptable;
 use App\Models\Traits\Searchable;
 use App\Presenters\Presentable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Storage;
 use Watson\Validating\ValidatingTrait;
@@ -15,19 +17,19 @@ use Watson\Validating\ValidatingTrait;
  */
 class Accessory extends SnipeModel
 {
-    protected $presenter = 'App\Presenters\AccessoryPresenter';
+    use HasFactory;
+
+    protected $presenter = \App\Presenters\AccessoryPresenter::class;
     use CompanyableTrait;
     use Loggable, Presentable;
     use SoftDeletes;
 
-    protected $dates = ['deleted_at', 'purchase_date'];
     protected $table = 'accessories';
     protected $casts = [
-        'requestable' => 'boolean'
-    ];
+        'purchase_date' => 'datetime',
+        'requestable' => 'boolean',    ];
 
     use Searchable;
-
     use Acceptable;
     
     /**
@@ -47,20 +49,20 @@ class Accessory extends SnipeModel
         'company'      => ['name'],
         'manufacturer' => ['name'],
         'supplier'     => ['name'],
-        'location'     => ['name']
+        'location'     => ['name'],
     ];
 
     /**
     * Accessory validation rules
     */
-    public $rules = array(
+    public $rules = [
         'name'              => 'required|min:3|max:255',
         'qty'               => 'required|integer|min:1',
         'category_id'       => 'required|integer|exists:categories,id',
         'company_id'        => 'integer|nullable',
         'min_amt'           => 'integer|min:0|nullable',
-        'purchase_cost'     => 'numeric|nullable',
-    );
+        'purchase_cost'     => 'numeric|nullable|gte:0',
+    ];
 
 
     /**
@@ -68,7 +70,7 @@ class Accessory extends SnipeModel
     * validation rules before attempting validation. If this property
     * is not set in the model it will default to true.
     *
-    * @var boolean
+     * @var bool
     */
     protected $injectUniqueIdentifier = true;
     use ValidatingTrait;
@@ -107,7 +109,7 @@ class Accessory extends SnipeModel
      */
     public function supplier()
     {
-        return $this->belongsTo('\App\Models\Supplier', 'supplier_id');
+        return $this->belongsTo(\App\Models\Supplier::class, 'supplier_id');
     }
 
 
@@ -124,7 +126,6 @@ class Accessory extends SnipeModel
             $value = null;
         }
         $this->attributes['requestable'] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
-        return;
     }
 
     /**
@@ -136,7 +137,7 @@ class Accessory extends SnipeModel
      */
     public function company()
     {
-        return $this->belongsTo('\App\Models\Company', 'company_id');
+        return $this->belongsTo(\App\Models\Company::class, 'company_id');
     }
 
     /**
@@ -148,7 +149,7 @@ class Accessory extends SnipeModel
      */
     public function location()
     {
-        return $this->belongsTo('\App\Models\Location', 'location_id');
+        return $this->belongsTo(\App\Models\Location::class, 'location_id');
     }
 
     /**
@@ -160,7 +161,7 @@ class Accessory extends SnipeModel
      */
     public function category()
     {
-        return $this->belongsTo('\App\Models\Category', 'category_id')->where('category_type', '=', 'accessory');
+        return $this->belongsTo(\App\Models\Category::class, 'category_id')->where('category_type', '=', 'accessory');
     }
 
     /**
@@ -172,7 +173,7 @@ class Accessory extends SnipeModel
      */
     public function assetlog()
     {
-        return $this->hasMany('\App\Models\Actionlog', 'item_id')->where('item_type', Accessory::class)->orderBy('created_at', 'desc')->withTrashed();
+        return $this->hasMany(\App\Models\Actionlog::class, 'item_id')->where('item_type', self::class)->orderBy('created_at', 'desc')->withTrashed();
     }
 
     /**
@@ -200,11 +201,10 @@ class Accessory extends SnipeModel
      * @since v5.0.0
      *
      * @see \App\Http\Controllers\Api\AccessoriesController\checkedout()
-     *
      */
     public function lastCheckout()
     {
-        return $this->assetlog()->where('action_type','=','checkout')->take(1);
+        return $this->assetlog()->where('action_type', '=', 'checkout')->take(1);
     }
 
 
@@ -218,7 +218,8 @@ class Accessory extends SnipeModel
      * @since [v3.0]
      * @return string
      */
-    public function getImageUrl() {
+    public function getImageUrl()
+    {
         if ($this->image) {
             return Storage::disk('public')->url(app('accessories_upload_path').$this->image);
         }
@@ -233,10 +234,9 @@ class Accessory extends SnipeModel
      * @since [v3.0]
      * @return \Illuminate\Database\Eloquent\Relations\Relation
      */
-
     public function users()
     {
-        return $this->belongsToMany('\App\Models\User', 'accessories_users', 'accessory_id', 'assigned_to')->withPivot('id', 'created_at', 'note')->withTrashed();
+        return $this->belongsToMany(\App\Models\User::class, 'accessories_users', 'accessory_id', 'assigned_to')->withPivot('id', 'created_at', 'note')->withTrashed();
     }
 
     /**
@@ -248,7 +248,7 @@ class Accessory extends SnipeModel
      */
     public function hasUsers()
     {
-        return $this->belongsToMany('\App\Models\User', 'accessories_users', 'accessory_id', 'assigned_to')->count();
+        return $this->belongsToMany(\App\Models\User::class, 'accessories_users', 'accessory_id', 'assigned_to')->count();
     }
 
     /**
@@ -260,7 +260,7 @@ class Accessory extends SnipeModel
      */
     public function manufacturer()
     {
-        return $this->belongsTo('\App\Models\Manufacturer', 'manufacturer_id');
+        return $this->belongsTo(\App\Models\Manufacturer::class, 'manufacturer_id');
     }
 
     /**
@@ -269,7 +269,7 @@ class Accessory extends SnipeModel
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return boolean
+     * @return bool
      */
     public function checkin_email()
     {
@@ -282,7 +282,7 @@ class Accessory extends SnipeModel
      *
      * @author [A. Gianotto] [<snipe@snipe.net>]
      * @since [v3.0]
-     * @return boolean
+     * @return bool
      */
     public function requireAcceptance()
     {
@@ -299,14 +299,14 @@ class Accessory extends SnipeModel
      */
     public function getEula()
     {
-
         $Parsedown = new \Parsedown();
 
         if ($this->category->eula_text) {
             return $Parsedown->text(e($this->category->eula_text));
-        } elseif ((Setting::getSettings()->default_eula_text) && ($this->category->use_default_eula=='1')) {
+        } elseif ((Setting::getSettings()->default_eula_text) && ($this->category->use_default_eula == '1')) {
             return $Parsedown->text(e(Setting::getSettings()->default_eula_text));
         }
+
             return null;
     }
 
@@ -322,6 +322,7 @@ class Accessory extends SnipeModel
         $checkedout = $this->users->count();
         $total = $this->qty;
         $remaining = $total - $checkedout;
+
         return $remaining;
     }
 

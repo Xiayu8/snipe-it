@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'sent'	        => 'Úspěch: Pokud tato e-mailová adresa existuje v našem systému, byl odeslán e-mail pro obnovení hesla.',
+    'sent'	        => 'Success: If that email address exists in our system, a password recovery email has been sent.',
     'user'			=> 'Nebyl nalezen žádný aktivní uživatel s takovým e-mailem.',
 ];

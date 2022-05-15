@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'sent'	        => 'Klart: Om den e-postadressen finns i vårt system, har ett lösenordsåterställningsmejl skickats.',
+    'sent'	        => 'Success: If that email address exists in our system, a password recovery email has been sent.',
     'user'			=> 'Ingen aktiv användare med denna e-postadress hittades.',
 ];

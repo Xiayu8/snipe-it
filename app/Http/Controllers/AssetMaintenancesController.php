@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Helpers\Helper;
@@ -22,7 +23,6 @@ use View;
  */
 class AssetMaintenancesController extends Controller
 {
-
     /**
     * Checks for permissions for this action.
     *
@@ -54,8 +54,6 @@ class AssetMaintenancesController extends Controller
         $this->authorize('view', AssetMaintenance::class);
         return view('asset_maintenances/index');
     }
-
-
 
     /**
      *  Returns a form view to create a new asset maintenance.
@@ -110,12 +108,12 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->old_weight = Helper::ParseWeight($request->input('old_weight'));
         $assetMaintenance->new_weight = Helper::ParseWeight($request->input('new_weight'));
 
-        if ((!Company::isCurrentUserHasAccess($asset)) && ($asset!=null)) {
+        if ((! Company::isCurrentUserHasAccess($asset)) && ($asset != null)) {
             return static::getInsufficientPermissionsRedirect();
         }
 
         // Save the asset maintenance data
-        $assetMaintenance->asset_id               = $request->input('asset_id');
+        $assetMaintenance->asset_id = $request->input('asset_id');
         $assetMaintenance->asset_maintenance_type = $request->input('asset_maintenance_type');
         $assetMaintenance->title                  = $request->input('title');
         $assetMaintenance->start_date             = $request->input('start_date');
@@ -131,8 +129,8 @@ class AssetMaintenancesController extends Controller
             && ( $assetMaintenance->start_date !== "" )
             && ( $assetMaintenance->start_date !== "0000-00-00" )
         ) {
-            $startDate                                = Carbon::parse($assetMaintenance->start_date);
-            $completionDate                           = Carbon::parse($assetMaintenance->completion_date);
+            $startDate = Carbon::parse($assetMaintenance->start_date);
+            $completionDate = Carbon::parse($assetMaintenance->completion_date);
             $assetMaintenance->asset_maintenance_time = $completionDate->diffInDays($startDate);
         }
 
@@ -145,7 +143,6 @@ class AssetMaintenancesController extends Controller
         }
 
         return redirect()->back()->withInput()->withErrors($assetMaintenance->getErrors());
-
     }
 
     /**
@@ -166,11 +163,10 @@ class AssetMaintenancesController extends Controller
             // Redirect to the improvement management page
             return redirect()->route('maintenances.index')
                            ->with('error', trans('admin/asset_maintenances/message.not_found'));
-        } elseif (!$assetMaintenance->asset) {
+        } elseif (! $assetMaintenance->asset) {
             return redirect()->route('maintenances.index')
                 ->with('error', 'The asset associated with this maintenance does not exist.');
-
-        } elseif (!Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
+        } elseif (! Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
             return static::getInsufficientPermissionsRedirect();
         }
 
@@ -197,7 +193,6 @@ class AssetMaintenancesController extends Controller
                    ->with('selectedAsset', null)
                    ->with('assetMaintenanceType', $assetMaintenanceType)
                    ->with('item', $assetMaintenance);
-
     }
 
     /**
@@ -219,7 +214,7 @@ class AssetMaintenancesController extends Controller
             // Redirect to the asset maintenance management page
             return redirect()->route('maintenances.index')
                            ->with('error', trans('admin/asset_maintenances/message.not_found'));
-        } elseif (!Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
+        } elseif (! Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
             return static::getInsufficientPermissionsRedirect();
         }
 
@@ -232,12 +227,12 @@ class AssetMaintenancesController extends Controller
 
         $asset = Asset::find(request('asset_id'));
 
-        if (!Company::isCurrentUserHasAccess($asset)) {
+        if (! Company::isCurrentUserHasAccess($asset)) {
             return static::getInsufficientPermissionsRedirect();
         }
 
         // Save the asset maintenance data
-        $assetMaintenance->asset_id               = $request->input('asset_id');
+        $assetMaintenance->asset_id = $request->input('asset_id');
         $assetMaintenance->asset_maintenance_type = $request->input('asset_maintenance_type');
         $assetMaintenance->title                  = $request->input('title');
         $assetMaintenance->start_date             = $request->input('start_date');
@@ -248,21 +243,21 @@ class AssetMaintenancesController extends Controller
         $newWeight                                = Helper::ParseWeight($request->input('new_weight'));
         $assetMaintenance->diff_weight            = $oldWeight-$newWeight;
 
-        if (( $assetMaintenance->completion_date == null )
+        if (($assetMaintenance->completion_date == null)
         ) {
-            if (( $assetMaintenance->asset_maintenance_time !== 0 )
-              || ( !is_null($assetMaintenance->asset_maintenance_time) )
+            if (($assetMaintenance->asset_maintenance_time !== 0)
+              || (! is_null($assetMaintenance->asset_maintenance_time))
             ) {
                 $assetMaintenance->asset_maintenance_time = null;
             }
         }
 
-        if (( $assetMaintenance->completion_date !== null )
-          && ( $assetMaintenance->start_date !== "" )
-          && ( $assetMaintenance->start_date !== "0000-00-00" )
+        if (($assetMaintenance->completion_date !== null)
+          && ($assetMaintenance->start_date !== '')
+          && ($assetMaintenance->start_date !== '0000-00-00')
         ) {
-            $startDate                                = Carbon::parse($assetMaintenance->start_date);
-            $completionDate                           = Carbon::parse($assetMaintenance->completion_date);
+            $startDate = Carbon::parse($assetMaintenance->start_date);
+            $completionDate = Carbon::parse($assetMaintenance->completion_date);
             $assetMaintenance->asset_maintenance_time = $completionDate->diffInDays($startDate);
         }
 
@@ -273,6 +268,7 @@ class AssetMaintenancesController extends Controller
             return redirect()->route("hardware.show", "$asset->id#maintenances")
                          ->with('success', trans('admin/asset_maintenances/message.edit.success'));
         }
+
         return redirect()->back()->withInput()->withErrors($assetMaintenance->getErrors());
     }
 
@@ -293,7 +289,7 @@ class AssetMaintenancesController extends Controller
             // Redirect to the asset maintenance management page
             return redirect()->route('maintenances.index')
                            ->with('error', trans('admin/asset_maintenances/message.not_found'));
-        } elseif (!Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
+        } elseif (! Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
             return static::getInsufficientPermissionsRedirect();
         }
 
@@ -323,7 +319,7 @@ class AssetMaintenancesController extends Controller
             // Redirect to the asset maintenance management page
             return redirect()->route('maintenances.index')
                            ->with('error', trans('admin/asset_maintenances/message.not_found'));
-        } elseif (!Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
+        } elseif (! Company::isCurrentUserHasAccess($assetMaintenance->asset)) {
             return static::getInsufficientPermissionsRedirect();
         }
 

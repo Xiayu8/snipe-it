@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'sent'	        => 'تم بنجاح: إذا كان عنوان البريد الإلكتروني هذا موجودًا في نظامنا ، فقد تم إرسال بريد إلكتروني لاستعادة كلمة المرور.',
+    'sent'	        => 'Success: If that email address exists in our system, a password recovery email has been sent.',
     'user'			=> 'لم يتم العثور على اسم مستخدم فعّال مرتبط بعنوان ذلك البريد الالكتروني.',
 ];

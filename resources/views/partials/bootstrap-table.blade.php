@@ -4,11 +4,11 @@
 @endpush
 
 @push('js')
+
 <script src="{{ url(mix('js/dist/bootstrap-table.js')) }}"></script>
 <script nonce="{{ csrf_token() }}">
-
     $(function () {
-
+        var locale = '{{ config('app.locale') }}';
 
         var stickyHeaderOffsetY = 0;
 
@@ -34,6 +34,7 @@
             data_export_options = $(this).attr('data-export-options');
             export_options = data_export_options ? JSON.parse(data_export_options) : {};
             export_options['htmlContent'] = false; // this is already the default; but let's be explicit about it
+            export_options['jspdf']= {"orientation": "l"};
             // the following callback method is necessary to prevent XSS vulnerabilities
             // (this is taken from Bootstrap Tables's default wrapper around jQuery Table Export)
             export_options['onCellHtmlData'] = function (cell, rowIndex, colIndex, htmlData) {
@@ -43,55 +44,58 @@
                 return htmlData
             }
             $(this).bootstrapTable({
-                classes: 'table table-responsive table-bordered table-condensed table-hover',
-                ajaxOptions: {
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                },
-                stickyHeader: true,
-                stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
-                undefinedText: '',
-                iconsPrefix: 'fa',
-                cookie: true,
-                cookieExpire: '2y',
-                mobileResponsive: true,
-                maintainSelected: true,
-                trimOnSearch: false,
-                showSearchClearButton: true,
-                paginationFirstText: "{{ trans('general.first') }}",
-                paginationLastText: "{{ trans('general.last') }}",
-                paginationPreText: "{{ trans('general.previous') }}",
-                paginationNextText: "{{ trans('general.next') }}",
-                pageList: ['10','20', '30','50','100','150','200'{!! ((config('app.max_results') > 200) ? ",'500'" : '') !!}{!! ((config('app.max_results') > 500) ? ",'".config('app.max_results')."'" : '') !!}],
-                pageSize: {{  (($snipeSettings->per_page!='') && ($snipeSettings->per_page > 0)) ? $snipeSettings->per_page : 20 }},
-                paginationVAlign: 'both',
-                queryParams: function (params) {
-                    var newParams = {};
-                    for(var i in params) {
-                        if(!keyBlocked(i)) { // only send the field if it's not in blockedFields
-                            newParams[i] = params[i];
-                        }
-                    }
-                    return newParams;
-                },
-                formatLoadingMessage: function () {
-                    return '<h2><i class="fa fa-spinner fa-spin" aria-hidden="true"></i> Loading... please wait.... </h4>';
-                },
-                icons: {
-                    advancedSearchIcon: 'fa fa-search-plus',
-                    paginationSwitchDown: 'fa-caret-square-o-down',
-                    paginationSwitchUp: 'fa-caret-square-o-up',
-                    columns: 'fa-columns',
-                    refresh: 'fa-refresh',
-                    export: 'fa-download',
-                    clearSearch: 'fa-times'
-                },
-                exportOptions: export_options,
-                exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
-                onLoadSuccess: function () {
-                    $('[data-toggle="tooltip"]').tooltip(); // Needed to attach tooltips after ajax call
+            classes: 'table table-responsive table-bordered table-condensed table-hover',
+            ajaxOptions: {
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
+            },
+            stickyHeader: true,
+            locale: locale,
+            stickyHeaderOffsetY: stickyHeaderOffsetY + 'px',
+            undefinedText: '',
+            iconsPrefix: 'fa',
+            cookie: true,
+            cookieExpire: '2y',
+            mobileResponsive: true,
+            maintainSelected: true,
+            trimOnSearch: false,
+            showSearchClearButton: true,
+            paginationFirstText: "{{ trans('general.first') }}",
+            paginationLastText: "{{ trans('general.last') }}",
+            paginationPreText: "{{ trans('general.previous') }}",
+            paginationNextText: "{{ trans('general.next') }}",
+            pageList: ['10','20', '30','50','100','150','200'{!! ((config('app.max_results') > 200) ? ",'500'" : '') !!}{!! ((config('app.max_results') > 500) ? ",'".config('app.max_results')."'" : '') !!}],
+            pageSize: {{  (($snipeSettings->per_page!='') && ($snipeSettings->per_page > 0)) ? $snipeSettings->per_page : 20 }},
+            paginationVAlign: 'both',
+            queryParams: function (params) {
+                var newParams = {};
+                for(var i in params) {
+                    if(!keyBlocked(i)) { // only send the field if it's not in blockedFields
+                        newParams[i] = params[i];
+                    }
+                }
+                return newParams;
+            },
+            formatLoadingMessage: function () {
+                return '<h2><i class="fas fa-spinner fa-spin" aria-hidden="true"></i> {{ trans('general.loading') }} </h4>';
+            },
+            icons: {
+                advancedSearchIcon: 'fas fa-search-plus',
+                paginationSwitchDown: 'fa-caret-square-o-down',
+                paginationSwitchUp: 'fa-caret-square-o-up',
+                columns: 'fa-columns',
+                refresh: 'fas fa-sync-alt',
+                export: 'fa-download',
+                clearSearch: 'fa-times'
+            },
+                exportOptions: export_options,
+
+            exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
+            onLoadSuccess: function () {
+                $('[data-toggle="tooltip"]').tooltip(); // Needed to attach tooltips after ajax call
+            }
+
             });
         });
     });
@@ -117,7 +121,7 @@
     $('.snipe-table').on('uncheck.bs.table .btSelectItem', function (row, $element) {
         $( "#checkbox_" + $element.id).remove();
     });
-    
+
 
     // Handle whether or not the edit button should be disabled
     $('.snipe-table').on('uncheck.bs.table', function () {
@@ -240,11 +244,11 @@
             }
 
             if ((row.available_actions) && (row.available_actions.clone === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="Clone Item"><i class="fa fa-copy" aria-hidden="true"></i><span class="sr-only">Clone</span></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/clone" class="btn btn-sm btn-info" data-tooltip="true" title="{{ trans('general.clone_item') }}"><i class="far fa-clone" aria-hidden="true"></i><span class="sr-only">Clone</span></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.update === true)) {
-                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="{{ trans('general.update') }}"><i class="fa fa-pencil" aria-hidden="true"></i><span class="sr-only">{{ trans('general.update') }}</span></a>&nbsp;';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/edit" class="btn btn-sm btn-warning" data-tooltip="true" title="{{ trans('general.update') }}"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="sr-only">{{ trans('general.update') }}</span></a>&nbsp;';
             }
 
             if ((row.available_actions) && (row.available_actions.delete === true)) {
@@ -253,16 +257,16 @@
                     + ' data-toggle="modal" '
                     + ' data-content="{{ trans('general.sure_to_delete') }} ' + row.name + '?" '
                     + ' data-title="{{  trans('general.delete') }}" onClick="return false;">'
-                    + '<i class="fa fa-trash" aria-hidden="true"></i><span class="sr-only">{{ trans('general.delete') }}</span></a>&nbsp;';
+                    + '<i class="fas fa-trash" aria-hidden="true"></i><span class="sr-only">Delete</span></a>&nbsp;';
             } else {
-                actions += '<a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fa fa-trash"></i></a>&nbsp;';
+                actions += '<a class="btn btn-danger btn-sm delete-asset disabled" onClick="return false;"><i class="fas fa-trash"></i></a>&nbsp;';
             }
-            
+
 
             if ((row.available_actions) && (row.available_actions.restore === true)) {
                 actions += '<form style="display: inline;" method="POST" action="{{ url('/') }}/' + dest + '/' + row.id + '/restore"> ';
                 actions += '@csrf';
-                actions += '<button class="btn btn-sm btn-warning" data-toggle="tooltip" title="{{ trans('general.restore') }}">';
+                actions += '<a href="{{ url('/') }}/' + dest + '/' + row.id + '/restore" class="btn btn-sm btn-warning" data-toggle="tooltip" title="{{ trans('general.restore') }}"><i class="far fa-clone"></i></a>&nbsp;';
                 actions += '<i class="fa fa-retweet" aria-hidden="true"></i><span class="sr-only">{{ trans('general.restore') }}</span></button></form>&nbsp;';
             }
 
@@ -283,32 +287,32 @@
 
             if (value.type == 'asset') {
                 item_destination = 'hardware';
-                item_icon = 'fa-barcode';
+                item_icon = 'fas fa-barcode';
             } else if (value.type == 'accessory') {
                 item_destination = 'accessories';
-                item_icon = 'fa-keyboard-o';
+                item_icon = 'far fa-keyboard';
             } else if (value.type == 'component') {
                 item_destination = 'components';
-                item_icon = 'fa-hdd-o';
+                item_icon = 'far fa-hdd';
             } else if (value.type == 'consumable') {
                 item_destination = 'consumables';
-                item_icon = 'fa-tint';
+                item_icon = 'fas fa-tint';
             } else if (value.type == 'license') {
                 item_destination = 'licenses';
-                item_icon = 'fa-floppy-o';
+                item_icon = 'far fa-save';
             } else if (value.type == 'user') {
                 item_destination = 'users';
-                item_icon = 'fa-user';
+                item_icon = 'fas fa-user';
             } else if (value.type == 'location') {
                 item_destination = 'locations'
-                item_icon = 'fa-map-marker';
+                item_icon = 'far fa-map-marker-alt';
             } else if (value.type == 'assetMaintenance') {
                 item_destination = 'hardware'
-                item_icon = 'fa-book';
+                item_icon = 'fas fa-book-dead';
                 return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.name + '#maintenances' + '" data-tooltip="true" title="' + value.type + '"><i class="fa ' + item_icon + ' text-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} "></i> ' + value.name + '[' + value.id + '] </a></nobr>';
             }
 
-            return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="fa ' + item_icon + ' text-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} "></i> ' + value.name + '</a></nobr>';
+            return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="' + item_icon + ' text-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} "></i> ' + value.name + '</a></nobr>';
 
         } else {
             return '';
@@ -340,7 +344,7 @@
     function licenseSeatInOutFormatter(value, row) {
         // The user is allowed to check the license seat out and it's available
         if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && ((!row.asset_id) && (!row.assigned_to))) {
-            return '<a href="{{ url('/') }}/licenses/' + row.license_id + '/checkout/'+row.id+'" class="btn btn-sm bg-maroon" data-toggle="tooltip" title="Check this item out">{{ trans('general.checkout') }}</a>';
+            return '<a href="{{ url('/') }}/licenses/' + row.license_id + '/checkout/'+row.id+'" class="btn btn-sm bg-maroon" data-toggle="tooltip" title="{{ trans('general.checkout_tooltip') }}">{{ trans('general.checkout') }}</a>';
         } else {
             return '<a href="{{ url('/') }}/licenses/' + row.id + '/checkin" class="btn btn-sm bg-purple" data-toggle="tooltip" title="Check in this license seat.">{{ trans('general.checkin') }}</a>';
         }
@@ -352,7 +356,7 @@
 
             // The user is allowed to check items out, AND the item is deployable
             if ((row.available_actions.checkout == true) && (row.user_can_checkout == true) && ((!row.asset_id) && (!row.assigned_to))) {
-                    return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm bg-maroon" data-toggle="tooltip" title="Check this item out">{{ trans('general.checkout') }}</a>';
+                    return '<a href="{{ url('/') }}/' + destination + '/' + row.id + '/checkout" class="btn btn-sm bg-maroon" data-toggle="tooltip" title="{{ trans('general.checkout_tooltip') }}">{{ trans('general.checkout') }}</a>';
 
             // The user is allowed to check items out, but the item is not deployable
             } else if (((row.user_can_checkout == false)) && (row.available_actions.checkout == true) && (!row.assigned_to)) {
@@ -376,7 +380,9 @@
 
     // This is only used by the requestable assets section
     function assetRequestActionsFormatter (row, value) {
-        if (value.available_actions.cancel == true)  {
+        if (value.assigned_to_self == true){
+            return '<button class="btn btn-danger btn-sm disabled" data-toggle="tooltip" title="Cancel this item request">{{ trans('button.cancel') }}</button>';
+        } else if (value.available_actions.cancel == true)  {
             return '<form action="{{ url('/') }}/account/request-asset/'+ value.id + '" method="POST">@csrf<button class="btn btn-danger btn-sm" data-toggle="tooltip" title="Cancel this item request">{{ trans('button.cancel') }}</button></form>';
         } else if (value.available_actions.request == true)  {
             return '<form action="{{ url('/') }}/account/request-asset/'+ value.id + '" method="POST">@csrf<button class="btn btn-primary btn-sm" data-toggle="tooltip" title="Request this item">{{ trans('button.request') }}</button></form>';
@@ -534,7 +540,7 @@
     function changeLogFormatter(value) {
         var result = '';
             for (var index in value) {
-                result += index + ': <del>' + value[index].old + '</del>  <i class="fa fa-long-arrow-right" aria-hidden="true"></i> ' + value[index].new + '<br>'
+                result += index + ': <del>' + value[index].old + '</del>  <i class="fas fa-long-arrow-alt-right" aria-hidden="true"></i> ' + value[index].new + '<br>'
             }
 
         return result;
@@ -587,9 +593,9 @@
 
     function trueFalseFormatter(value) {
         if ((value) && ((value == 'true') || (value == '1'))) {
-            return '<i class="fa fa-check text-success"></i>';
+            return '<i class="fas fa-check text-success"></i>';
         } else {
-            return '<i class="fa fa-times text-danger"></i>';
+            return '<i class="fas fa-times text-danger"></i>';
         }
     }
 
@@ -666,12 +672,17 @@
             return '<a href="' + value + '" data-toggle="lightbox" data-type="image"><img src="' + value + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive" alt="' + altName + '"></a>';
         }
     }
+    function downloadFormatter(value) {
+        if (value) {
+            return '<a href="' + value + '" target="_blank"><i class="fas fa-download"></i></a>';
+        }
+    }
 
     function fileUploadFormatter(value) {
         if ((value) && (value.url) && (value.inlineable)) {
             return '<a href="' + value.url + '" data-toggle="lightbox" data-type="image"><img src="' + value.url + '" style="max-height: {{ $snipeSettings->thumbnail_max_h }}px; width: auto;" class="img-responsive"></a>';
         } else if ((value) && (value.url)) {
-            return '<a href="' + value.url + '" class="btn btn-default"><i class="fa fa-download"></i></a>';
+            return '<a href="' + value.url + '" class="btn btn-default"><i class="fas fa-download"></i></a>';
         }
     }
 
@@ -693,7 +704,7 @@
             decimalfixed = periodless.replace(/,/g,".");
         } else {
             // yank commas, that's it.
-            decimalfixed = number.toString().replace(",","");
+            decimalfixed = number.toString().replace(/\,/g,"");
         }
         return parseFloat(decimalfixed);
     }
@@ -702,14 +713,42 @@
         if (Array.isArray(data)) {
             var field = this.field;
             var total_sum = data.reduce(function(sum, row) {
+                
                 return (sum) + (cleanFloat(row[field]) || 0);
             }, 0);
+            
             return numberWithCommas(total_sum.toFixed(5));
         }
         return 'not an array';
     }
 
+    function sumFormatterQuantity(data){
+        if(Array.isArray(data)) {
+            
+            // Prevents issues on page load where data is an empty array
+            if(data[0] == undefined){
+                return 0.00
+            }
+            // Check that we are actually trying to sum cost from a table
+            // that has a quantity column. We must perform this check to
+            // support licences which use seats instead of qty
+            if('qty' in data[0]) {
+                var multiplier = 'qty';
+            } else if('seats' in data[0]) {
+                var multiplier = 'seats';
+            } else {
+                return 'no quantity';
+            }
+            var total_sum = data.reduce(function(sum, row) {
+                return (sum) + (cleanFloat(row["purchase_cost"])*row[multiplier] || 0);
+            }, 0);
+            return numberWithCommas(total_sum.toFixed(2));
+        }
+        return 'not an array';
+    }
+
     function numberWithCommas(value) {
+        
         if ((value) && ("{{$snipeSettings->digit_separator}}" == "1.234,56")){
             var parts = value.toString().split(".");
              parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ".");

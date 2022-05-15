@@ -1,6 +1,6 @@
 <?php
 
-    return [
+return [
     'accessories'			=> 'Accessories',
     'activated'			    => 'Activated',
     'accessory'				=> 'Accessory',
@@ -115,6 +115,7 @@
     'files'                 => 'Files',
     'file_name'				=> 'File',
     'file_type'             => 'File Type',
+    'filesize'              => 'File Size',
     'file_uploads'			=> 'File Uploads',
     'file_upload'           => 'File Upload',
     'generate'				=> 'Generate',
@@ -239,6 +240,7 @@
     'state'  				=> 'State',
     'status_labels'			=> 'Status Labels',
     'status'    			=> 'Status',
+    'accept_eula'           => 'Acceptance Agreement',
     'supplier'              => 'Supplier',
     'suppliers'  			=> 'Suppliers',
     'sure_to_delete'    => 'Are you sure you wish to delete',

@@ -32,7 +32,7 @@ class AddKitsAccessoriesTable extends Migration
     public function down()
     {
         if (Schema::hasTable('kits_accessories')) {
-		    Schema::drop('kits_accessories');
+            Schema::drop('kits_accessories');
         }
     }
 }

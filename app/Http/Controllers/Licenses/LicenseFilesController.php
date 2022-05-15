@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Licenses;
 
+use App\Helpers\StorageHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssetFileRequest;
 use App\Models\Actionlog;
@@ -9,12 +10,10 @@ use App\Models\License;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use App\Helpers\StorageHelper;
 use enshrined\svgSanitize\Sanitizer;
 
 class LicenseFilesController extends Controller
 {
-
     /**
      * Validates and stores files associated with a license.
      *
@@ -34,8 +33,9 @@ class LicenseFilesController extends Controller
             $this->authorize('update', $license);
 
             if ($request->hasFile('file')) {
-
-                if (!Storage::exists('private_uploads/licenses')) Storage::makeDirectory('private_uploads/licenses', 775);
+                if (! Storage::exists('private_uploads/licenses')) {
+                    Storage::makeDirectory('private_uploads/licenses', 775);
+                }
 
                 foreach ($request->file('file') as $file) {
 
@@ -69,15 +69,15 @@ class LicenseFilesController extends Controller
 
 
                     return redirect()->route('licenses.show', $license->id)->with('success', trans('admin/licenses/message.upload.success'));
-                
+
             }
+
             return redirect()->route('licenses.show', $license->id)->with('error', trans('admin/licenses/message.upload.nofiles'));
         }
         // Prepare the error message
         return redirect()->route('licenses.index')
             ->with('error', trans('admin/licenses/message.does_not_exist'));
     }
-
 
     /**
      * Deletes the selected license file.
@@ -100,7 +100,7 @@ class LicenseFilesController extends Controller
 
             // Remove the file if one exists
             if (Storage::exists('licenses/'.$log->filename)) {
-                try  {
+                try {
                     Storage::delete('licenses/'.$log->filename);
                 } catch (\Exception $e) {
                     \Log::debug($e);
@@ -108,6 +108,7 @@ class LicenseFilesController extends Controller
             }
 
             $log->delete();
+
             return redirect()->back()
                 ->with('success', trans('admin/hardware/message.deletefile.success'));
         }
@@ -115,8 +116,6 @@ class LicenseFilesController extends Controller
         // Redirect to the licence management page
         return redirect()->route('licenses.index')->with('error', trans('admin/licenses/message.does_not_exist'));
     }
-
-
 
     /**
      * Allows the selected file to be viewed.
@@ -130,25 +129,24 @@ class LicenseFilesController extends Controller
      */
     public function show($licenseId = null, $fileId = null, $download = true)
     {
-
-        \Log::info('Private filesystem is: '.config('filesystems.default') );
+        \Log::info('Private filesystem is: '.config('filesystems.default'));
         $license = License::find($licenseId);
 
         // the license is valid
         if (isset($license->id)) {
             $this->authorize('view', $license);
 
-            if (!$log = Actionlog::find($fileId)) {
+            if (! $log = Actionlog::find($fileId)) {
                 return response('No matching record for that asset/file', 500)
                     ->header('Content-Type', 'text/plain');
             }
 
             $file = 'private_uploads/licenses/'.$log->filename;
 
-
             if (Storage::missing($file)) {
                 \Log::debug('NOT EXISTS for '.$file);
                 \Log::debug('NOT EXISTS URL should be '.Storage::url($file));
+
                 return response('File '.$file.' ('.Storage::url($file).') not found on server', 404)
                     ->header('Content-Type', 'text/plain');
             } else {
@@ -163,20 +161,16 @@ class LicenseFilesController extends Controller
                         if ($contents = file_get_contents(Storage::url($file))) { // TODO - this will fail on private S3 files or large public ones
                             return Response::make(Storage::url($file)->header('Content-Type', mime_content_type($file)));
                         }
-                        return JsonResponse::create(["error" => "Failed validation: "], 500);
+
+                        return JsonResponse::create(['error' => 'Failed validation: '], 500);
                     }
 
                     return StorageHelper::downloader($file);
+
                 }
-
             }
-
-
         }
+
         return redirect()->route('license.index')->with('error', trans('admin/licenses/message.does_not_exist', ['id' => $fileId]));
-
     }
-
-
-
 }

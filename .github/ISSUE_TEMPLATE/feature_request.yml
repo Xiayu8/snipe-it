@@ -8,7 +8,7 @@ body:
   - type: textarea
     attributes:
       label: Is your feature request related to a problem? Please describe.
-      description: A clear and concise description of what the problem is. The more information you can provide about your use-case, the more liklely we are to consider your feature. 
+      description: A clear and concise description of what the problem is. The more information you can provide about your use-case, the more liklely we are to consider your feature.
     validations:
       required: true
   - type: textarea

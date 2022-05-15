@@ -41,7 +41,5 @@ return [
     'make_required' => 'Optional - click to make required',
     'reorder' => 'Reorder',
     'db_field' => 'Champ BDD',
-    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.',
-    'is_unique' => 'Cette valeur doit être unique parmi tous les actifs',
-    'unique' => 'Unique',
+    'db_convert_warning' => 'WARNING. This field is in the custom fields table as <code> :db_column </code> but should be :expected </code>.'
 ];

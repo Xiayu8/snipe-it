@@ -9,7 +9,7 @@
 @section('header_right')
     {{ Form::open(['method' => 'post', 'class' => 'form-horizontal']) }}
     {{csrf_field()}}
-    <button type="submit" class="btn btn-default"><i class="fa fa-download icon-white" aria-hidden="true"></i> {{ trans('general.download_all') }}</button>
+    <button type="submit" class="btn btn-default"><i class="fas fa-download icon-white" aria-hidden="true"></i> {{ trans('general.download_all') }}</button>
     {{ Form::close() }}
 @stop
 
@@ -49,9 +49,9 @@
                             <th class="col-sm-2" data-field="action_type">{{ trans('general.action') }}</th>
                             <th class="col-sm-1" data-field="type" data-formatter="itemTypeFormatter">{{ trans('general.type') }}</th>
                             <th class="col-sm-3" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
-                            <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">To</th>
+                            <th class="col-sm-2" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.to') }}</th>
                             <th class="col-sm-1" data-field="note">{{ trans('general.notes') }}</th>
-                            <th class="col-sm-2" data-field="log_meta" data-visible="false" data-formatter="changeLogFormatter">Changed</th>
+                            <th class="col-sm-2" data-field="log_meta" data-visible="false" data-formatter="changeLogFormatter">{{ trans('general.changed') }}</th>
                         </tr>
                     </thead>
                 </table>

@@ -2362,6 +2362,15 @@
       ]
     },
     {
+      "login": "Delta5",
+      "name": "Evan Taylor",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1975640?v=4",
+      "profile": "https://github.com/Delta5",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "PetriAsi",
       "name": "Petri Asikainen",
       "avatar_url": "https://avatars.githubusercontent.com/u/8735148?v=4",
@@ -2515,6 +2524,15 @@
       ]
     },
     {
+      "login": "PlaneNuts",
+      "name": "PlaneNuts",
+      "avatar_url": "https://avatars.githubusercontent.com/u/88776392?v=4",
+      "profile": "https://github.com/PlaneNuts",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "exula",
       "name": "Bradley Coudriet",
       "avatar_url": "https://avatars.githubusercontent.com/u/3842948?v=4",
@@ -2533,6 +2551,24 @@
       ]
     },
     {
+      "login": "adagioajanes",
+      "name": "Alex Janes",
+      "avatar_url": "https://avatars.githubusercontent.com/u/38761237?v=4",
+      "profile": "https://adagiohealth.org",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "nuraeil",
+      "name": "Nuraeil",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32387849?v=4",
+      "profile": "https://github.com/nuraeil",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "TenOfTens",
       "name": "TenOfTens",
       "avatar_url": "https://avatars.githubusercontent.com/u/48162670?v=4",
@@ -2542,12 +2578,30 @@
       ]
     },
     {
-      "login": "savornicesei",
-      "name": "Simona Avornicesei",
-      "avatar_url": "https://avatars.githubusercontent.com/u/917232?v=4",
-      "profile": "http://www.avornicesei.com",
+      "login": "insert-waffle",
+      "name": "waffle",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9415391?v=4",
+      "profile": "https://ditisjens.be/",
       "contributions": [
-        "test"
+        "code"
+      ]
+    },
+    {
+      "login": "QveenSi",
+      "name": "Yevhenii Huzii",
+      "avatar_url": "https://avatars.githubusercontent.com/u/19945501?v=4",
+      "profile": "https://github.com/QveenSi",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "veenone",
+      "name": "Achmad Fienan Rahardianto",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3839381?v=4",
+      "profile": "https://github.com/veenone",
+      "contributions": [
+        "code"
       ]
     },
     {

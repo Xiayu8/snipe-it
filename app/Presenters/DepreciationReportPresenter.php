@@ -128,6 +128,7 @@ class DepreciationReportPresenter extends Presenter
                 "visible" => true,
                 "title" => trans('general.purchase_cost'),
                 "footerFormatter" => 'sumFormatter',
+                "class" => "text-right",
             ], [
                 "field" => "order_number",
                 "searchable" => true,
@@ -148,6 +149,7 @@ class DepreciationReportPresenter extends Presenter
                 "visible" => true,
                 "title" => trans('admin/hardware/table.book_value'),
                 "footerFormatter" => 'sumFormatter',
+                "class" => "text-right",
             ], [
                 "field" => "monthly_depreciation",
                 "searchable" => true,
@@ -161,6 +163,7 @@ class DepreciationReportPresenter extends Presenter
                 "visible" => true,
                 "title" => trans('admin/hardware/table.diff'),
                 "footerFormatter" => 'sumFormatter',
+                "class" => "text-right",
             ],[
                 "field" => "warranty_expires",
                 "searchable" => false,
@@ -396,6 +399,6 @@ class DepreciationReportPresenter extends Presenter
 
     public function glyph()
     {
-        return '<i class="fa fa-barcode" aria-hidden="true"></i>';
+        return '<i class="fas fa-barcode" aria-hidden="true"></i>';
     }
 }

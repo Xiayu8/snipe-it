@@ -6,7 +6,6 @@ return [
     'archived'  				=> 'Retiré',
     'asset'  					=> 'Biens',
     'bulk_checkout'             => 'Attribuer les actifs',
-    'bulk_checkin'              => 'Restitution d\'actifs',
     'checkin'  					=> 'Retour des Biens',
     'checkout'  				=> 'Commander l\'actif',
     'clone'  					=> 'Cloner le Bien',
@@ -17,7 +16,7 @@ return [
     'requestable'               => 'Réquisitionnable',
     'requested'				    => 'Demandé',
     'not_requestable'           => 'Non-réquisitionnable',
-    'requestable_status_warning' => 'Ne pas modifier le statut de demande',
+    'requestable_status_warning' => 'Do not change  requestable status',
     'restore'  					=> 'Restaurer l\'actif',
     'pending'  					=> 'En attente',
     'undeployable'  			=> 'Non déployable',
@@ -39,6 +38,6 @@ return [
     'csv_import_match_username' => 'Essayer de faire correspondre les utilisateurs par nom d\'utilisateur',
     'error_messages' => 'Messages d\'erreur:',
     'success_messages' => 'Messages de succès:',
-    'alert_details' => 'Voir ci-dessous pour plus de détails.',
+    'alert_details' => 'Please see below for details.',
     'custom_export' => 'Exportation personnalisée'
 ];

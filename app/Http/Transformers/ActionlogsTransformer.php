@@ -63,7 +63,7 @@ class ActionlogsTransformer
                 [
                     'url' => route('show/assetfile', ['assetId' => $actionlog->item->id, 'fileId' => $actionlog->id]),
                     'filename' => $actionlog->filename,
-                    'inlineable' => (bool) \App\Helpers\Helper::show_file_inline($actionlog->filename),
+                    'inlineable' => (bool) Helper::show_file_inline($actionlog->filename),
                 ] : null,
 
             'item' => ($actionlog->item) ? [
@@ -73,7 +73,7 @@ class ActionlogsTransformer
             ] : null,
             'location' => ($actionlog->location) ? [
                 'id' => (int) $actionlog->location->id,
-                'name' => e($actionlog->location->name)
+                'name' => e($actionlog->location->name),
             ] : null,
             'created_at'    => Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
             'updated_at'    => Helper::getFormattedDateObject($actionlog->updated_at, 'datetime'),
@@ -96,7 +96,7 @@ class ActionlogsTransformer
             'signature_file'   => ($actionlog->accept_signature) ? route('log.signature.view', ['filename' => $actionlog->accept_signature ]) : null,
             'log_meta'          => ((isset($clean_meta)) && (is_array($clean_meta))) ? $clean_meta: null,
             'action_date'   => ($actionlog->action_date) ? Helper::getFormattedDateObject($actionlog->action_date, 'datetime'): Helper::getFormattedDateObject($actionlog->created_at, 'datetime'),
-
+            'stored_eula_file' => ($actionlog->stored_eula_file) ? route('log.storedeula.download', ['filename' => $actionlog->stored_eula_file]) : null,
         ];
         //\Log::info("Clean Meta is: ".print_r($clean_meta,true));
 
