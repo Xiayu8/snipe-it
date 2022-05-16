@@ -85,7 +85,7 @@ class ManufacturerPresenter extends Presenter
                 'sortable' => true,
                 'switchable' => true,
                 'title' => ' <span class="hidden-md hidden-lg">Assets</span>'
-                    .'<span class="hidden-xs"><i class="fas fa-barcode fa-lg"></i></span>',
+                    .'<span class="hidden-xs"><i class="fas fa-flask fa-lg"></i></span>',
                 'visible' => true,
             ],
             [

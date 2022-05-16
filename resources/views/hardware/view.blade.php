@@ -135,7 +135,7 @@
                     <li>
                         <a href="#assets" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
-                            <i class="fas fa-barcode fa-2x" aria-hidden="true"></i>
+                            <i class="fas fa-flask fa-2x" aria-hidden="true"></i>
                           </span>
                           <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
                             {!! ($asset->assignedAssets()->count() > 0 ) ? '<badge class="badge badge-secondary">'.$asset->assignedAssets()->count().'</badge>' : '' !!}
@@ -603,7 +603,8 @@
                                                                 }
                                                             } 
                                                             //echo $infoTest;
-                                                            echo '<i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-html="true" data-placement="right" title="'.$infoTest.'"></i>';
+                                                            //echo '<i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-html="true" data-placement="right" title="'.$infoTest.'"></i>';
+                                                            echo '<i><dfn class="fa fa-info-circle" title="'.$infoTest.'"></dfn></i>';
                                                         ?>
                                                         @elseif(($field->name=='R/H')&&($asset->{$field->db_column_name()}!=''))
                                                             {!! nl2br(e($asset->{$field->db_column_name()})) !!} <?php
@@ -705,7 +706,8 @@
                                                                 }
                                                             } 
                                                             //echo $infoTest;
-                                                            echo '<i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-html="true" data-placement="right" title="'.$infoTest.'"></i>';
+                                                            //echo '<i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-html="true" data-placement="right" title="'.$infoTest.'"></i>';
+                                                            echo '<i><dfn class="fa fa-info-circle" title="'.$infoTest.'"></dfn></i>';
                                                         ?>
                                                         @else
                                                             {!! nl2br(e($asset->{$field->db_column_name()})) !!} &nbsp;
@@ -1045,7 +1047,7 @@
                                                        'id' => 'bulkForm']) }}
                                                 <input type="hidden" name="bulk_actions" value="labels" />
                                                 <input type="hidden" name="ids[{{$asset->id}}]" value="{{ $asset->id }}" />
-                                                <button class="btn btn-sm btn-default" id="bulkEdit" ><i class="fas fa-barcode" aria-hidden="true"></i> {{ trans_choice('button.generate_labels', 1) }}</button>
+                                                <button class="btn btn-sm btn-default" id="bulkEdit" ><i class="fas fa-flask" aria-hidden="true"></i> {{ trans_choice('button.generate_labels', 1) }}</button>
 
                                             {{ Form::close() }}
 

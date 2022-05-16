@@ -34,7 +34,7 @@
                                     </label>
 
                                 </td>
-                                <td class="col-md-1"><i class="fas fa-barcode" aria-hidden="true"></i></td>
+                                <td class="col-md-1"><i class="fas fa-flask" aria-hidden="true"></i></td>
                                 <td class="col-md-10">Name</td>
                             </tr>
                             </thead>

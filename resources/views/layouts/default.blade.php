@@ -132,7 +132,7 @@
                   @can('index', \App\Models\Asset::class)
                   <li aria-hidden="true"{!! (Request::is('hardware*') ? ' class="active"' : '') !!} tabindex="-1">
                       <a href="{{ url('hardware') }}" tabindex="-1">
-                          <i class="fas fa-barcode" aria-hidden="true"></i>
+                          <i class="fas fa-flask" aria-hidden="true"></i>
                           <span class="sr-only">{{ trans('general.assets') }}</span>
                       </a>
                   </li>
@@ -200,7 +200,7 @@
                      @can('create', \App\Models\Asset::class)
                       <li {!! (Request::is('hardware/create') ? 'class="active>"' : '') !!}>
                               <a href="{{ route('hardware.create') }}" tabindex="-1">
-                                  <i class="fas fa-barcode fa-fw" aria-hidden="true"></i>
+                                  <i class="fas fa-flask fa-fw" aria-hidden="true"></i>
                                   {{ trans('general.asset') }}
                               </a>
                       </li>
@@ -407,7 +407,7 @@
             @endcan
             @can('index', \App\Models\Asset::class)
             <li class="treeview{{ (Request::is('hardware*') ? ' active' : '') }}">
-                <a href="#"><i class="fas fa-barcode" aria-hidden="true"></i>
+                <a href="#"><i class="fas fa-flask" aria-hidden="true"></i>
                   <span>{{ trans('general.assets') }}</span>
                   <i class="fa fa-angle-left pull-right"></i>
                 </a>
