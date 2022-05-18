@@ -1044,7 +1044,7 @@ class SettingsController extends Controller
      */
     public function getBackups()
     {
-
+        $settings = Setting::getSettings();
         $path = 'app/backups';
         $backup_files = Storage::files($path);
         $files_raw = [];
@@ -1061,7 +1061,7 @@ class SettingsController extends Controller
                         'filename' => basename($backup_files[$f]),
                         'filesize' => Setting::fileSizeConvert(Storage::size($backup_files[$f])),
                         'modified_value' => $file_timestamp,
-                        'modified_display' => Helper::getFormattedDateObject($file_timestamp, $type = 'datetime', false),
+                        'modified_display' => date($settings->date_display_format.' '.$settings->time_display_format, $file_timestamp),
                         
                     ];
                 }
@@ -1234,7 +1234,11 @@ class SettingsController extends Controller
                 // TODO: run a backup
 
 
-                Artisan::call('db:wipe');
+                Artisan::call('db:wipe', [
+                    '--force' => true,
+                ]);
+
+                \Log::debug('Attempting to restore from: '. storage_path($path).'/'.$filename);
 
                 // run the restore command
                 Artisan::call('snipeit:restore', 
