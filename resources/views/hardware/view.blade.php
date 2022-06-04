@@ -603,8 +603,8 @@
                                                                 }
                                                             } 
                                                             //echo $infoTest;
-                                                            //echo '<i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-html="true" data-placement="right" title="'.$infoTest.'"></i>';
-                                                            echo '<i><dfn class="fa fa-info-circle" title="'.$infoTest.'"></dfn></i>';
+                                                            echo '<i class="fa fa-info-circle" aria-hidden="true" data-container="body" data-toggle="tooltip" data-html="true" data-placement="right" title="'.$infoTest.'"></i>';
+                                                            //echo '<i><dfn class="fa fa-info-circle" title="'.$infoTest.'"></dfn></i>';
                                                         ?>
                                                         @elseif(($field->name=='R/H')&&($asset->{$field->db_column_name()}!=''))
                                                             {!! nl2br(e($asset->{$field->db_column_name()})) !!} <?php
@@ -706,8 +706,8 @@
                                                                 }
                                                             } 
                                                             //echo $infoTest;
-                                                            //echo '<i class="fa fa-info-circle" aria-hidden="true" data-toggle="tooltip" data-html="true" data-placement="right" title="'.$infoTest.'"></i>';
-                                                            echo '<i><dfn class="fa fa-info-circle" title="'.$infoTest.'"></dfn></i>';
+                                                            echo '<i class="fa fa-info-circle" data-container="body" data-toggle="tooltip" data-placement="right" title="'.$infoTest.'"></i>';
+                                                            //echo '<i><dfn class="fa fa-info-circle" title="'.$infoTest.'"></dfn></i>';
                                                         ?>
                                                         @else
                                                             {!! nl2br(e($asset->{$field->db_column_name()})) !!} &nbsp;
