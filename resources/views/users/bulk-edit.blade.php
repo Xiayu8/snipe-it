@@ -104,13 +104,13 @@
                         <!-- activated -->
                         <div class="form-group">
                             <div class="col-sm-3 control-label">
-                                {{ trans('general.activated') }}
+                                {{ trans('general.login_enabled') }}
                             </div>
                             <div class="col-sm-9">
                                 <div class="radio">
                                     <label for="activated">
                                         {{ Form::radio('activated', '', true, ['aria-label'=>'activated', 'class'=>'minimal']) }} {{  trans('general.do_not_change') }} <br>
-                                        {{ Form::radio('activated', '1', old('activated'), ['aria-label'=>'activated', 'class'=>'minimal']) }}  {{  trans('general.login_enabled')}} <br>
+                                        {{ Form::radio('activated', '1', old('activated'), ['aria-label'=>'activated', 'class'=>'minimal']) }}  {{  trans('admin/users/general.user_activated')}} <br>
                                         {{ Form::radio('activated', '0', old('activated'), ['aria-label'=>'activated', 'class'=>'minimal']) }}  {{  trans('admin/users/general.user_deactivated')}}
 
                                     </label>
@@ -123,8 +123,7 @@
                         <div class="form-group{{ $errors->has('groups') ? ' has-error' : '' }}">
                             <label class="col-md-3 control-label" for="groups"> {{ trans('general.groups') }}</label>
                             <div class="col-md-6">
-                                @if ((Config::get('app.lock_passwords') || (!Auth::user()->isSuperUser())))
-
+                                @if ((config('app.lock_passwords') || (!Auth::user()->isSuperUser())))
                                     <span class="help-block">{{  trans('admin/users/general.group_memberships_helpblock') }}</p>
                                 @else
                                     <div class="controls">

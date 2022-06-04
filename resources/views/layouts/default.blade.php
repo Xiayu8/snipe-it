@@ -392,7 +392,7 @@
        <!-- Sidebar toggle button-->
       </header>
 
-      <!-- Left side column. contains the logo and sidebar -->
+        <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
@@ -594,8 +594,8 @@
             @endcan
 
             @can('admin')
-                <li class="treeview">
-                    <a href="#">
+                <li class="treeview {!! in_array(Request::route()->getName(),App\Helpers\Helper::SettingUrls()) ? ' active': '' !!}">
+                    <a href="#" id="settings" class="">
                         <i class="fas fa-cog" aria-hidden="true"></i>
                         <span>{{ trans('general.settings') }}</span>
                         <i class="fa fa-angle-left pull-right"></i>
@@ -625,7 +625,6 @@
                                 </a>
                             </li>
                         @endcan
-
 
                         @can('view', \App\Models\Category::class)
                             <li>
@@ -682,9 +681,7 @@
                                 </a>
                             </li>
                         @endcan
-
                     </ul>
-
                 </li>
             @endcan
 
