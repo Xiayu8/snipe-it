@@ -53,8 +53,9 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
     img.barcode {
         display:block;
 
-        padding-top: .11in;
-        width: 100%;
+        padding-top: .0in;
+        width: 50%;
+        height: 35%;
     }
     div.label-logo {
         float: right;
@@ -65,13 +66,13 @@ $qr_size = ($settings->alt_barcode_enabled=='1') && ($settings->alt_barcode!='')
     }
     .qr_text {
         width: {{ $settings->labels_width }}in;
-        height: {{ $settings->labels_height }}in;
-        padding-top: {{$settings->labels_display_bgutter}}in;
+        
+        padding-top: 0.025in;
         font-family: arial, helvetica, sans-serif;
         font-size: {{$settings->labels_fontsize}}pt;
         padding-right: .0001in;
         overflow: hidden !important;
-        display: inline;
+        display: inline-block;
         word-wrap: break-word;
         word-break: break-all;
     }
