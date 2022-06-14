@@ -98,21 +98,37 @@ class AssetsTransformer
                     $decrypted = Helper::gracefulDecrypt($field, $asset->{$field->convertUnicodeDbSlug()});
                     $value = (Gate::allows('superadmin')) ? $decrypted : strtoupper(trans('admin/custom_fields/general.encrypted'));
 
+                    if ($field->format == 'DATE'){
+                        if (Gate::allows('superadmin')){
+                            $value = Helper::getFormattedDateObject($value)['formatted'];
+                        } else {
+                           $value = strtoupper(trans('admin/custom_fields/general.encrypted'));
+                        }
+                    }
+
                     $fields_array[$field->name] = [
                             'field' => e($field->convertUnicodeDbSlug()),
                             'value' => e($value),
                             'field_format' => $field->format,
+                            'element' => $field->element,
+
                         ];
 
                 } else {
+                    $value = $asset->{$field->convertUnicodeDbSlug()};
+
+                    if ($field->format == 'DATE' && !is_null($value)){
+                        $value = Helper::getFormattedDateObject($value)['formatted'];
+                    }
+                    
                     $fields_array[$field->name] = [
                         'field' => e($field->convertUnicodeDbSlug()),
-                        'value' => e($asset->{$field->convertUnicodeDbSlug()}),
+                        'value' => e($value),
                         'field_format' => $field->format,
+                        'element' => $field->element,
                     ];
-
-
                 }
+
                 $array['custom_fields'] = $fields_array;
             }
         } else {
