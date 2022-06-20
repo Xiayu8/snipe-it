@@ -84,6 +84,7 @@
                 advancedSearchIcon: 'fas fa-search-plus',
                 paginationSwitchDown: 'fa-caret-square-o-down',
                 paginationSwitchUp: 'fa-caret-square-o-up',
+                fullscreen: 'fa-expand',
                 columns: 'fa-columns',
                 refresh: 'fas fa-sync-alt',
                 export: 'fa-download',
@@ -124,8 +125,7 @@
 
     $('.snipe-table').on('uncheck.bs.table .btSelectItem', function (row, $element) {
         var tableId =  $(this).data('id-table');
-        $( "#" + tableId + "checkbox_" + $element.id).remove();
-        console.log("#" + tableId + "checkbox_" + $element.id);
+        $( "#" + tableId + "_checkbox_" + $element.id).remove();
     });
 
 
