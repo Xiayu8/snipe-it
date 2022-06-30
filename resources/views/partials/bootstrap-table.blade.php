@@ -92,7 +92,7 @@
             },
                 exportOptions: export_options,
 
-            exportTypes: ['csv', 'excel', 'doc', 'txt','json', 'xml', 'pdf'],
+            exportTypes: ['xlsx', 'excel', 'csv', 'pdf','json', 'xml', 'txt', 'sql', 'doc' ],
             onLoadSuccess: function () {
                 $('[data-toggle="tooltip"]').tooltip(); // Needed to attach tooltips after ajax call
             }
@@ -188,6 +188,7 @@
                 var status_meta = {
                   'deployed': '{{ strtolower(trans('general.deployed')) }}',
                   'deployable': '{{ strtolower(trans('admin/hardware/general.deployable')) }}',
+                  'archived': '{{ strtolower(trans('general.archived')) }}',
                   'pending': '{{ strtolower(trans('general.pending')) }}'
                 }
 
@@ -325,6 +326,9 @@
                 item_destination = 'hardware'
                 item_icon = 'fas fa-book-dead';
                 return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.name + '#maintenances' + '" data-tooltip="true" title="' + value.type + '"><i class="fa ' + item_icon + ' text-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} "></i> ' + value.name + '[' + value.id + '] </a></nobr>';
+            } else if (value.type == 'model') {
+                item_destination = 'models'
+                item_icon = '';
             }
 
             return '<nobr><a href="{{ url('/') }}/' + item_destination +'/' + value.id + '" data-tooltip="true" title="' + value.type + '"><i class="' + item_icon + ' text-{{ $snipeSettings->skin!='' ? $snipeSettings->skin : 'blue' }} "></i> ' + value.name + '</a></nobr>';
