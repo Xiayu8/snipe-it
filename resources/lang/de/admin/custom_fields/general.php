@@ -41,7 +41,7 @@ return [
     'make_required' => 'Optional - Klicken, um erforderlich zu machen',
     'reorder' => 'Sortieren',
     'db_field' => 'Datenbankfeld',
-    'db_convert_warning' => 'WARNUNG. Dieses Feld befindet sich in der Tabelle mit benutzerdefinierten Feldern wie <code> :db_column </code> aber sollte: </code> sein.',
+    'db_convert_warning' => 'WARNUNG. Dieses Feld befindet sich in der Tabelle mit benutzerdefinierten Feldern als <code>:db_column</code> sollte aber <code>:expected</code> sein.',
     'is_unique' => 'Dieser Wert muss für jedes Asset eindeutig sein',
     'unique' => 'Einzigartig',
 ];

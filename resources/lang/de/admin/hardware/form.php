@@ -46,4 +46,6 @@ return [
     'asset_not_deployable' => 'Dieses Asset ist nicht verfügbar und kann nicht herausgegeben werden.',
     'asset_deployable' => 'Dieses Asset ist verfügbar und kann herausgegeben werden.',
     'processing_spinner' => 'Wird verarbeitet...',
+    'optional_infos'  => 'Optionale Informationen',
+    'order_details'   => 'Bestellinformationen'
 ];

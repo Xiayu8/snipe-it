@@ -46,4 +46,6 @@ return [
     'asset_not_deployable' => 'Lo stato del bene è "Non Assegnabile". Non puoi fare il check-out di questo bene.',
     'asset_deployable' => 'Lo stato del bene è "Assegnabile". Puoi fare il check-out di questo bene.',
     'processing_spinner' => 'Elaborazione...',
+    'optional_infos'  => 'Informazioni Opzionali',
+    'order_details'   => 'Informazioni relative all\'ordine'
 ];

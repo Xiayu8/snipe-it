@@ -91,8 +91,13 @@ return [
     'url'                  => ':attribute Format ist ungültig.',
     'unique_undeleted'     => 'Die Variable :attribute muss eindeutig sein.',
     'non_circular'         => 'Das :attribute darf keinen Zirkelbezug ergeben.',
+    'disallow_same_pwd_as_user_fields' => 'Das Passwort muss sich vom Nutzernamen unterscheiden.',
+    'letters'              => 'Das Passwort muss mindestens einen Buchstaben beinhalten.',
+    'numbers'              => 'Das Passwort muss mindestens eine Zahl beinhalten.',
+    'case_diff'            => 'Das Passwort muss Groß- und Kleinschreibung beinhalten.',
+    'symbols'              => 'Das Passwort muss Sonderzeichen beinhalten.',
     'gte'                  => [
-        'numeric'          => 'Value cannot be negative'
+        'numeric'          => 'Wert darf nicht negativ sein'
     ],
 
 

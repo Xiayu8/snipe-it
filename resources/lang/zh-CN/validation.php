@@ -91,8 +91,13 @@ return [
     'url'                  => ':attribute 格式无效',
     'unique_undeleted'     => ':attribute 属性必须唯一。',
     'non_circular'         => ':attribute 不能创建循环引用。',
+    'disallow_same_pwd_as_user_fields' => '密码不能和用户名相同。',
+    'letters'              => '密码必须包含至少一个字母。',
+    'numbers'              => '密码必须包含至少一个数字。',
+    'case_diff'            => '密码必须使用混合大小写。',
+    'symbols'              => '密码必须包含符号。',
     'gte'                  => [
-        'numeric'          => 'Value cannot be negative'
+        'numeric'          => '数值不能为负数'
     ],
 
 

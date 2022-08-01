@@ -25,6 +25,7 @@ use Response;
 use App\Http\Requests\SlackSettingsRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Artisan;
+use Validator;
 
 /**
  * This controller handles all actions related to Settings for
@@ -910,7 +911,24 @@ class SettingsController extends Controller
     {
         $setting = Setting::getSettings();
 
-        return view('settings.ldap', compact('setting'));
+        /**
+         * This validator is only temporary (famous last words.) - @snipe
+         */
+        $messages = [
+            'ldap_username_field.not_in' => '<code>sAMAccountName</code> (mixed case) will likely not work. You should use <code>samaccountname</code> (lowercase) instead. ',
+            'ldap_auth_filter_query.not_in' => '<code>uid=samaccountname</code> is probably not a valid auth filter. You probably want <code>uid=</code> ',
+            'ldap_filter.regex' => 'This value should probably not be wrapped in parentheses.',
+        ];
+
+        $validator = Validator::make($setting->toArray(), [
+            'ldap_username_field' => 'not_in:sAMAccountName',
+            'ldap_auth_filter_query' => 'not_in:uid=samaccountname',
+            'ldap_filter' => 'regex:"^[^(]"',
+        ],  $messages);
+
+
+
+        return view('settings.ldap', compact('setting'))->withErrors($validator);
     }
 
     /**
@@ -1260,34 +1278,30 @@ class SettingsController extends Controller
                 // If it's greater than 300, it probably worked
                 $output = Artisan::output();
 
-                if (strlen($output) > 300) {
-                    $find_user = DB::table('users')->where('first_name', $user->first_name)->where('last_name', $user->last_name)->exists();
+                /* Run migrations */
+                \Log::debug('Migrating database...');
+                Artisan::call('migrate', ['--force' => true]);
+                $migrate_output = Artisan::output();
+                \Log::debug($migrate_output);
 
-                    if (!$find_user){
-                        \Log::warning('Attempting to restore user: ' . $user->first_name . ' ' . $user->last_name);
-                        $new_user = $user->replicate();
-                        $new_user->push();
-                    }
-
-
-                    \Log::debug('Logging all users out..');
-                    Artisan::call('snipeit:global-logout', ['--force' => true]);
-                    
-                    /* run migrations */
-                    \Log::debug('Migrating database...');
-                    Artisan::call('migrate', ['--force' => true]);
-                    $migrate_output = Artisan::output();
-                    \Log::debug($migrate_output);
-
-                    DB::table('users')->update(['remember_token' => null]);
-                    \Auth::logout();
-
-                    return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
+                $find_user = DB::table('users')->where('username', $user->username)->exists();
+                
+                if (!$find_user){
+                    \Log::warning('Attempting to restore user: ' . $user->username);
+                    $new_user = $user->replicate();
+                    $new_user->push();
                 } else {
-                    return redirect()->route('settings.backups.index')->with('error', $output);
-
+                    \Log::debug('User: ' . $user->username .' already exists.');
                 }
 
+                \Log::debug('Logging all users out..');
+                Artisan::call('snipeit:global-logout', ['--force' => true]);
+
+                DB::table('users')->update(['remember_token' => null]);
+                \Auth::logout();
+
+                return redirect()->route('login')->with('success', 'Your system has been restored. Please login again.');
+                
             } else {
                 return redirect()->route('settings.backups.index')->with('error', trans('admin/settings/message.backup.file_not_found'));
             }

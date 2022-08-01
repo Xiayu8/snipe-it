@@ -64,7 +64,7 @@ return [
         'string'  => ':attribute は、少なくとも :min 文字以上にして下さい。',
         'array'   => ':attribute は少なくとも :min 以上にして下さい。',
     ],
-    'starts_with'          => 'The :attribute must start with one of the following: :values.',
+    'starts_with'          => ':attribute は、いずれかの値で始まる必要があります: :values.',
     'not_in'               => '選択された :attribute は不正です。',
     'numeric'              => ':attribute は数字にして下さい。',
     'present'              => ':attribute フィールドは必須です。',
@@ -91,8 +91,13 @@ return [
     'url'                  => ':attribute フォーマットが不正です。',
     'unique_undeleted'     => ':attribute は 一意の値である必要があります。',
     'non_circular'         => ':attribute は、循環参照を作成してはいけません。',
+    'disallow_same_pwd_as_user_fields' => 'パスワードはユーザー名と同じにすることはできません。',
+    'letters'              => 'パスワードには英字が1文字以上必要です。',
+    'numbers'              => 'パスワードには数字が1つ以上必要です。',
+    'case_diff'            => 'パスワードは英字と数字を混在させる必要があります。',
+    'symbols'              => 'パスワードには記号を含める必要があります',
     'gte'                  => [
-        'numeric'          => 'Value cannot be negative'
+        'numeric'          => '負の値にすることはできません'
     ],
 
 

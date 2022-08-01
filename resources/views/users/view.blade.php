@@ -141,11 +141,6 @@
                 <div class="callout callout-warning">
                   <i class="icon fas fa-exclamation-triangle"></i>
                   {{ trans('admin/users/message.user_deleted_warning') }}
-                  @can('update', $user)
-                      <a href="{{ route('restore/user', $user->id) }}">
-                        {{ trans('admin/users/general.restore_user') }}
-                      </a>
-                  @endcan
                 </div>
               </div>
             @endif
@@ -158,7 +153,7 @@
               <div class="col-md-12 text-center">
                 
                  @if (($user->isSuperUser()) || ($user->hasAccess('admin')))
-                    <i class="fas fa-crown fa-2x {{  ($user->isSuperUser()) ? 'text-danger' : ' text-orange'}}"></i>
+                    <i class="fas fa-crown fa-2x{{  ($user->isSuperUser()) ? ' text-danger' : ' text-orange'}}"></i>
                     <div class="{{  ($user->isSuperUser()) ? 'text-danger' : ' text-orange'}}" style="font-weight: bold">{{  ($user->isSuperUser()) ? 'superadmin' : 'admin'}}</div>
                   @endif
 
@@ -186,6 +181,19 @@
                 <div class="col-md-12" style="padding-top: 5px;">
                   <a href="{{ route('users.print', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">{{ trans('admin/users/general.print_assigned') }}</a>
                 </div>
+                @endcan
+
+                @can('view', $user)
+                  <div class="col-md-12" style="padding-top: 5px;">
+                  @if(!empty($user->email))
+                    <form action="{{ route('users.email',['userId'=> $user->id]) }}" method="POST">
+                      {{ csrf_field() }}
+                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener">{{ trans('admin/users/general.email_assigned') }}</button>
+                    </form>
+                  @else
+                      <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_email') }}">{{ trans('admin/users/general.email_assigned') }}</button>
+                  @endif
+                  </div>
                 @endcan
 
                 @can('update', $user)
@@ -220,7 +228,10 @@
                     </div>
                   @else
                     <div class="col-md-12" style="padding-top: 5px;">
-                      <a href="{{ route('restore/user', $user->id) }}" style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</a>
+                        <form method="POST" action="{{ route('restore/user', $user->id) }}">
+                            @csrf
+                            <button style="width: 100%;" class="btn btn-sm btn-warning hidden-print">{{ trans('button.restore') }}</button>
+                        </form>
                     </div>
                   @endif
                 @endcan
@@ -271,13 +282,9 @@
                       <div class="col-md-9">
 
                         @if ($user->isSuperUser())
-                          <label class="label label-danger">
-                              <i class="fas fa-crown" title="superuser"></i>
-                          </label>&nbsp;
+                          <label class="label label-danger"><i class="fas fa-crown" title="superuser"></i></label>&nbsp;
                         @elseif ($user->hasAccess('admin'))
-                          <label class="label label-warning">
-                              <i class="fas fa-crown" title="admin"></i>
-                          </label>&nbsp;
+                          <label class="label label-warning"><i class="fas fa-crown" title="admin"></i></label>&nbsp;
                         @endif
                          {{ $user->username }}
 

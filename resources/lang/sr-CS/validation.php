@@ -90,9 +90,14 @@ return [
     'uploaded'             => ':attribute nije prenet.',
     'url'                  => ':attribute format je neispravan.',
     'unique_undeleted'     => ':attribute mora biti jedinstven.',
-    'non_circular'         => 'The :attribute must not create a circular reference.',
+    'non_circular'         => ':attribute ne sme da kreira cirkularnu referencu.',
+    'disallow_same_pwd_as_user_fields' => 'Lozinka ne može biti ista kao korisničko ime.',
+    'letters'              => 'Lozinka mora da sadrži barem jedno slovo.',
+    'numbers'              => 'Lozinka mora da sadrži barem jednu cifru.',
+    'case_diff'            => 'Lozinka mora da sadrži malo i veliko slovo.',
+    'symbols'              => 'Lozinka mora da sadrži simbole.',
     'gte'                  => [
-        'numeric'          => 'Value cannot be negative'
+        'numeric'          => 'Vrednost ne može biti negativna'
     ],
 
 
