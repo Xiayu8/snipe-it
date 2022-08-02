@@ -179,7 +179,6 @@
                           </span>
                         </a>
                     </li>
-                    @endcan
 
                     <li>
                     <a href="#modelfiles" data-toggle="tab">
@@ -192,9 +191,10 @@
                           </span>
                     </a>
                     </li>
+                    @endcan
 
                    
-                    @can('update', \App\Models\Asset::class)
+                    @can('superuser')
                         <li class="pull-right">
                             <a href="#" data-toggle="modal" data-target="#uploadFileModal">
                                 <i class="fas fa-paperclip" aria-hidden="true"></i>
