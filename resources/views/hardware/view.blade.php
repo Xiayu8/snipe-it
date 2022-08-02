@@ -723,8 +723,12 @@
                                                             //echo '<i><dfn class="fa fa-info-circle" title="'.$infoTest.'"></dfn></i>';
                                                         ?>
                                                         @else
-                                                            {!! nl2br(e($asset->{$field->db_column_name()})) !!} &nbsp;
+                                                            {!! nl2br(e($asset->{$field->db_column_name()})) !!}
                                                         @endif
+                                                    @endif
+
+                                                    @if ($asset->{$field->db_column_name()}=='')
+                                                        &nbsp;
                                                     @endif
                                                 </div>
                                             </div>
