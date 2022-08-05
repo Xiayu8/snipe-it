@@ -71,7 +71,7 @@
             {{ trans('admin/asset_maintenances/form.title') }}
           </label>
           <div class="col-md-7{{  (Helper::checkIfRequired($item, 'title')) ? ' required' : '' }}">
-            <input class="form-control" type="text" name="title" id="title" value="{{ old('title', $item->title) }}" />
+            <input class="form-control" type="text" name="title" id="title" placeholder="purpose (e.g., LPF Harz, Mediumherstellung)" value="{{ old('title', $item->title) }}" />
             {!! $errors->first('title', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
@@ -126,7 +126,7 @@
         <div class="form-group {{ $errors->has('notes') ? ' has-error' : '' }}">
           <label for="notes" class="col-md-3 control-label">{{ trans('admin/asset_maintenances/form.notes') }}</label>
           <div class="col-md-7">
-            <textarea class="col-md-6 form-control" id="notes" name="notes">{{ old('notes', $item->notes) }}</textarea>
+            <textarea class="col-md-6 form-control" id="notes" placeholder="any additional information (optional)" name="notes">{{ old('notes', $item->notes) }}</textarea>
             {!! $errors->first('notes', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
@@ -139,7 +139,7 @@
               <span class="input-group-addon">
                 [g]
               </span>
-            <input class="col-md-6 form-control" id="old_weight" name="old_weight"value="{{ old('old_weight', \App\Helpers\Helper::formatWeightOutput($item->old_weight)) }}"</input>
+            <input class="col-md-6 form-control" id="old_weight" name="old_weight" placeholder="1234,56789" value="{{ old('old_weight', \App\Helpers\Helper::formatWeightOutput($item->old_weight)) }}"</input>
             {!! $errors->first('old_weight', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
         </div>
@@ -153,7 +153,7 @@
               <span class="input-group-addon">
                 [g]
               </span>
-            <input class="col-md-6 form-control" id="new_weight" name="new_weight" value="{{ old('new_weight', \App\Helpers\Helper::formatWeightOutput($item->new_weight)) }}"></input>
+            <input class="col-md-6 form-control" id="new_weight" name="new_weight" placeholder="1234,56789" value="{{ old('new_weight', \App\Helpers\Helper::formatWeightOutput($item->new_weight)) }}"></input>
             {!! $errors->first('new_weight', '<span class="alert-msg" aria-hidden="true"><i class="fa fa-times" aria-hidden="true"></i> :message</span>') !!}
           </div>
           <p class="help-block">
