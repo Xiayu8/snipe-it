@@ -324,7 +324,6 @@
                              <i class="fas fa-check fa-disk fa-fw" aria-hidden="true"></i>
                              {{ trans('general.requested_assets_menu') }}
                          </a></li>
-                     @endcan
                      
                      <li {!! (Request::is('account/accept') ? ' class="active"' : '') !!}>
                          <a href="{{ route('account.accept') }}">
