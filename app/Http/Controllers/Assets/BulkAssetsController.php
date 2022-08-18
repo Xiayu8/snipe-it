@@ -113,6 +113,8 @@ class BulkAssetsController extends Controller
             || ($request->filled('_snipeit_cas_nr_10'))
             || ($request->filled('_snipeit_ppe_12'))
             || ($request->filled('_snipeit_sds_13'))
+            || ($request->filled('null_purchase_date'))
+            || ($request->filled('null_expected_checkin_date'))
         ) {
             foreach ($assets as $assetId) {
 
@@ -136,6 +138,14 @@ class BulkAssetsController extends Controller
                     ->conditionallyAddItem('_snipeit_cas_nr_10')
                     ->conditionallyAddItem('_snipeit_ppe_12')
                     ->conditionallyAddItem('_snipeit_sds_13');
+
+                if ($request->input('null_purchase_date')=='1') {
+                    $this->update_array['purchase_date'] = null;
+                }
+
+                if ($request->input('null_expected_checkin_date')=='1') {
+                    $this->update_array['expected_checkin'] = null;
+                }
 
                 if ($request->filled('purchase_cost')) {
                     $this->update_array['purchase_cost'] =  Helper::ParseCurrency($request->input('purchase_cost'));
