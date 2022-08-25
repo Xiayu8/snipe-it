@@ -1337,9 +1337,15 @@
                         <div class="row">
                             <div class="col-md-12">
                                 @can('create', \App\Models\AssetMaintenance::class)
+                                @if ($asset->status_id == 5)
+                                    <div id="maintenance-toolbar">
+                                        <a title="Asset is depleted" class="btn btn-primary" disabled>Add Logbook Entry - Asset is depleted</a>
+                                    </div>
+                                @else
                                     <div id="maintenance-toolbar">
                                         <a href="{{ route('maintenances.create', ['asset_id' => $asset->id]) }}" class="btn btn-primary">Add Logbook Entry</a>
                                     </div>
+                                @endif
                             @endcan
 
                             <!-- Asset Maintenance table -->
