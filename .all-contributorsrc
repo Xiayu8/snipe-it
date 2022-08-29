@@ -2675,6 +2675,33 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "julian-piehl",
+      "name": "Peace",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32363424?v=4",
+      "profile": "https://github.com/julian-piehl",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "kylegordon",
+      "name": "Kyle Gordon",
+      "avatar_url": "https://avatars.githubusercontent.com/u/231528?v=4",
+      "profile": "https://github.com/kylegordon",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "sunflowerbofh",
+      "name": "Katharina Drexel",
+      "avatar_url": "https://avatars.githubusercontent.com/u/53009155?v=4",
+      "profile": "http://www.bfh.ch",
+      "contributions": [
+        "code"
+      ]
     }
   ]
 }
