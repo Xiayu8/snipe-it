@@ -39,7 +39,7 @@
               {!! $errors->first('purchase_date', '<span class="alert-msg"><i class="fas fa-times"></i> :message</span>') !!}
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-6">
               <label>
                 {{ Form::checkbox('null_purchase_date', '1', false, ['class' => 'minimal']) }}
                 {{ trans_choice('general.set_to_null', count($assets),['asset_count' => count($assets)]) }}
@@ -58,7 +58,7 @@
 
                  {!! $errors->first('expected_checkin', '<span class="alert-msg" aria-hidden="true"><i class="fas fa-times" aria-hidden="true"></i> :message</span>') !!}
              </div>
-              <div class="col-md-3">
+              <div class="col-md-6">
                 <label>
                   {{ Form::checkbox('null_expected_checkin_date', '1', false, ['class' => 'minimal']) }}
                   {{ trans_choice('general.set_to_null', count($assets), ['asset_count' => count($assets)]) }}

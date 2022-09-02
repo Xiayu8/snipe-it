@@ -836,7 +836,7 @@
         </div>
           @if ($snipeSettings->footer_text!='')
               <div class="pull-right">
-                  {!!  Parsedown::instance()->text(e($snipeSettings->footer_text))  !!}
+                  {!!  Helper::parseEscapedMarkedown($snipeSettings->footer_text)  !!}
               </div>
           @endif
           
