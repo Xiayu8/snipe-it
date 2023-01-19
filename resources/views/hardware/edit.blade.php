@@ -123,7 +123,7 @@
             include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
             include ('partials.forms.edit.warranty')
         -->
-            <!-- byod checkbox -->
+            <!-- byod checkbox 
             <div class="form-group">
                 <div class="col-md-7 col-md-offset-3">
                     <label for="byod">
@@ -134,10 +134,11 @@
                     <p class="help-block">{{ trans('general.byod_help') }}
                     </p>
                 </div>
-            </div>
+            </div>-->
         </div>
     </div>
 
+    <!--
     <div class="form-group">
         <div class="col-md-9 col-sm-9 col-md-offset-3">
             <a id="order_info" class="text-primary">
