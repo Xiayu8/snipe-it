@@ -99,7 +99,7 @@
                 <div class="col-md-12 text-center">
                   <img src="{{ $user->present()->gravatar() }}"  class=" img-thumbnail hidden-print" style="margin-bottom: 20px;" alt="{{ $user->present()->fullName() }}">
                 </div>
-
+                @can('edit', \App\Models\Asset::class)
                   <div class="col-md-12">
                     <a href="{{ route('profile') }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">
                       {{ trans('general.editprofile') }}
@@ -111,6 +111,7 @@
                     {{ trans('general.changepassword') }}
                   </a>
                 </div>
+                @endcan
 
                 @can('self.api')
                 <div class="col-md-12" style="padding-top: 5px;">
@@ -120,7 +121,7 @@
                 </div>
                 @endcan
 
-
+                @can('edit', \App\Models\Asset::class)
                   <div class="col-md-12" style="padding-top: 5px;">
                     <a href="{{ route('profile.print') }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">
                       {{ trans('admin/users/general.print_assigned') }}
@@ -138,6 +139,7 @@
                       <button style="width: 100%;" class="btn btn-sm btn-primary hidden-print" rel="noopener" disabled title="{{ trans('admin/users/message.user_has_no_email') }}">{{ trans('admin/users/general.email_assigned') }}</button>
                     @endif
                   </div>
+                  @endcan
 
                 <br><br>
               </div>

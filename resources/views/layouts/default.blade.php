@@ -696,6 +696,7 @@
                 </a>
 
                 <ul class="treeview-menu">
+                    @can('superadmin')
                     <li>
                         <a href="{{ route('reports.activity') }}" {{ (Request::is('reports/activity') ? ' class="active"' : '') }}>
                             {{ trans('general.activity_report') }}
@@ -715,11 +716,13 @@
                             {{ trans('general.license_report') }}
                         </a>
                     </li>
+                    @endcan
                     <li>
                         <a href="{{ url('reports/asset_maintenances') }}" {{ (Request::is('reports/asset_maintenances') ? ' class="active"' : '') }}>
                             {{ trans('general.asset_maintenance_report') }}
                         </a>
                     </li>
+                    @can('superadmin')
                     <li>
                         <a href="{{ url('reports/unaccepted_assets') }}" {{ (Request::is('reports/unaccepted_assets') ? ' class="active"' : '') }}>
                             {{ trans('general.unaccepted_asset_report') }}
@@ -735,6 +738,7 @@
                             {{ trans('general.custom_report') }}
                         </a>
                     </li>
+                    @endcan
                 </ul>
             </li>
             @endcan
