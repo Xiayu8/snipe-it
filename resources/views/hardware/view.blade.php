@@ -9,7 +9,7 @@
 {{-- Right header --}}
 @section('header_right')
 
-    
+
     @can('manage', \App\Models\Asset::class)
         @if ($asset->deleted_at=='')
         <div class="dropdown pull-right">
@@ -295,7 +295,6 @@
                                         </div>
                                     @endif
 
-
                                     @if ((isset($audit_log)) && ($audit_log->created_at))
                                         <div class="row">
                                             <div class="col-xs-3 col-md-2">
@@ -445,6 +444,17 @@
                                         </div>
                                     </div>
                                     -->
+
+                                    <!-- byod -->
+                                    <div class="row">
+                                        <div class="col-md-2">
+                                            <strong>{{ trans('general.byod') }}</strong>
+                                        </div>
+                                        <div class="col-md-9">
+                                            {!! ($asset->byod=='1') ? '<i class="fas fa-check text-success" aria-hidden="true"></i> '.trans('general.yes') : '<i class="fas fa-times text-danger" aria-hidden="true"></i> '.trans('general.no')  !!}
+                                        </div>
+                                    </div>
+
                                     @if (($asset->model) && ($asset->model->fieldset))
                                         @foreach($asset->model->fieldset->fields as $field)
                                             <div class="row">
@@ -453,7 +463,7 @@
                                                         {{ $field->name }}
                                                     </strong>
                                                 </div>
-                                                <div class="col-xs-7 col-md-6">
+                                                <div class="col-xs-7 col-md-6{{ (($field->format=='URL') && ($asset->{$field->db_column_name()}!='')) ? ' ellipsis': '' }}">
                                                     @if ($field->field_encrypted=='1')
                                                         <i class="fas fa-lock" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
                                                     @endif

@@ -100,6 +100,7 @@ class AssetsController extends Controller
             'checkout_counter',
             'checkin_counter',
             'requests_counter',
+            'byod',
         ];
 
         $filter = [];
@@ -189,6 +190,10 @@ class AssetsController extends Controller
             $assets->ByDepreciationId($request->input('depreciation_id'));
         }
 
+        if ($request->filled('byod')) {
+            $assets->where('assets.byod', '=', $request->input('byod'));
+        }
+
         $request->filled('order_number') ? $assets = $assets->where('assets.order_number', '=', e($request->get('order_number'))) : '';
 
         // Set the offset to the API call's offset, unless the offset is higher than the actual count of items in which
@@ -265,6 +270,11 @@ class AssetsController extends Controller
             case 'Deployed':
                 // more sad, horrible workarounds for laravel bugs when doing full text searches
                 $assets->where('assets.assigned_to', '>', '0');
+                break;
+            case 'byod':
+                // This is kind of redundant, since we already check for byod=1 above, but this keeps the
+                // sidebar nav links a little less chaotic
+                $assets->where('assets.byod', '=', '1');
                 break;
             default:
 
@@ -379,13 +389,23 @@ class AssetsController extends Controller
             $assets = $assets->withTrashed();
         }
 
-        $assets = $assets->get();
+        if (($assets = $assets->get()) && ($assets->count()) > 0) {
 
-        if (($assets) && ($assets->count() > 0)) {
-            return (new AssetsTransformer)->transformAssets($assets, $assets->count());
-        } else {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
+            // If there is exactly one result and the deleted parameter is not passed, we should pull the first (and only)
+            // asset from the returned collection, since transformAsset() expects an Asset object, NOT a collection
+            if (($assets->count() == 1) && ($request->input('deleted') != 'true')) {
+                return (new AssetsTransformer)->transformAsset($assets->first());
+
+                // If there is more than one result OR if the endpoint is requesting deleted items (even if there is only one
+                // match, return the normal collection transformed.
+            } else {
+                return (new AssetsTransformer)->transformAssets($assets, $assets->count());
+            }
+
         }
+
+        // If there are 0 results, return the "no such asset" response
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
 
     }
 
@@ -406,14 +426,14 @@ class AssetsController extends Controller
         if ($request->input('deleted', 'false') == 'true') {
             $assets = $assets->withTrashed();
         }
-
-        $assets = $assets->get();
-
-        if (($assets) && ($assets->count() > 0)) {
-            return (new AssetsTransformer)->transformAssets($assets, $assets->count());
-        } else {
-            return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
+        
+        if (($assets = $assets->get()) && ($assets->count()) > 0) {
+             return (new AssetsTransformer)->transformAssets($assets, $assets->count());
         }
+
+        // If there are 0 results, return the "no such asset" response
+        return response()->json(Helper::formatStandardApiResponse('error', null, trans('admin/hardware/message.does_not_exist')), 200);
+
     }
 
     /**

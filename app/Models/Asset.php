@@ -95,6 +95,7 @@ class Asset extends Depreciable
         'location_id'    => 'integer',
         'rtd_company_id' => 'integer',
         'supplier_id'    => 'integer',
+        'byod'           => 'boolean',
     ];
 
     protected $rules = [
@@ -106,7 +107,6 @@ class Asset extends Depreciable
         'physical'        => 'numeric|max:1|nullable',
         'checkout_date'   => 'date|max:10|min:10|nullable',
         'checkin_date'    => 'date|max:10|min:10|nullable',
-        'supplier_id'     => 'exists:suppliers,id|numeric|nullable|min:2',
         'location_id'     => 'exists:locations,id|nullable',
         'rtd_location_id' => 'required|exists:locations,id|nullable',
         'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
@@ -115,7 +115,7 @@ class Asset extends Depreciable
         'purchase_cost'   => 'numeric|nullable|gte:0',
         'next_audit_date' => 'date|nullable',
         'last_audit_date' => 'date|nullable',
-        'supplier_id'     => 'exists:suppliers,id|nullable',
+        'supplier_id'     => 'exists:suppliers,id|numeric|nullable|min:2',
     ];
 
   /**
@@ -144,6 +144,7 @@ class Asset extends Depreciable
         'requestable',
         'last_checkout',
         'expected_checkin',
+        'byod',
     ];
 
     use Searchable;
