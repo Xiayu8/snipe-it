@@ -20,7 +20,7 @@
                       <div>
                           <label>
                               <p>
-                              <input type="checkbox" value="{{ $value }}" name="{{ $field->db_column_name() }}[]" class="minimal" {{  isset($item) ? (in_array($value, preg_split('/[, |,]/', $item->{$field->db_column_name()})) ? ' checked="checked"' : '') : (Request::old($field->db_column_name()) != '' ? ' checked="checked"' : (in_array($key, preg_split('/[, |,]/', $field->defaultValue($model->id))) ? ' checked="checked"' : '')) }}>
+                              <input type="checkbox" value="{{ $value }}" name="{{ $field->db_column_name() }}[]" class="minimal" {{  isset($item) ? (in_array($value, array_map('trim', explode(',', $item->{$field->db_column_name()}))) ? ' checked="checked"' : '') : (Request::old($field->db_column_name()) != '' ? ' checked="checked"' : (in_array($key, array_map('trim', explode(',', $field->defaultValue($model->id)))) ? ' checked="checked"' : '')) }}>
                                 <?php
                                     $ghs = array ("M003" => "ISO_7010_M003.svg", "M004" => "ISO_7010_M004.svg", "M009" => "ISO_7010_M009.svg", "M010" => "ISO_7010_M010.svg",
                                                     "M011" => "ISO_7010_M011.svg", "M013" => "ISO_7010_M013.svg", "M014" => "ISO_7010_M014.svg",

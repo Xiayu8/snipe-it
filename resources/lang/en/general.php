@@ -11,6 +11,7 @@ return [
     'admin'					=> 'Admin',
     'administrator'			=> 'Administrator',
     'add_seats'             => 'Added seats',
+    'age'                   => "Age",
     'all_assets'			=> 'All Assets',
     'all'       			=> 'All',
     'archived'              => 'Archived',
@@ -280,6 +281,9 @@ return [
     'yes' 					=> 'Yes',
     'zip'  					=> 'Zip',
     'noimage'				=> 'No image uploaded or image not found.',
+    'file_does_not_exist'   => 'The requested file does not exist on the server.',
+    'file_upload_success'   => 'File upload success!',
+    'no_files_uploaded'     => 'File upload success!',
     'token_expired'         => 'Your form session has expired. Please try again.',
     'login_enabled'         => 'Login Enabled',
     'audit_due'             => 'Due for Audit',
@@ -380,6 +384,9 @@ return [
     'unaccepted_profile_warning'   => 'You have :count items requiring acceptance. Click here to accept or decline them',
     'start_date'            => 'Start Date',
     'end_date'            => 'End Date',
+    'alt_uploaded_image_thumbnail' => 'Uploaded thumbnail',
+    'placeholder_kit'       => 'Select a kit'
+
 
 
 ];
