@@ -99,13 +99,15 @@
                 <div class="col-md-12 text-center">
                   <img src="{{ $user->present()->gravatar() }}"  class=" img-thumbnail hidden-print" style="margin-bottom: 20px;" alt="{{ $user->present()->fullName() }}">
                 </div>
-                @can('update', \App\Models\Asset::class)
+                @can('superuser')
                   <div class="col-md-12">
                     <a href="{{ route('profile') }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print">
                       {{ trans('general.editprofile') }}
                     </a>
                   </div>
+                @endcan
 
+                @can('update', \App\Models\Asset::class)
                 <div class="col-md-12" style="padding-top: 5px;">
                   <a href="{{ route('account.password.index') }}" style="width: 100%;" class="btn btn-sm btn-primary hidden-print" target="_blank" rel="noopener">
                     {{ trans('general.changepassword') }}
