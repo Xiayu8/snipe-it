@@ -18,7 +18,7 @@
                     <li class="active">
                         <a href="#asset_tab" data-toggle="tab">
                             <span class="hidden-lg hidden-md">
-                            <i class="fas fa-barcode" aria-hidden="true"></i>
+                            <i class="fas fa-flask" aria-hidden="true"></i>
                             </span>
                             <span class="hidden-xs hidden-sm">{{ trans('general.assets') }}
                                 {!! (($company->assets) && ($company->assets()->AssetsForShow()->count() > 0 )) ? '<badge class="badge badge-secondary">'.number_format($company->assets()->AssetsForShow()->count()).'</badge>' : '' !!}

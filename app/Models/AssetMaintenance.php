@@ -35,6 +35,8 @@ class AssetMaintenance extends Model implements ICompanyableChild
         'completion_date'        => 'nullable|date',
         'notes'                  => 'string|nullable',
         'cost'                   => 'numeric|nullable',
+        'old_weight'             => 'numeric|required',
+        'new_weight'             => 'numeric|required'
     ];
 
     use Searchable;
@@ -88,6 +90,11 @@ class AssetMaintenance extends Model implements ICompanyableChild
             $value = 0;
         }
         $this->attributes['is_warranty'] = $value;
+    }
+
+    public function getDisplayNameAttribute()
+    {
+        return $this->asset_id;
     }
 
     /**

@@ -78,7 +78,7 @@
                             <button class="btn btn-lg btn-primary btn-block">{{ trans('auth/general.login')  }}</button>
                             @endif
                         </div>
-                        <div class="text-right col-md-12 col-sm-12 col-xs-12" style="padding-top: 10px;">
+                        <!--<div class="text-right col-md-12 col-sm-12 col-xs-12" style="padding-top: 10px;">
                             @if ($snipeSettings->custom_forgot_pass_url)
                                 <a href="{{ $snipeSettings->custom_forgot_pass_url  }}" rel="noopener">{{ trans('auth/general.forgot_password')  }}</a>
                             @elseif (!config('app.require_saml'))
@@ -86,7 +86,7 @@
                             @endif
 
 
-                        </div>
+                        </div>-->
                     </div> <!-- end login box -->
 
                 </div> <!-- col-md-4 -->

@@ -99,7 +99,7 @@ class Asset extends Depreciable
     ];
 
     protected $rules = [
-        'name'            => 'max:255|nullable',
+        'name'            => 'required|min:2|max:255|nullable',
         'model_id'        => 'required|integer|exists:models,id',
         'status_id'       => 'required|integer|exists:status_labels,id',
         'company_id'      => 'integer|nullable',
@@ -108,14 +108,14 @@ class Asset extends Depreciable
         'checkout_date'   => 'date|max:10|min:10|nullable',
         'checkin_date'    => 'date|max:10|min:10|nullable',
         'location_id'     => 'exists:locations,id|nullable',
-        'rtd_location_id' => 'exists:locations,id|nullable',
+        'rtd_location_id' => 'required|exists:locations,id|nullable',
         'asset_tag'       => 'required|min:1|max:255|unique_undeleted',
         'status'          => 'integer',
         'serial'          => 'unique_serial|nullable',
         'purchase_cost'   => 'numeric|nullable|gte:0',
         'next_audit_date' => 'date|nullable',
         'last_audit_date' => 'date|nullable',
-        'supplier_id'     => 'exists:suppliers,id|nullable',
+        'supplier_id'     => 'exists:suppliers,id|numeric|nullable|min:2',
     ];
 
   /**

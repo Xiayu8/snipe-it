@@ -48,7 +48,7 @@ class AssetPresenter extends Presenter
                 'sortable' => true,
                 'switchable' => true,
                 'title' => trans('admin/hardware/table.image'),
-                'visible' => true,
+                'visible' => false,
                 'formatter' => 'imageFormatter',
             ], [
                 'field' => 'asset_tag',
@@ -62,7 +62,7 @@ class AssetPresenter extends Presenter
                 'searchable' => true,
                 'sortable' => true,
                 'title' => trans('admin/hardware/form.serial'),
-                'visible' => true,
+                'visible' => false,
                 'formatter' => 'hardwareLinkFormatter',
             ],  [
                 'field' => 'model',
@@ -96,7 +96,7 @@ class AssetPresenter extends Presenter
                 'searchable' => true,
                 'sortable' => true,
                 'title' => trans('admin/hardware/form.checkedout_to'),
-                'visible' => true,
+                'visible' => false,
                 'formatter' => 'polymorphicItemFormatter',
             ], [
                 'field' => 'employee_number',
@@ -153,6 +153,7 @@ class AssetPresenter extends Presenter
                 'title' => trans('general.purchase_cost'),
                 'footerFormatter' => 'sumFormatter',
                 'class' => 'text-right',
+                'visible' => false,
             ], [
                 'field' => 'order_number',
                 'searchable' => true,
@@ -295,7 +296,7 @@ class AssetPresenter extends Presenter
             'sortable' => false,
             'switchable' => true,
             'title' => trans('general.checkin').'/'.trans('general.checkout'),
-            'visible' => true,
+            'visible' => false,
             'formatter' => 'hardwareInOutFormatter',
         ];
 
@@ -538,6 +539,6 @@ class AssetPresenter extends Presenter
 
     public function glyph()
     {
-        return '<i class="fas fa-barcode" aria-hidden="true"></i>';
+        return '<i class="fas fa-flask" aria-hidden="true"></i>';
     }
 }

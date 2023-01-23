@@ -37,7 +37,7 @@
         <p>{{ strtolower(trans('general.assets')) }}</p>
       </div>
       <div class="icon" aria-hidden="true">
-        <i class="fas fa-barcode" aria-hidden="true"></i>
+        <i class="fas fa-flask" aria-hidden="true"></i>
       </div>
       @can('index', \App\Models\Asset::class)
         <a href="{{ route('hardware.index') }}" class="small-box-footer">{{ trans('general.view_all') }} <i class="fa fa-arrow-circle-right" aria-hidden="true"></i></a>
@@ -306,7 +306,7 @@
                                 <th class="col-sm-3" data-visible="true" data-field="name" data-formatter="locationsLinkFormatter" data-sortable="true">{{ trans('general.name') }}</th>
                                 
                                 <th class="col-sm-1" data-visible="true" data-field="assets_count" data-sortable="true">
-                                    <i class="fas fa-barcode" aria-hidden="true"></i>
+                                    <i class="fas fa-flask" aria-hidden="true"></i>
                                     <span class="sr-only">{{ trans('general.asset_count') }}</span>
                                 </th>
                                 <th class="col-sm-1" data-visible="true" data-field="assigned_assets_count" data-sortable="true">
@@ -368,7 +368,7 @@
                                     {{ trans('general.type') }}
                                 </th>
                                 <th class="col-sm-1" data-visible="true" data-field="assets_count" data-sortable="true">
-                                    <i class="fas fa-barcode" aria-hidden="true"></i>
+                                    <i class="fas fa-flask" aria-hidden="true"></i>
                                     <span class="sr-only">{{ trans('general.asset_count') }}</span>
                                 </th>
                                 <th class="col-sm-1" data-visible="true" data-field="accessories_count" data-sortable="true">

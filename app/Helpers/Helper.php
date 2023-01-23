@@ -55,6 +55,18 @@ class Helper
         return $cost;
     }
 
+    public static function formatWeightOutput($old_weight)
+    {
+        if (is_numeric($old_weight)) {
+            if (Setting::getSettings()->digit_separator=='1.234,56') {
+                return number_format($old_weight, 5, ',', '.');
+            }
+            return number_format($old_weight, 5, '.', ',');
+        }
+        // It's already been parsed.
+        return $old_weight;
+    }
+
 
     /**
      * Static colors for pie charts.
@@ -439,6 +451,19 @@ class Helper
      * @return Float
      */
     public static function ParseCurrency($currencyString) {
+        $without_currency = str_replace(Setting::getSettings()->default_currency, '', $currencyString); //generally shouldn't come up, since we don't do this in fields, but just in case it does...
+        if(Setting::getSettings()->digit_separator=='1.234,56') {
+            //EU format
+            $without_thousands = str_replace('.', '', $without_currency);
+            $corrected_decimal = str_replace(',', '.', $without_thousands);
+        } else {
+            $without_thousands = str_replace(',', '', $without_currency);
+            $corrected_decimal = $without_thousands;  // decimal is already OK
+        }
+        return floatval($corrected_decimal);
+    }
+
+    public static function ParseWeight($currencyString) {
         $without_currency = str_replace(Setting::getSettings()->default_currency, '', $currencyString); //generally shouldn't come up, since we don't do this in fields, but just in case it does...
         if(Setting::getSettings()->digit_separator=='1.234,56') {
             //EU format

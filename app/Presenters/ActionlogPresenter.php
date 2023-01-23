@@ -41,7 +41,7 @@ class ActionlogPresenter extends Presenter
         $itemicon = 'fas fa-paperclip';
 
         if ($this->itemType() == 'asset') {
-            return 'fas fa-barcode';
+            return 'fas fa-flask';
         } elseif ($this->itemType() == 'accessory') {
             return 'far fa-keyboard';
         } elseif ($this->itemType() == 'consumable') {
@@ -50,6 +50,8 @@ class ActionlogPresenter extends Presenter
             return 'far fa-save';
         } elseif ($this->itemType() == 'component') {
             return 'far fa-hdd';
+        } elseif ($this->itemType()=="assetMaintenance") {
+            return 'fas fa-book-dead';
         }
 
     }

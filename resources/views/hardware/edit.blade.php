@@ -12,8 +12,9 @@
 {{-- Page content --}}
 @section('inputFields')
     
-    @include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])
-
+        <!--include ('partials.forms.edit.company-select', ['translated_name' => trans('general.company'), 'fieldname' => 'company_id'])-->
+        @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
+    <!--include ('partials.forms.edit.warranty')-->
 
   <!-- Asset Tag -->
   <div class="form-group {{ $errors->has('asset_tag') ? ' has-error' : '' }}">
@@ -51,21 +52,18 @@
 
     @include ('partials.forms.edit.model-select', ['translated_name' => trans('admin/hardware/form.model'), 'fieldname' => 'model_id', 'field_req' => true])
 
-
-    @include ('partials.forms.edit.status', [ 'required' => 'true'])
-    @if (!$item->id)
-        @include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true', 'style' => 'display:none;'])
-        @include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_user', 'style' => 'display:none;', 'required' => 'false'])
-        @include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_asset', 'style' => 'display:none;', 'required' => 'false'])
-        @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required' => 'false'])
-    @elseif (($item->assignedTo) && ($item->deleted_at == ''))
-        <!-- This is an asset and it's currently deployed, so let them edit the expected checkin date -->
-        @include ('partials.forms.edit.datepicker', ['translated_name' => trans('admin/hardware/form.expected_checkin'),'fieldname' => 'expected_checkin'])
-    @endif
-
-    @include ('partials.forms.edit.notes')
+        <!--if (!$item->id)
+        include ('partials.forms.checkout-selector', ['user_select' => 'true','asset_select' => 'true', 'location_select' => 'true', 'style' => 'display:none;'])
+        include ('partials.forms.edit.user-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_user', 'style' => 'display:none;', 'required' => 'false'])
+        include ('partials.forms.edit.asset-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_asset', 'style' => 'display:none;', 'required' => 'false'])
+        include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.checkout_to'), 'fieldname' => 'assigned_location', 'style' => 'display:none;', 'required' => 'false'])
+    elseif (($item->assignedTo) && ($item->deleted_at == ''))
+        This is an asset and it's currently deployed, so let them edit the expected checkin date
+        include ('partials.forms.edit.datepicker', ['translated_name' => trans('admin/hardware/form.expected_checkin'),'fieldname' => 'expected_checkin'])
+    endif -->
+    @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
     @include ('partials.forms.edit.location-select', ['translated_name' => trans('admin/hardware/form.default_location'), 'fieldname' => 'rtd_location_id'])
-    @include ('partials.forms.edit.requestable', ['requestable_text' => trans('admin/hardware/general.requestable')])
+        <!--include ('partials.forms.edit.requestable', ['requestable_text' => trans('admin/hardware/general.requestable')])-->
 
     <!-- Image -->
     @if ($item->image)
@@ -83,7 +81,7 @@
     </div>
     @endif
 
-    @include ('partials.forms.edit.image-upload')
+    <!--include ('partials.forms.edit.image-upload')-->
 
     <div id='custom_fields_content'>
         <!-- Custom Fields -->
@@ -103,8 +101,10 @@
         @include("models/custom_fields_form",["model" => $model])
         @endif
     </div>
+    @include ('partials.forms.edit.order_number')
+    @include ('partials.forms.edit.notes')
 
-    <div class="form-group">
+    <!--<div class="form-group">
     <label class="col-md-3 control-label"></label>
 
         <div class="col-md-9 col-sm-9 col-md-offset-3">
@@ -118,10 +118,10 @@
         
         <div id="optional_details" class="col-md-12" style="display:none">
         <br>
-            @include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
-            @include ('partials.forms.edit.warranty')
-
-            <!-- byod checkbox -->
+            include ('partials.forms.edit.name', ['translated_name' => trans('admin/hardware/form.name')])
+            include ('partials.forms.edit.warranty')
+            -->
+            <!-- byod checkbox 
             <div class="form-group">
                 <div class="col-md-7 col-md-offset-3">
                     <label for="byod">
@@ -134,9 +134,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 
-    <div class="form-group">
+    <!--<div class="form-group">
         <div class="col-md-9 col-sm-9 col-md-offset-3">
             <a id="order_info" class="text-primary">
                 <i class="fa fa-caret-right fa-2x" id="order_info_icon"></i>
@@ -147,10 +147,7 @@
 
         <div id='order_details' class="col-md-12" style="display:none">
             <br>
-            @include ('partials.forms.edit.order_number')
-            @include ('partials.forms.edit.purchase_date')
-            @include ('partials.forms.edit.supplier-select', ['translated_name' => trans('general.supplier'), 'fieldname' => 'supplier_id'])
-
+            include ('partials.forms.edit.purchase_date')
                 @php
                 $currency_type = null;
                 if ($item->id && $item->location) {
@@ -158,10 +155,10 @@
                 }
                 @endphp
 
-            @include ('partials.forms.edit.purchase_cost', ['currency_type' => $currency_type])
+            include ('partials.forms.edit.purchase_cost', ['currency_type' => $currency_type])
 
         </div>
-    </div>
+    </div>-->
    
 @stop
 

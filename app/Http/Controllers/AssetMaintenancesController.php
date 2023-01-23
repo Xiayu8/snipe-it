@@ -6,6 +6,7 @@ use App\Helpers\Helper;
 use App\Models\Asset;
 use App\Models\AssetMaintenance;
 use App\Models\Company;
+use App\Models\Actionlog;
 use Auth;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -50,7 +51,7 @@ class AssetMaintenancesController extends Controller
     */
     public function index()
     {
-        $this->authorize('view', Asset::class);
+        $this->authorize('view', this->authorize('view', AssetMaintenance::class));
         return view('asset_maintenances/index');
     }
 
@@ -65,7 +66,7 @@ class AssetMaintenancesController extends Controller
      */
     public function create()
     {
-        $this->authorize('update', Asset::class);
+        $this->authorize('create', AssetMaintenance::class);
         $asset = null;
 
         if ($asset = Asset::find(request('asset_id'))) {
@@ -96,7 +97,7 @@ class AssetMaintenancesController extends Controller
     */
     public function store(Request $request)
     {
-        $this->authorize('update', Asset::class);
+        $this->authorize('create', AssetMaintenance::class);
         // create a new model instance
         $assetMaintenance = new AssetMaintenance();
         $assetMaintenance->supplier_id = $request->input('supplier_id');
@@ -104,6 +105,8 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->cost = Helper::ParseCurrency($request->input('cost'));
         $assetMaintenance->notes = $request->input('notes');
         $asset = Asset::find($request->input('asset_id'));
+        $assetMaintenance->old_weight = Helper::ParseWeight($request->input('old_weight'));
+        $assetMaintenance->new_weight = Helper::ParseWeight($request->input('new_weight'));
 
         if ((! Company::isCurrentUserHasAccess($asset)) && ($asset != null)) {
             return static::getInsufficientPermissionsRedirect();
@@ -116,6 +119,11 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->start_date = $request->input('start_date');
         $assetMaintenance->completion_date = $request->input('completion_date');
         $assetMaintenance->user_id = Auth::id();
+        $assetMaintenance->old_weight             = Helper::ParseWeight($request->input('old_weight'));
+        $assetMaintenance->new_weight             = Helper::ParseWeight($request->input('new_weight'));
+        $oldWeight                                = Helper::ParseWeight($request->input('old_weight'));
+        $newWeight                                = Helper::ParseWeight($request->input('new_weight'));
+        $assetMaintenance->diff_weight            = $oldWeight-$newWeight;
 
         if (($assetMaintenance->completion_date !== null)
             && ($assetMaintenance->start_date !== '')
@@ -129,7 +137,7 @@ class AssetMaintenancesController extends Controller
         // Was the asset maintenance created?
         if ($assetMaintenance->save()) {
             // Redirect to the new asset maintenance page
-            return redirect()->route('maintenances.index')
+            return redirect()->route("hardware.show", "$asset->id#maintenances")
                            ->with('success', trans('admin/asset_maintenances/message.create.success'));
         }
 
@@ -148,7 +156,7 @@ class AssetMaintenancesController extends Controller
     */
     public function edit($assetMaintenanceId = null)
     {
-        $this->authorize('update', Asset::class);
+        $this->authorize('update', AssetMaintenance::class);
         // Check if the asset maintenance exists
         if (is_null($assetMaintenance = AssetMaintenance::find($assetMaintenanceId))) {
             // Redirect to the improvement management page
@@ -199,7 +207,7 @@ class AssetMaintenancesController extends Controller
      */
     public function update(Request $request, $assetMaintenanceId = null)
     {
-        $this->authorize('update', Asset::class);
+        $this->authorize('update', AssetMaintenance::class);
         // Check if the asset maintenance exists
         if (is_null($assetMaintenance = AssetMaintenance::find($assetMaintenanceId))) {
             // Redirect to the asset maintenance management page
@@ -213,6 +221,8 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->is_warranty = $request->input('is_warranty');
         $assetMaintenance->cost =  Helper::ParseCurrency($request->input('cost'));
         $assetMaintenance->notes = $request->input('notes');
+        $assetMaintenance->old_weight = Helper::ParseWeight($request->input('old_weight'));
+        $assetMaintenance->new_weight = Helper::ParseWeight($request->input('new_weight'));
 
         $asset = Asset::find(request('asset_id'));
 
@@ -226,6 +236,11 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance->title = $request->input('title');
         $assetMaintenance->start_date = $request->input('start_date');
         $assetMaintenance->completion_date = $request->input('completion_date');
+        $assetMaintenance->old_weight             = Helper::ParseWeight($request->input('old_weight'));
+        $assetMaintenance->new_weight             = Helper::ParseWeight($request->input('new_weight'));
+        $oldWeight                                = Helper::ParseWeight($request->input('old_weight'));
+        $newWeight                                = Helper::ParseWeight($request->input('new_weight'));
+        $assetMaintenance->diff_weight            = $oldWeight-$newWeight;
 
         if (($assetMaintenance->completion_date == null)
         ) {
@@ -249,7 +264,7 @@ class AssetMaintenancesController extends Controller
         if ($assetMaintenance->save()) {
 
             // Redirect to the new asset maintenance page
-            return redirect()->route('maintenances.index')
+            return redirect()->route("hardware.show", "$asset->id#maintenances")
                          ->with('success', trans('admin/asset_maintenances/message.edit.success'));
         }
 

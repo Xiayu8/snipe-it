@@ -108,6 +108,34 @@ return [
 
     ],
 
+    'AssetMaintenances' => [
+        [
+            'permission' => 'assetMaintenaces.view',
+            'label'      => 'View ',
+            'note'       => '',
+            'display'    => true,
+        ],
+        [
+            'permission' => 'assetMaintenances.create',
+            'label'      => 'Create ',
+            'note'       => '',
+            'display'    => true,
+        ],
+        [
+            'permission' => 'assetMaintenances.edit',
+            'label'      => 'Edit  ',
+            'note'       => '',
+            'display'    => true,
+        ],
+        [
+            'permission' => 'assetMaintenances.delete',
+            'label'      => 'Delete ',
+            'note'       => '',
+            'display'    => true,
+        ],
+
+    ],
+
     'Accessories' => [
         [
             'permission' => 'accessories.view',

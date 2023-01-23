@@ -104,6 +104,16 @@ class BulkAssetsController extends Controller
             || ($request->filled('model_id'))
             || ($request->filled('null_purchase_date'))
             || ($request->filled('null_expected_checkin_date'))
+            || ($request->filled('_snipeit_description_3'))
+            || ($request->filled('_snipeit_state_of_aggregation_4'))
+            || ($request->filled('_snipeit_quantity_5'))
+            || ($request->filled('_snipeit_shelf_nr_6'))
+            || ($request->filled('_snipeit_haz_subst_7'))
+            || ($request->filled('_snipeit_rh_8'))
+            || ($request->filled('_snipeit_sp_9'))
+            || ($request->filled('_snipeit_cas_nr_10'))
+            || ($request->filled('_snipeit_ppe_12'))
+            || ($request->filled('_snipeit_sds_13'))
         ) {
             foreach ($assets as $assetId) {
 
@@ -116,7 +126,17 @@ class BulkAssetsController extends Controller
                     ->conditionallyAddItem('requestable')
                     ->conditionallyAddItem('status_id')
                     ->conditionallyAddItem('supplier_id')
-                    ->conditionallyAddItem('warranty_months');
+                    ->conditionallyAddItem('warranty_months')
+                    ->conditionallyAddItem('_snipeit_description_3')
+                    ->conditionallyAddItem('_snipeit_state_of_aggregation_4')
+                    ->conditionallyAddItem('_snipeit_quantity_5')
+                    ->conditionallyAddItem('_snipeit_shelf_nr_6')
+                    ->conditionallyAddItem('_snipeit_haz_subst_7')
+                    ->conditionallyAddItem('_snipeit_rh_8')
+                    ->conditionallyAddItem('_snipeit_sp_9')
+                    ->conditionallyAddItem('_snipeit_cas_nr_10')
+                    ->conditionallyAddItem('_snipeit_ppe_12')
+                    ->conditionallyAddItem('_snipeit_sds_13');
 
                 if ($request->input('null_purchase_date')=='1') {
                     $this->update_array['purchase_date'] = null;

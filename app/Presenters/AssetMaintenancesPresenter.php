@@ -68,6 +68,7 @@ class AssetMaintenancesPresenter extends Presenter
                 'searchable' => true,
                 'sortable' => true,
                 'title' => trans('admin/asset_maintenances/form.asset_maintenance_type'),
+                'visible' => false,
             ], [
                 'field' => 'title',
                 'searchable' => true,
@@ -85,6 +86,7 @@ class AssetMaintenancesPresenter extends Presenter
                 'sortable' => true,
                 'title' => trans('admin/asset_maintenances/form.completion_date'),
                 'formatter' => 'dateDisplayFormatter',
+                'visible' => false,
             ], [
                 'field' => 'notes',
                 'searchable' => true,
@@ -95,18 +97,35 @@ class AssetMaintenancesPresenter extends Presenter
                 'searchable' => true,
                 'sortable' => true,
                 'title' => trans('admin/asset_maintenances/table.is_warranty'),
+                'visible' => false,
             ], [
                 'field' => 'cost',
                 'searchable' => true,
                 'sortable' => true,
                 'title' => trans('admin/asset_maintenances/form.cost'),
                 'class' => 'text-right',
+                'visible' => false,
             ], [
                 'field' => 'user_id',
                 'searchable' => true,
                 'sortable' => true,
                 'title' => trans('general.admin'),
-                'formatter' => 'usersLinkObjFormatter',
+                'formatter' => 'usersLinkObjFormatter'
+            ],[
+                'field' => 'old_weight',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => 'Old Weight [g]',
+            ], [
+                'field' => 'new_weight',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => 'New Weight [g]',
+            ], [
+                'field' => 'diff_weight',
+                'searchable' => true,
+                'sortable' => true,
+                'title' => '&Delta;Weight [g]',
             ], [
                 'field' => 'actions',
                 'searchable' => false,

@@ -48,7 +48,7 @@ class CompanyPresenter extends Presenter
                 'field' => 'assets_count',
                 'searchable' => false,
                 'sortable' => true,
-                'title' => '<span class="hidden-xs"><i class="fas fa-barcode" aria-hidden="true"></i></span><span class="hidden-md hidden-lg">'.trans('general.assets').'</span>',
+                'title' => '<span class="hidden-xs"><i class="fas fa-flask" aria-hidden="true"></i></span><span class="hidden-md hidden-lg">'.trans('general.assets').'</span>',
                 'visible' => true,
 
             ], [

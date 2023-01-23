@@ -9,7 +9,7 @@
             @endif
             @if ((isset($asset_select)) && ($asset_select!='false'))
             <label class="btn btn-default">
-                <input name="checkout_to_type" value="asset" aria-label="checkout_to_type" type="radio"><i class="fas fa-barcode" aria-hidden="true"></i> {{ trans('general.asset') }}
+                <input name="checkout_to_type" value="asset" aria-label="checkout_to_type" type="radio"><i class="fas fa-flask" aria-hidden="true"></i> {{ trans('general.asset') }}
             </label>
             @endif
             @if ((isset($location_select)) && ($location_select!='false'))

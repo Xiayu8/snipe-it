@@ -19,8 +19,20 @@
                   @foreach ($field->formatFieldValuesAsArray() as $key => $value)
                       <div>
                           <label>
+                            <p>
                               <input type="checkbox" value="{{ $value }}" name="{{ $field->db_column_name() }}[]" class="minimal" {{  isset($item) ? (in_array($value, array_map('trim', explode(',', $item->{$field->db_column_name()}))) ? ' checked="checked"' : '') : (Request::old($field->db_column_name()) != '' ? ' checked="checked"' : (in_array($key, array_map('trim', explode(',', $field->defaultValue($model->id)))) ? ' checked="checked"' : '')) }}>
+                              <?php
+                                    $ghs = array ("M003" => "ISO_7010_M003.svg", "M004" => "ISO_7010_M004.svg", "M009" => "ISO_7010_M009.svg", "M010" => "ISO_7010_M010.svg",
+                                                    "M011" => "ISO_7010_M011.svg", "M013" => "ISO_7010_M013.svg", "M014" => "ISO_7010_M014.svg",
+                                                    "M016" => "ISO_7010_M016.svg", "M017" => "ISO_7010_M017.svg", "M018" => "ISO_7010_M018.svg", "M019" => "ISO_7010_M019.svg");
+                                    foreach ($ghs as $key => $val){
+                                        if (strpos($value, $key) !== false){
+                                            echo '<img style="height: 35px; width: 35px;" src="https://Chemikalienliste/uploads/'.$val.'" alt="'.$key.'">';
+                                        }
+                                    }
+                              ?>
                               {{ $value }}
+                                </p>
                           </label>
                       </div>
                   @endforeach

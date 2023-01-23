@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Accessory;
 use App\Models\Asset;
+use App\Models\AssetMaintenance;
 use App\Models\AssetModel;
 use App\Models\Category;
 use App\Models\Company;
@@ -23,6 +24,7 @@ use App\Models\User;
 use App\Policies\AccessoryPolicy;
 use App\Policies\AssetModelPolicy;
 use App\Policies\AssetPolicy;
+use App\Policies\AssetMaintenancePolicy;
 use App\Policies\CategoryPolicy;
 use App\Policies\CompanyPolicy;
 use App\Policies\ComponentPolicy;
@@ -56,6 +58,7 @@ class AuthServiceProvider extends ServiceProvider
         Accessory::class => AccessoryPolicy::class,
         Asset::class => AssetPolicy::class,
         AssetModel::class => AssetModelPolicy::class,
+        AssetMaintenance::class => AssetMaintenancePolicy::class,
         Category::class => CategoryPolicy::class,
         Component::class => ComponentPolicy::class,
         Consumable::class => ConsumablePolicy::class,
