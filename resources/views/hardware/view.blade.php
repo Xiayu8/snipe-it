@@ -589,7 +589,7 @@
                                                             "P402"=>'Store in a dry place.',
                                                             "P403"=>'Store in a well-ventilated place.',
                                                             "P404"=>'Store in a closed container.',
-                                                            "P405"=>'Store l°Cked up.',
+                                                            "P405"=>'Store locked up.',
                                                             "P406"=>'Store in corrosive resistant/... container with a resistant inner liner.',
                                                             "P407"=>'Maintain air gap between stacks/pallets.',
                                                             "P410"=>'Protect from sunlight.',
