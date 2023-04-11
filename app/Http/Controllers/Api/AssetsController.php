@@ -1005,6 +1005,7 @@ class AssetsController extends Controller
                     'asset_tag'=> e($asset->asset_tag),
                     'note'=> e($request->input('note')),
                     'next_audit_date' => Helper::getFormattedDateObject($asset->next_audit_date),
+                    'status_id' => e($asset->status_id),
                 ], trans('admin/hardware/message.audit.success')));
             }
         }

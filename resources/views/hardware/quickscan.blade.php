@@ -151,7 +151,10 @@
                 dataType : 'json',
                 data : formData,
                 success : function (data) {
-                    if (data.status == 'success') {
+                    if (data.status == 'success' && data.payload.status_id == 5) {
+                        $('#audited tbody').prepend("<tr class='success'><td>" + data.payload.asset_tag + "</td><td>" + data.messages + "</td><td><i class='fas fa-check text-success'></i>   <i class='text-warning'> Depleted </i><i class='fas fa-exclamation text-warning'></i> </td></tr>");
+                        incrementOnSuccess();
+                    } else if (data.status == 'success') {
                         $('#audited tbody').prepend("<tr class='success'><td>" + data.payload.asset_tag + "</td><td>" + data.messages + "</td><td><i class='fas fa-check text-success'></i></td></tr>");
                         incrementOnSuccess();
                     } else {
