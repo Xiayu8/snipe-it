@@ -52,6 +52,8 @@ class ActionlogPresenter extends Presenter
             return 'far fa-hdd';
         } elseif ($this->itemType()=="assetMaintenance") {
             return 'fas fa-book-dead';
+        } elseif ($this->itemType() == 'user') {
+            return 'fa-solid fa-people-arrows';
         }
 
     }

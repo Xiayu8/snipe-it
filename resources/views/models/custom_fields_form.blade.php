@@ -18,10 +18,9 @@
                     <!-- Checkboxes -->
                   @foreach ($field->formatFieldValuesAsArray() as $key => $value)
                       <div>
-                          <label>
-                              <p>
-                              <input type="checkbox" value="{{ $value }}" name="{{ $field->db_column_name() }}[]" class="minimal" {{  isset($item) ? (in_array($value, array_map('trim', explode(',', $item->{$field->db_column_name()}))) ? ' checked="checked"' : '') : (Request::old($field->db_column_name()) != '' ? ' checked="checked"' : (in_array($key, array_map('trim', explode(',', $field->defaultValue($model->id)))) ? ' checked="checked"' : '')) }}>
-                                <?php
+                          <label class="form-control">
+                              <input type="checkbox" value="{{ $value }}" name="{{ $field->db_column_name() }}[]" {{  isset($item) ? (in_array($value, array_map('trim', explode(',', $item->{$field->db_column_name()}))) ? ' checked="checked"' : '') : (Request::old($field->db_column_name()) != '' ? ' checked="checked"' : (in_array($key, array_map('trim', explode(',', $field->defaultValue($model->id)))) ? ' checked="checked"' : '')) }}>
+                              <?php
                                     $ghs = array ("M003" => "ISO_7010_M003.svg", "M004" => "ISO_7010_M004.svg", "M009" => "ISO_7010_M009.svg", "M010" => "ISO_7010_M010.svg",
                                                     "M011" => "ISO_7010_M011.svg", "M013" => "ISO_7010_M013.svg", "M014" => "ISO_7010_M014.svg",
                                                     "M016" => "ISO_7010_M016.svg", "M017" => "ISO_7010_M017.svg", "M018" => "ISO_7010_M018.svg", "M019" => "ISO_7010_M019.svg");
@@ -41,8 +40,8 @@
               @foreach ($field->formatFieldValuesAsArray() as $value)
 
               <div>
-                  <label>
-                      <input type="radio" value="{{ $value }}" name="{{ $field->db_column_name() }}" class="minimal" {{ isset($item) ? ($item->{$field->db_column_name()} == $value ? ' checked="checked"' : '') : (Request::old($field->db_column_name()) != '' ? ' checked="checked"' : (in_array($value, explode(', ', $field->defaultValue($model->id))) ? ' checked="checked"' : '')) }}>
+                  <label class="form-control">
+                      <input type="radio" value="{{ $value }}" name="{{ $field->db_column_name() }}" {{ isset($item) ? ($item->{$field->db_column_name()} == $value ? ' checked="checked"' : '') : (Request::old($field->db_column_name()) != '' ? ' checked="checked"' : (in_array($value, explode(', ', $field->defaultValue($model->id))) ? ' checked="checked"' : '')) }}>
                       {{ $value }}
                   </label>
               </div>
@@ -89,7 +88,7 @@
 
         @if ($field->field_encrypted)
         <div class="col-md-1 col-sm-1 text-left">
-            <i class="fas fa-lock" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
+            <i class="fas fa-lock" data-tooltip="true" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
         </div>
         @endif
 

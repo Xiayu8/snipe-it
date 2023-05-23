@@ -102,7 +102,7 @@ class AssetMaintenancesController extends Controller
         $assetMaintenance = new AssetMaintenance();
         $assetMaintenance->supplier_id = $request->input('supplier_id');
         $assetMaintenance->is_warranty = $request->input('is_warranty');
-        $assetMaintenance->cost = Helper::ParseCurrency($request->input('cost'));
+        $assetMaintenance->cost = $request->input('cost');
         $assetMaintenance->notes = $request->input('notes');
         $asset = Asset::find($request->input('asset_id'));
         $assetMaintenance->old_weight = Helper::ParseWeight($request->input('old_weight'));
@@ -220,7 +220,7 @@ class AssetMaintenancesController extends Controller
 
         $assetMaintenance->supplier_id = $request->input('supplier_id');
         $assetMaintenance->is_warranty = $request->input('is_warranty');
-        $assetMaintenance->cost =  Helper::ParseCurrency($request->input('cost'));
+        $assetMaintenance->cost =  $request->input('cost');
         $assetMaintenance->notes = $request->input('notes');
         $assetMaintenance->old_weight = Helper::ParseWeight($request->input('old_weight'));
         $assetMaintenance->new_weight = Helper::ParseWeight($request->input('new_weight'));

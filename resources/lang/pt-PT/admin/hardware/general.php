@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Este ativo foi excluído.',
     'edit'  					=> 'Editar artigo',
     'model_deleted'  			=> 'This Assets model has been deleted. You must restore the model before you can restore the Asset.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Solicitavel',
     'requested'				    => 'Requisitado',
     'not_requestable'           => 'Not Requestable',
@@ -40,5 +42,6 @@ return [
     'error_messages' => 'Error messages:',
     'success_messages' => 'Success messages:',
     'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Exportação Personalizada'
+    'custom_export' => 'Exportação Personalizada',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

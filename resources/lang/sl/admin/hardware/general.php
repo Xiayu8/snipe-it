@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'To sredstvo je bilo izbrisano.',
     'edit'  					=> 'Urejanje sredstva',
     'model_deleted'  			=> 'Model tega sredstva je bil izbrisan. Pred obnovitvijo sredstva je potrebno obnoviti model.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Zahtevano',
     'requested'				    => 'Zahtevano',
     'not_requestable'           => 'Not Requestable',
@@ -40,5 +42,6 @@ return [
     'error_messages' => 'Error messages:',
     'success_messages' => 'Success messages:',
     'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export'
+    'custom_export' => 'Custom Export',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];
