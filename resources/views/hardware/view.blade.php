@@ -75,8 +75,8 @@
         @if (!$asset->model)
             <div class="col-md-12">
                 <div class="callout callout-danger">
-                    <h2>NO MODEL ASSOCIATED</h2>
-                        <p>This will break things in weird and horrible ways. Edit this asset now to assign it a model. </p>
+                    <h2>{{ trans('admin/models/message.no_association') }}</h2>
+                        <p>{{ trans('admin/models/message.no_association_fix') }}</p>
                 </div>
             </div>
         @endif
@@ -85,9 +85,8 @@
             <div class="col-md-12">
                 <div class="alert alert-danger">
                     <i class="fas fa-exclamation-triangle faa-pulse animated" aria-hidden="true"></i>
-                    <strong>WARNING: </strong>
-                    This asset has been deleted.
-                    You must restore it before you can assign it to someone.
+                    <strong>{{ trans('general.notification_warning') }} </strong>
+                    {{ trans('general.asset_deleted_warning') }}
                 </div>
             </div>
         @endif
@@ -244,7 +243,7 @@
                                                         <i class="fas fa-circle text-green"></i>
                                                     @elseif (($asset->assetstatus) && ($asset->assetstatus->pending=='1'))
                                                         <i class="fas fa-circle text-orange"></i>
-                                                    @elseif (($asset->assetstatus) && ($asset->assetstatus->archived=='1'))
+                                                    @else
                                                         <i class="fas fa-times text-red"></i>
                                                     @endif
                                                     <a href="{{ route('statuslabels.show', $asset->assetstatus->id) }}">
@@ -457,7 +456,7 @@
                                                 </div>
                                                 <div class="col-md-6{{ (($field->format=='URL') && ($asset->{$field->db_column_name()}!='')) ? ' ellipsis': '' }}">
                                                     @if ($field->field_encrypted=='1')
-                                                        <i class="fas fa-lock" data-toggle="tooltip" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
+                                                        <i class="fas fa-lock" data-tooltip="true" data-placement="top" title="{{ trans('admin/custom_fields/general.value_encrypted') }}"></i>
                                                     @endif
 
                                                     @if ($field->isFieldDecryptable($asset->{$field->db_column_name()} ))
@@ -531,6 +530,25 @@
                                             </div>
                                         </div>
                                     @endif
+                                    @if(($asset->components->count() > 0) && ($asset->purchase_cost))
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <strong>
+                                                    {{ trans('admin/hardware/table.components_cost') }}
+                                                </strong>
+                                            </div>
+                                            <div class="col-md-6">
+                                                @if (($asset->id) && ($asset->location))
+                                                    {{ $asset->location->currency }}
+                                                @elseif (($asset->id) && ($asset->location))
+                                                    {{ $asset->location->currency }}
+                                                @else
+                                                    {{ $snipeSettings->default_currency }}
+                                                @endif
+                                                {{Helper::formatCurrencyOutput($asset->getComponentCost())}}
+                                            </div>
+                                        </div>
+                                    @endif
                                     @if (($asset->model) && ($asset->depreciation) && ($asset->purchase_date))
                                         <div class="row">
                                             <div class="col-md-2">
@@ -596,9 +614,9 @@
                                                 {{ $asset->warranty_months }}
                                                 {{ trans('admin/hardware/form.months') }}
 
-                                                @if (($asset->serial && $asset->model->manufacturer) && $asset->model->manufacturer->name == 'Apple')
-                                                    <a href="https://checkcoverage.apple.com/us/{{ \App\Models\Setting::getSettings()->locale  }}/?sn={{ $asset->serial }}" target="_blank">
-                                                        <i class="fa-brands fa-apple" aria-hidden="true"><span class="sr-only">Applecare Status Lookup</span></i>
+                                                @if (($asset->model->manufacturer) && ($asset->model->manufacturer->warranty_lookup_url!=''))
+                                                    <a href="{{ $asset->present()->dynamicWarrantyUrl() }}" target="_blank">
+                                                        <i class="fa fa-external-link" aria-hidden="true"><span class="sr-only">{{ trans('admin/hardware/general.mfg_warranty_lookup', ['manufacturer' => $asset->model->manufacturer->name]) }}</span></i>
                                                     </a>
                                                 @endif
                                             </div>
@@ -672,7 +690,8 @@
 
                                             </div>
                                         </div>
-
+                                    @endif
+                                    @if ($asset->asset_eol_date)
                                         <div class="row">
                                             <div class="col-md-2">
                                                 <strong>
@@ -680,10 +699,10 @@
                                                 </strong>
                                             </div>
                                             <div class="col-md-6">
-                                                @if ($asset->purchase_date)
-                                                {{ Helper::getFormattedDateObject($asset->present()->eol_date(), 'date', false) }}
+                                                @if ($asset->asset_eol_date)
+                                                {{ Helper::getFormattedDateObject($asset->asset_eol_date, 'date', false) }}
                                                 -
-                                                {{ Carbon::parse($asset->present()->eol_date())->diffForHumans(['parts' => 2]) }}
+                                                {{ Carbon::parse($asset->asset_eol_date)->diffForHumans(['parts' => 2]) }}
                                                 @else
                                                     {{ trans('general.na_no_purchase_date') }}
                                                 @endif
@@ -1144,17 +1163,15 @@
                       data-cookie="true">
                 <thead>
                 <tr>
-                  <th data-visible="true" style="width: 40px;" class="hidden-xs">{{ trans('admin/hardware/table.icon') }}</th>
+                  <th data-visible="true" data-field="icon" style="width: 40px;" class="hidden-xs" data-formatter="iconFormatter">{{ trans('admin/hardware/table.icon') }}</th>
                   <th class="col-sm-2" data-visible="true" data-field="action_date" data-formatter="dateDisplayFormatter">{{ trans('general.date') }}</th>
                   <th class="col-sm-1" data-visible="true" data-field="admin" data-formatter="usersLinkObjFormatter">{{ trans('general.admin') }}</th>
                   <th class="col-sm-1" data-visible="true" data-field="action_type">{{ trans('general.action') }}</th>
                   <th class="col-sm-2" data-visible="true" data-field="item" data-formatter="polymorphicItemFormatter">{{ trans('general.item') }}</th>
                   <th class="col-sm-2" data-visible="true" data-field="target" data-formatter="polymorphicItemFormatter">{{ trans('general.target') }}</th>
                   <th class="col-sm-2" data-field="note">{{ trans('general.notes') }}</th>
-                    @if  ($snipeSettings->require_accept_signature=='1')
-                        <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
-                    @endif
-                    <th class="col-md-3" data-visible="false" data-field="file" data-visible="false"  data-formatter="fileUploadFormatter">{{ trans('general.download') }}</th>
+                  <th class="col-md-3" data-field="signature_file" data-visible="false"  data-formatter="imageFormatter">{{ trans('general.signature') }}</th>
+                  <th class="col-md-3" data-visible="false" data-field="file" data-visible="false"  data-formatter="fileUploadFormatter">{{ trans('general.download') }}</th>
                   <th class="col-sm-2" data-field="log_meta" data-visible="true" data-formatter="changeLogFormatter">{{ trans('admin/hardware/table.changed')}}</th>
                 </tr>
                 </thead>

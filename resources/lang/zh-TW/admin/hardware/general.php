@@ -14,6 +14,8 @@ return [
     'deleted'  					=> '此資產已被刪除.',
     'edit'  					=> '編輯資產',
     'model_deleted'  			=> '此資產模板已被刪除. 你必須先還原資產模板才可還原資產.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => '可申領',
     'requested'				    => '已申領',
     'not_requestable'           => '不可申請',
@@ -40,5 +42,6 @@ return [
     'error_messages' => '錯誤訊息:',
     'success_messages' => '成功訊息:',
     'alert_details' => '請看下面的詳細資料.',
-    'custom_export' => '自定義匯出'
+    'custom_export' => '自定義匯出',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];

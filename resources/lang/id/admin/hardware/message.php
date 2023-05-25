@@ -23,6 +23,8 @@ return [
     'restore' => [
         'error'   		=> 'Aset gagal dikembalikan, silahkan coba lagi',
         'success' 		=> 'Aset berhasil dikembalikan.',
+        'bulk_success' 		=> 'Asset restored successfully.',
+        'nothing_updated'   => 'No assets were selected, so nothing was restored.', 
     ],
 
     'audit' => [
@@ -49,6 +51,8 @@ return [
         'success'               => 'Berkas Anda berhasil terimpor',
         'file_delete_success'   => 'File anda telah berhasil dihapus',
         'file_delete_error'      => 'File tidak bisa dihapus',
+        'header_row_has_malformed_characters' => 'One or more attributes in the header row contain malformed UTF-8 characters',
+        'content_row_has_malformed_characters' => 'One or more attributes in the first row of content contain malformed UTF-8 characters',
     ],
 
 

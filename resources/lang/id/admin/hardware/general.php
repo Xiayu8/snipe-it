@@ -14,6 +14,8 @@ return [
     'deleted'  					=> 'Aset ini telah dihapus.',
     'edit'  					=> 'Sunting Aset',
     'model_deleted'  			=> 'Model Aset ini telah dihapus. Anda harus memulihkan model aset tersebut sebelum Anda dapat memulihkan Aset.',
+    'model_invalid'             => 'The Model of this Asset is invalid.',
+    'model_invalid_fix'         => 'The Asset should be edited to correct this before attempting to check it in or out.',
     'requestable'               => 'Dapat diminta',
     'requested'				    => 'Telah diminta',
     'not_requestable'           => 'Not Requestable',
@@ -40,5 +42,6 @@ return [
     'error_messages' => 'Error messages:',
     'success_messages' => 'Success messages:',
     'alert_details' => 'Please see below for details.',
-    'custom_export' => 'Custom Export'
+    'custom_export' => 'Custom Export',
+    'mfg_warranty_lookup' => ':manufacturer Warranty Status Lookup',
 ];
