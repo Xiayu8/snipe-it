@@ -62,6 +62,7 @@ class AssetMaintenancesTransformer
             'old_weight' => Helper::formatWeightOutput($assetmaintenance->old_weight),
             'new_weight' => Helper::formatWeightOutput($assetmaintenance->new_weight),
             'diff_weight' => Helper::formatWeightOutput($assetmaintenance->diff_weight),
+            'is_warranty'=> $assetmaintenance->is_warranty,
 
         ];
 
