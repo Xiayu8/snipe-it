@@ -333,19 +333,18 @@
                                     </a>
                                     <ul class="dropdown-menu">
                                         <!-- User image -->
+                                        @can('superadmin')
                                         <li {!! (Request::is('account/profile') ? ' class="active"' : '') !!}>
                                             <a href="{{ route('view-assets') }}">
                                                 <i class="fas fa-check fa-fw" aria-hidden="true"></i>
                                                 {{ trans('general.viewassets') }}
                                             </a></li>
 
-                                        @can('viewRequestable', \App\Models\Asset::class)
                                             <li {!! (Request::is('account/requested') ? ' class="active"' : '') !!}>
                                                 <a href="{{ route('account.requested') }}">
                                                     <i class="fas fa-check fa-disk fa-fw" aria-hidden="true"></i>
                                                     {{ trans('general.requested_assets_menu') }}
                                                 </a></li>
-                                        @endcan
 
                                         <li {!! (Request::is('account/accept') ? ' class="active"' : '') !!}>
                                             <a href="{{ route('account.accept') }}">
@@ -360,12 +359,15 @@
                                                 {{ trans('general.editprofile') }}
                                             </a>
                                         </li>
+                                        @endcan
+                                        @can('audit', \App\Models\Asset::class)
                                         <li>
                                             <a href="{{ route('account.password.index') }}">
                                                 <i class="fa-solid fa-asterisk fa-fw" aria-hidden="true"></i>
                                                 {{ trans('general.changepassword') }}
                                             </a>
                                         </li>
+                                        @endcan
 
 
                                         @can('self.api')
@@ -453,7 +455,7 @@
                                         @endforeach
                                     @endif
 
-
+                                    @can('superadmin')
                                     <li{!! (Request::query('status') == 'Deployed' ? ' class="active"' : '') !!}>
                                         <a href="{{ url('hardware?status=Deployed') }}">
                                             <i class="far fa-circle text-blue fa-fw"></i>
@@ -462,14 +464,16 @@
                                             ({{ (isset($total_deployed_sidebar)) ? $total_deployed_sidebar : '' }})
                                         </a>
                                     </li>
+                                    @endcan
                                     <li{!! (Request::query('status') == 'RTD' ? ' class="active"' : '') !!}>
                                         <a href="{{ url('hardware?status=RTD') }}">
                                             <i class="far fa-circle text-green fa-fw"></i>
                                             {{ trans('general.all') }}
-                                            {{ trans('general.ready_to_deploy') }}
+                                            Available
                                             ({{ (isset($total_rtd_sidebar)) ? $total_rtd_sidebar : '' }})
                                         </a>
                                     </li>
+                                    @can('superadmin')
                                     <li{!! (Request::query('status') == 'Pending' ? ' class="active"' : '') !!}><a
                                                 href="{{ url('hardware?status=Pending') }}"><i
                                                     class="far fa-circle text-orange fa-fw"></i>
@@ -478,14 +482,16 @@
                                             ({{ (isset($total_pending_sidebar)) ? $total_pending_sidebar : '' }})
                                         </a>
                                     </li>
+                                    @endcan
                                     <li{!! (Request::query('status') == 'Undeployable' ? ' class="active"' : '') !!} ><a
                                                 href="{{ url('hardware?status=Undeployable') }}"><i
                                                     class="fas fa-times text-red fa-fw"></i>
                                             {{ trans('general.all') }}
-                                            {{ trans('general.undeployable') }}
+                                            Depleted
                                             ({{ (isset($total_undeployable_sidebar)) ? $total_undeployable_sidebar : '' }})
                                         </a>
                                     </li>
+                                    @can('superadmin')
                                     <li{!! (Request::query('status') == 'byod' ? ' class="active"' : '') !!}><a
                                                 href="{{ url('hardware?status=byod') }}"><i
                                                     class="fas fa-times text-red fa-fw"></i>
@@ -508,6 +514,7 @@
                                             {{ trans('admin/hardware/general.requestable') }}
                                         </a>
                                     </li>
+                                    @endcan
 
                                     @can('audit', \App\Models\Asset::class)
                                         <li{!! (Request::is('hardware/audit/due') ? ' class="active"' : '') !!}>
@@ -543,7 +550,7 @@
                                         </li>
                                     @endcan
 
-                                    @can('create', \App\Models\Asset::class)
+                                    @can('superadmin')
                                         <li{!! (Request::query('Deleted') ? ' class="active"' : '') !!}>
                                             <a href="{{ url('hardware?status=Deleted') }}">
                                                 {{ trans('general.deleted') }}
@@ -884,9 +891,9 @@
                 @endif
 
 
-                <a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software,
+                <!--<a target="_blank" href="https://snipeitapp.com" rel="noopener">Snipe-IT</a> is open source software,
                 made with <i class="fas fa-heart" style="color: #a94442; font-size: 10px" aria-hidden="true"></i><span
-                        class="sr-only">love</span> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.
+                        class="sr-only">love</span> by <a href="https://twitter.com/snipeitapp" rel="noopener">@snipeitapp</a>.-->
             </footer>
 
 
