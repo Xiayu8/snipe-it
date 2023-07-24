@@ -153,7 +153,7 @@ class BulkAssetsController extends Controller
                     ->conditionallyAddItem('_snipeit_sp_9')
                     ->conditionallyAddItem('_snipeit_cas_nr_10')
                     ->conditionallyAddItem('_snipeit_ppe_12')
-                    ->conditionallyAddItem('_snipeit_sds_13');
+                    ->conditionallyAddItem('_snipeit_sds_13')
                     ->conditionallyAddItem('next_audit_date');
 
                 if ($request->input('null_purchase_date')=='1') {
