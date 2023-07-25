@@ -390,7 +390,7 @@ class Asset extends Depreciable
      */
     public function depreciation()
     {
-        return $this->model->belongsTo(\App\Models\Depreciation::class, 'depreciation_id');
+        return $this->hasOneThrough(\App\Models\Depreciation::class,\App\Models\AssetModel::class,'id','id','model_id','depreciation_id');
     }
 
 
@@ -785,24 +785,17 @@ class Asset extends Depreciable
      * @since [v4.0]
      * @return string | false
      */
-    public static function autoincrement_asset()
+    public static function autoincrement_asset(int $additional_increment = 0)
     {
         $settings = \App\Models\Setting::getSettings();
 
 
         if ($settings->auto_increment_assets == '1') {
-            $temp_asset_tag = \DB::table('assets')
-                ->where('physical', '=', '1')
-                ->max('asset_tag');
-
-            $asset_tag_digits = preg_replace('/\D/', '', $temp_asset_tag);
-            $asset_tag = preg_replace('/^0*/', '', $asset_tag_digits);
-
             if ($settings->zerofill_count > 0) {
-                return $settings->auto_increment_prefix.self::zerofill($settings->next_auto_tag_base, $settings->zerofill_count);
+                return $settings->auto_increment_prefix.self::zerofill($settings->next_auto_tag_base + $additional_increment, $settings->zerofill_count);
             }
 
-            return $settings->auto_increment_prefix.$settings->next_auto_tag_base;
+            return $settings->auto_increment_prefix.($settings->next_auto_tag_base + $additional_increment);
         } else {
             return false;
         }
@@ -1566,7 +1559,7 @@ class Asset extends Depreciable
     */
     public function scopeOrderModelNumber($query, $order)
     {
-        return $query->join('models', 'assets.model_id', '=', 'models.id')->orderBy('models.model_number', $order);
+        return $query->leftJoin('models as model_number_sort', 'assets.model_id', '=', 'model_number_sort.id')->orderBy('model_number_sort.model_number', $order);
     }
 
 

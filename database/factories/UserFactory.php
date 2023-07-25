@@ -271,6 +271,15 @@ class UserFactory extends Factory
         });
     }
 
+    public function viewDepartments()
+    {
+        return $this->state(function () {
+            return [
+                'permissions' => '{"departments.view":"1"}',
+            ];
+        });
+    }
+
     public function viewLicenses()
     {
         return $this->state(function () {
@@ -415,4 +424,12 @@ class UserFactory extends Factory
         });
     }
 
+    public function canEditOwnLocation()
+    {
+        return $this->state(function () {
+            return [
+                'permissions' => '{"self.edit_location":"1"}',
+            ];
+        });
+    }
 }

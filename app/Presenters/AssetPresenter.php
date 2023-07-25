@@ -155,6 +155,13 @@ class AssetPresenter extends Presenter
                 'class' => 'text-right',
                 'visible' => false,
             ], [
+                "field" => "book_value",
+                "searchable" => false,
+                "sortable" => false,
+                "title" => trans('admin/hardware/table.book_value'),
+                "footerFormatter" => 'sumFormatter',
+                "class" => "text-right",
+            ],[
                 'field' => 'order_number',
                 'searchable' => true,
                 'sortable' => true,
@@ -293,7 +300,7 @@ class AssetPresenter extends Presenter
                 'formatter'=> 'customFieldsFormatter',
                 'escape' => true,
                 'class' => ($field->field_encrypted == '1') ? 'css-padlock' : '',
-                'visible' => true,
+                'visible' => ($field->show_in_listview == '1') ? true : false,
             ];
         }
 
