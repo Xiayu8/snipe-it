@@ -108,6 +108,7 @@
                         </a>
                     </li>
 
+                   @can('superadmin') 
                     <li>
                         <a href="#software" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
@@ -152,7 +153,9 @@
                           </span>
                         </a>
                     </li>
+                   @endcan 
 
+                   @if($asset->model->name == "Gift") 
                     <li>
                         <a href="#maintenances" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
@@ -163,7 +166,9 @@
                           </span>
                         </a>
                     </li>
+                   @endif 
 
+                    @can('superadmin')
                     <li>
                         <a href="#files" data-toggle="tab">
                           <span class="hidden-lg hidden-md">
@@ -186,6 +191,7 @@
                           </span>
                     </a>
                     </li>
+                   @endcan 
 
                    
                     @can('update', \App\Models\Asset::class)
